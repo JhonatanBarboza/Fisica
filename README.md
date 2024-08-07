@@ -5,3 +5,4 @@ This project aims to apply physical concepts within a game or simulation for the
 # Packages dependencies:
 
 - pygame-2.6.0
+- sys from stdlib
