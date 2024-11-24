@@ -1,8 +1,14 @@
-# Physics
+# Gravitação
 
-This project aims to apply physical concepts within a game or simulation for the "Basic Physics" course.
+## Descrição Básica do Projeto
+Esse projeto é uma simulação das leis da gravitação entre estrelas e planetas. O propósito é aplicar na computação o que foi estudado na matéria Física Básica I. Para tanto, criamos uma simulação em Python utilizando como base a biblioteca Pygame.
 
-# Packages dependencies:
+## Conceitos de Física e Modelo Matemático
 
-- pygame-2.6.0
-- sys from stdlib
+
+## Implementação
+
+## Como Usar
+
+## Referências
+https://github.com/JhonatanBarboza/Simulacao_Universo
