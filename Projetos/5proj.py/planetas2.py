@@ -3,10 +3,53 @@ import pygame
 import pygame_gui #interface
 import math
 import random
+import matplotlib.pyplot as plt
+import numpy as np
+
+class GraficoTempoReal:
+    def __init__(self, max_pontos=200):
+        self.max_pontos = max_pontos
+        self.corpos_ativos = []
+        self.velocidade_media = []
+
+    def atualizar(self, estrelas, planetas):
+        # Número de corpos ativos
+        total_corpos_ativos = sum(1 for corpo in estrelas + planetas if corpo.ativo)
+        self.corpos_ativos.append(total_corpos_ativos)
+
+        # Velocidade média
+        velocidades = [math.sqrt(corpo.vx**2 + corpo.vy**2) for corpo in estrelas + planetas if corpo.ativo]
+        velocidade_media = np.mean(velocidades) if velocidades else 0
+        self.velocidade_media.append(velocidade_media)
+
+        # Limita o número de pontos
+        self.corpos_ativos = self.corpos_ativos[-self.max_pontos:]
+        self.velocidade_media = self.velocidade_media[-self.max_pontos:]
+
+    def desenhar_grafico(self, tela):
+        plt.figure(figsize=(6, 4))
+        plt.subplot(2, 1, 1)
+        plt.plot(self.corpos_ativos, label='Corpos Ativos')
+        plt.title('Métricas da Simulação')
+        plt.ylabel('Número')
+
+        plt.subplot(2, 1, 2)
+        plt.plot(self.velocidade_media, label='Velocidade Média', color='red')
+        plt.xlabel('Tempo')
+        plt.ylabel('Velocidade')
+
+        plt.tight_layout()
+        plt.savefig('simulation_metrics.png')
+        plt.close()
+
+        # Carrega a imagem salva
+        grafico = pygame.image.load('simulation_metrics.png')
+        grafico = pygame.transform.scale(grafico, (300, 200))
+        tela.blit(grafico, (LARGURA - 320, 10))
 
 # Inicializando o Pygame e criando a janela com opção de redimensionamento
 pygame.init()
-LARGURA, ALTURA = 1920, 1080  # Dimensões iniciais da janela
+LARGURA, ALTURA = 920, 640  # Dimensões iniciais da janela
 tela = pygame.display.set_mode((LARGURA, ALTURA), pygame.RESIZABLE)  # Criando a janela
 pygame.display.set_caption("Space Simulation")  # Definindo o título da janela
 clock = pygame.time.Clock()  # Inicializando o relógio para controlar a taxa de quadros
@@ -503,6 +546,8 @@ def desenhar_planetas():
 rodando = True  # Flag para controle do loop principal
 simulacao_ativa = False  # Estado inicial da simulação (não iniciada)
 
+grafico_tempo_real = GraficoTempoReal()
+
 while rodando:
     """
     Ciclo principal de execução do programa.
@@ -562,6 +607,8 @@ while rodando:
         atualizar_planetas()      # Atualiza posições dos planetas
         desenhar_estrelas()       # Renderiza estrelas
         desenhar_planetas()       # Renderiza planetas
+        grafico_tempo_real.atualizar(estrelas, planetas)
+        grafico_tempo_real.desenhar_grafico(tela)
 
     # Desenha elementos da interface
     gerenciador_interface.draw_ui(tela)
