@@ -76,12 +76,12 @@ def atualizar_informacoes():
     NUM_PLANETAS = int(slider_planetas.get_current_value())  # Obtém o valor do slider de planetas
 
 # Constantes relacionadas às propriedades das estrelas e planetas
-LIMITE_VELOCIDADE_INICIAL_ESTRELA = 20  # Velocidade inicial máxima para estrelas
-LIMITE_VELOCIDADE_INICIAL_PLANETA = 40  # Velocidade inicial máxima para planetas
+LIMITE_VELOCIDADE_INICIAL_ESTRELA = 5  # Velocidade inicial máxima para estrelas
+LIMITE_VELOCIDADE_INICIAL_PLANETA = 15  # Velocidade inicial máxima para planetas
 
 MASSA_PLANETA = 5  # Massa fixa atribuída aos planetas
-LIMITE_INFERIOR_MASSA_ESTRELA = 1000  # Limite inferior da massa das estrelas
-LIMITE_SUPERIOR_MASSA_ESTRELA = 1000  # Limite superior da massa das estrelas
+LIMITE_INFERIOR_MASSA_ESTRELA = 10000  # Limite inferior da massa das estrelas
+LIMITE_SUPERIOR_MASSA_ESTRELA = 100000  # Limite superior da massa das estrelas
 COR_ESTRELA = (150, 70, 8)  # Cor padrão atribuída às estrelas (RGB)
 
 # Constantes relacionadas ao tamanho dos corpos celestes
@@ -206,6 +206,15 @@ def criar_estrelas(num_estrelas: int) -> list:
         list: Lista de objetos Estrela.
     """
     estrelas = []
+
+    #estrela_central = Estrela(
+    #    ESPACO_VIRTUAL_LARGURA / 2, ESPACO_VIRTUAL_ALTURA / 2,
+    #    0, 0, LIMITE_SUPERIOR_MASSA_ESTRELA * 1000,
+    #    calcular_raio_estrela(LIMITE_SUPERIOR_MASSA_ESTRELA * 10),
+    #    COR_ESTRELA
+    #)
+    #estrelas.append(estrela_central)
+
     for _ in range(num_estrelas):
         x, y = gerar_posicao_aleatoria()
         massa = calcular_massa_estrela()
