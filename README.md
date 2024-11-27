@@ -1,3 +1,8 @@
+<!-- MathJax script
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+-->
 # Gravitação
 
 ## Descrição Básica do Projeto
@@ -7,6 +12,33 @@ Esse projeto é uma simulação das leis da gravitação entre estrelas e planet
 Em essência, estrelas (pontos laranjas) influenciam outras estrelas e planetas (pontos azuis e verdes) de acordo com as leis da gravitação que serão discutidas mais adiante.
 
 ## Conceitos de Física e Modelo Matemático
+### O problema de dois corpos sob a ação de uma força central
+  Um sistema de dois corpos é um modelo teórico em que dois objetos interagem exclusivamente sob a influência de forças mútuas, como a gravidade. Nesse contexto, o centro de massa desempenha um papel crucial: ele é o ponto onde o momento total do sistema é conservado, e ambos os corpos orbitam ao seu redor. Em muitos casos, especialmente em sistemas isolados, assume-se que o momento angular total em relação ao centro de massa é constante. Isso significa que, se o momento angular inicial é zero, os corpos se moverão de maneira a preservar essa condição. Além disso, a energia total do sistema é a soma das energias cinética e potencial gravitacional, e sua conservação determina as possíveis trajetórias. A interação entre essas energias define se o movimento é uma órbita fechada (elipse ou círculo), aberta (parábola ou hipérbole), ou mesmo uma colisão direta. Esses princípios fornecem a base para compreender a dinâmica em sistemas gravitacionais, ajudando a prever as configurações e comportamentos possíveis.
+  Inicialmente, estudaremos o movimento entre os dois corpos como partículas, pois para descrever a trajetória, a composição interna dos corpos não é relevante para o movimento, logo será estudando como o movimento de uma párticula sujeita a uma força central. Essas forças de interação, são forças centrais e conservativas.
+  
+  (imagem do sistema)
+ 
+ A partir do desenho e da Lei da Gravitação Universal de Newton, obtém-se o módulo da força que 2 sofre por causa da presença de 1 ( $\vec{F_{21}}$ ), e a direção será dada por esse valor absoluto vezes a direção unitária, dada pelo vetor $|\vec{r_2} - \vec{r_1}|$ pelo seu módulo, sendo que sua direção é contrária a força, por isso sinal é negativo.
+
+<p>
+$$
+\begin{aligned}
+\left| \vec{F_{21}} \right| &= \frac{G m_1 m_2}{|\vec{r_2} - \vec{r_1}|^2} \\
+\vec{F_{21}} &= \frac{G m_1 m_2}{|\vec{r_2} - \vec{r_1}|^3} \left( |\vec{r_2} - \vec{r_1}| \right)
+\end{aligned}
+$$
+</p>
+
+ Tendo em vista que a força é conservativa, ela poderia ter sido obtida através da energia potencial, dada por:
+ <p>
+ $$ 
+ \begin{align}
+ U(\vec{r_1},\vec{r_2}) = -G\frac{m_1 m_2}{|\vec{r_2} - \vec{r_1}|}
+ \end{align}
+ $$
+ </p>
+
+
 
 ## O problema de três corpos
 O Problema de Três Corpos consiste em determinar o movimento de três corpos, dadas suas 
