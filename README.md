@@ -193,24 +193,72 @@ $$
 \frac{\partial L}{\partial r} = \mu r \dot{\phi}^2 - \frac{\partial U}{\partial r} \\
 \frac{\partial L}{\partial \dot{r}} = \mu \dot{r} \\
 \dot{\phi} = \frac{l}{\mu r^2} \\
-\mu r \dot{\frac{l^2}{\mu^2 r^4}} - \frac{\partial U}{\partial r} = \mu \ddot{r} \\
+\mu r \frac{l^2}{\mu^2 r^4} - \frac{\partial U}{\partial r} = \mu \ddot{r} \\
 \dot{\frac{l^2}{\mu r^3}} - \frac{\partial U}{\partial r} = \mu \ddot{r}
 \end{align}
 $$
 
-Temos como resposta "algo" junto a força generalizada, e do outro lado a massa vezes a aceleração. Esse "algo" é chamado de força centrífuga, pois é um termo sempre positivo, causando um aumento do r que o faz fugir do centro, vale ressaltar que é uma força ficticia, pois estamos trabalhando com uma partícula ficticia, por conta disso, podemos escrever uma energia potencial associada a essa força, assim se integrarmos a expressão obtida e fizermos uma relação com a energia potencial, teremos:
+Deparamo-nos com um termo associado à força generalizada que representa a força centrífuga. Esta força, embora seja considerada fictícia, desempenha um papel fundamental na descrição do movimento de corpos em sistemas não-inerciais ou com movimento circular.
+A força centrífuga surge como um termo de compensação no equilíbrio dinâmico, sempre positivo, que tende a afastar a partícula do centro de rotação. É importante ressaltar que essa força não é uma força real no sentido físico tradicional, mas sim um artifício matemático que surge das equações de movimento quando descritas em um referencial rotativo.
+Sua natureza matemática permite que possamos associar a ela uma energia potencial efetiva. Ao integrarmos a expressão correspondente, podemos estabelecer uma relação energética que captura o comportamento dinâmico do sistema.
 
 $$ 
 \begin{align}
 U_{cf} = \displaystyle\int \frac{l^2}{\mu r^3} = \frac{l^2}{2\mu r^2} \\
-U_{total} = U + U_{cf} = U(r) = \frac{l^2}{2\mu r^2}
+U_{total} = U + U_{cf} = U(r) + \frac{l^2}{2\mu r^2}
 \end{align}
 $$
 
 Dessa forma, possuímos um problema de dois corpos sujeitos a uma força central, travestido ao problema de uma partícula em uma dimensão, com massa reduzida(ficticia), e essa dimensão única é uma quantidade escalar que é a distância entre as duas partículas que compunham o problema original, e dessa forma, pode-se utiklizar ferramentas de método unidimensionais.
 
+Exemplo do gráfico da energia para sistema gravitacional:
 
+$$ 
+\begin{align}
+U_{cf} = \frac{l^2}{2\mu r^2} \\
+U(r) = \- \frac{G m_1 m_2}{r}
+\end{align}
+$$
 
+(gráfico)
+
+No começo a parcela positiva domina, pois sobe mais depressa, já no final, a parcela negativa que domina, pois se aproxima do zero mais lentamente, dando esse resultado acima. Dessa forma, nosso problema se resume a analisar o percurso de uma partícula de massa \$mu$ que se move sujeita a ação dessa energia potencial. 
+ A análise do gráfico de energia potencial permite determinar se as trajetórias de uma partícula são fechadas ou abertas com base na energia total do sistema. Para trajetórias fechadas, a energia é menor que a energia de escape, confinando a partícula em uma região finita. Para trajetórias abertas, a energia é suficiente para a partícula escapar e se mover indefinidamente, seguindo uma trajetória não restrita. Cabe destacar que no ponto de mínimo da função, a trajetória é uma circunferência.
+
+Provando o resultado anterior, garantindo a conservação da energia:
+
+$$ 
+\begin{align}
+\mu \ddot{r} = \- \frac{d U_{efetivo}}{d r} \\
+\mu \frac{d \dot{r}^2}{dt} = \- \frac{d U_{efetivo}}{d r} \frac{dr}{dt} = \- \frac{d U_{efetivo}}{d t} \\
+\frac{d}{d t} \left( \frac{1}{2} \mu \dot{r}^2 \right) + \frac{d U_{efetivo}}{d t} = 0 \\
+\frac{1}{2} \mu \dot{r}^2 + U_{efetivo} (r) = constante = E
+\end{align}
+$$
+
+Portanto, essa quantidade de energia é conservada( não depende do tempo ), sendo dada pela soma da energia cinética mais o potencial efetivo, que engloba a energia potencial real e a energia potencial centrífuga, que pode ser associada a energia cinética de rotação.
+ Dessa forma, podemos obter a segunda lei de kepler, dado a figura abaixo:
+ (figura de dois vetor, com um angulo d fi em um tempo dt)
+ Buscamos calcular área dessa figura, aproximando essa curva para um t infinitesimal, teremos uma reta, assim basta calcularmos a área de um triângulo:
+
+ $$ 
+\begin{align}
+dA = \frac{1}{2} r(t) r(t + dt) \sin{\phi} \\
+dt \to 0 \\
+\frac{dA}{dt} = \frac{1}{2} r(t) r(t + 0) \frac{d\phi}{dt} = \frac{1}{2} r(t)^2 \dot{\phi}
+\end{align}
+$$
+
+Assim, obtemos a velocidade areolar, e conforme a segunda lei de Kepler, áreas iguais são percorridas em intervalos de tempos iguais, devemos provar que essa velocidade é constante, assim substituindo $\dot{\phi}$, pela relação encontrada anteriormente, temos:
+
+ $$ 
+\begin{align}
+\frac{dA}{dt} = \frac{1}{2} r(t)^2 \frac{l}{\mu r^2}
+\frac{dA}{dt} = \frac{l}{2 \mu}
+\end{align}
+$$
+
+Portanto, essa velocidade é a razão de duas constantes, ou seja, ela não varia no tempo. Sendo verdadeiro, sempre quando existir uma força central, não apenas para o cenário gravitacional.
 
 </p>
 
