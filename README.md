@@ -259,8 +259,75 @@ Assim, obtemos a velocidade areolar, e conforme a segunda lei de Kepler, áreas 
 $$
 
 Portanto, essa velocidade é a razão de duas constantes, ou seja, ela não varia no tempo. Sendo verdadeiro, sempre quando existir uma força central, não apenas para o cenário gravitacional.
+ Agora, iremos resolver a equação radial, adotando $\- \frac{d U}{dr} = F_g$, faremos um substituição de variável não trivial, mas com esse resultado faremos a nova variável como função do angulo $\phi$, tendo em vista que queremos a forma dessa trajetória, que será dada em função de $\phi$, que será obtida através da regra da cadeia, temos:
+
+ $$ 
+\begin{align}
+\mu \ddot{r} =  F + \frac{l^2}{\mu r^3} \\
+u = \frac{1}{r} \\
+\frac{dr}{dt} = \frac{dr}{d \phi} \frac{d \phi}{d t} = \frac{dr}{d\phi} \dot{\phi} \\
+\frac{dr}{dt} = \frac{l}{\mu r^2} \frac{dr}{d \phi} \therefore \\
+\frac{d^2r}{dt^2} = \left(\frac{l}{\mu r^2}\right) \frac{d^2r}{d \phi^2} \\
+r = \frac{1}{u} \to \frac{dr}{d \phi} \left(\frac{1}{u}\right) = \- \frac{1}{u^2} \frac{d u}{d \phi} \\
+\frac{dr}{dt} = \frac{l}{\mu r^2} \- \frac{1}{u^2} \frac{d u}{d \phi} = \frac{dr}{dt} = \- \frac{-l}{\mu} \frac{du}{d \phi} \\
+\frac{d^2r}{dt^2} = \- (\frac{l u^2}{\mu} \frac{l}{\mu} \frac{d^2u}{d \phi^2} = \- \frac{l^2u^2}{\mu^2} \frac{d^2u}{d \phi^2} \\
+\end{align}
+$$
+
+Dessa forma, conseguimos escrever a segunda derivada de r em relação a t, em termos da segunda derivada de u em relação a $\phi$, levando na equação radial( F possui sinal de +, porque é uma força atrativa):
+
+$$
+\begin{align}
+\- \mu \frac{l^2 u^2}{\mu^2} \frac{d^2 u}{d \phi^2} &= F + \frac{l^2 u^3}{\mu}, \\
+u &= u(\phi), \\
+\frac{d^2 u}{d \phi^2} &= - \frac{\mu}{l^2 u^2} F - u, \\
+F &= - \frac{\gamma}{r^2} = - \gamma u^2, \quad \gamma = \text{constante}, \\
+\frac{d^2 u}{d \phi^2} &= - u + \frac{\mu \gamma}{l^2}.
+\end{align}
+$$
+
+Dessa forma, obtemos a equação de um oscilador, pois temos uma constante, que torna a equação não homogenea, ou seja, possui uma força ou pertubação externa do problema. A equação homogenea, seria apenas  $\frac{d^2u}{d \phi^2} + u = 0$, que é a equação de um oscilador harmonico, no entanto, por conta da força externa, temos um oscilador forçado com uma força constante. Note que essa equação é verdade para qualquer força central, dado uma força nula ($F = 0$), tendo $\ddot{u} + u = 0$ e tem como solução $u(\phi) = A \cos{\phi - \delta}$, porém se força é nula, trajetória deveria ser uma reta:
+
+(imagem do sistema e do porque é uma reta)
+
+ Dessa forma, temos que a trajetória de uma linha reta em coordenadas polares dada por:
+$$
+\begin{align}
+r(\phi) \cos{\phi - \delta} &= r_0 \\
+r(\phi) &= \frac{r_0}{cos{\phi - \delta}}
+\end{align}
+$$
+
+Bom como $u = \frac{1}{r}$, então $r = \frac{1}{A \cos{\phi - \delta}}$. Dessa forma, mostramos a maneira de como iremos trabalhar com as coordenadas polares para obter o resultado final. Para resolver, faremos uma mudança de variaveis, tal que $v(\phi) = u(\phi) \- \frac{\mu \gamma}{l^2}$, pois ao tomar a derivada, a constante some, e teremos que a derivada de v é igual a derivada de u (isso só é possível porque a força é constante). Assim a equação é dada por:
+
+$$
+\begin{align}
+\ddot{v(\phi)} + v(\phi) &= 0 \\
+\end{align}
+$$
+
+Como encontrado nos estudos de osciladores harmônicos, a solução dessa equação diferencial é( adotaremos $\delta = 0$, pois apenas indica onde começaremos a conta o $\phi$):
+
+$$
+\begin{align}
+v(\phi) &= A \cos{(\phi - \delta)} \\
+u(\phi) &= A \cos{(\phi - \delta)} + \frac{\mu \gamma}{l^2} \\
+u(\phi) &= A \cos{\phi} + \frac{\mu \gamma}{l^2} = \frac{\gamma \mu}{l^2} \left(1 + \epsilon \cos{\phi}\right) \\
+\epsilon &= \frac{A l^2}{\mu \gamma} \\
+r(\phi) &= \frac{\frac{l^2}{\gamma \mu}}{1 + \epsilon \cos{\phi}} = \frac{c}{1 + \epsilon \cos{\phi}} \\
+c &= \frac{l^2}{\gamma \mu}
+\end{align}
+$$
+
+Dessa forma, definimos a equação da órbita, que representa a equação polar de uma cônica( elipses, hiperboles e parábolas ).
+
+
+
+
+
 
 </p>
+
 
  
 
