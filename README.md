@@ -116,7 +116,7 @@ L = \frac{1}{2} M \dot{\vec{R}}^2 + \frac{1}{2} \mu \dot{\vec{r}}^2 - U(r)
 \end{align}
 $$
 
-Tendo em vista que a equação não depende de $\vec{R}$, apenas depende de \dot{\vec{R}}, portanto, essa coordenada é cíclica( ignorável ), tendo uma lei de conservação associada a essa coordenda sobre o momento total do sistema, logo o momento total do sistema é conservado. Outra conclusão é que podemos imaginar essa equação como compostas por duas partes, uma dependente da coordenada $\dot{\vec{R}}$ e a outra só dependendo de $\vec{r}$ e $\dot{\vec{r}}$, ou seja, mostra-nos que temos dois problemas separáveis, distintos e independentes. Bom, como a R é coordenada ignorável, significa que $M\ddot{\vec{R}} = 0$ e isso está associado ao fato de um sistema isolado, que só depende de forças externas e como não há forças externas, logo, seu momento associado ao centro de massa é constante, por consequência, $M\dot{\vec{R}} = constante$ ( momento total do sistema ), velocidade do centro de massa é uma constante do movimento, ou seja, centro de massa executa um movimento uniforme.
+Tendo em vista que a equação não depende de $\vec{R}$, apenas depende de $\dot{\vec{R}}$, portanto, essa coordenada é cíclica( ignorável ), tendo uma lei de conservação associada a essa coordenda sobre o momento total do sistema, logo o momento total do sistema é conservado. Outra conclusão é que podemos imaginar essa equação como compostas por duas partes, uma dependente da coordenada $\dot{\vec{R}}$ e a outra só dependendo de $\vec{r}$ e $\dot{\vec{r}}$, ou seja, mostra-nos que temos dois problemas separáveis, distintos e independentes. Bom, como a R é coordenada ignorável, significa que $M\ddot{\vec{R}} = 0$ e isso está associado ao fato de um sistema isolado, que só depende de forças externas e como não há forças externas, logo, seu momento associado ao centro de massa é constante, por consequência, $M\dot{\vec{R}} = constante$ ( momento total do sistema ), velocidade do centro de massa é uma constante do movimento, ou seja, centro de massa executa um movimento uniforme.
  Analisando, a equação de movimento para coordenada relativa. Toma-se a derivada de L em relação a posição, denotada por $q_i$, e como é um vetor, significa tomar o seu gradiente dessa função escalar, e menos resultado, obtém-se a força.
 
 $$ 
@@ -319,21 +319,87 @@ c &= \frac{l^2}{\gamma \mu}
 \end{align}
 $$
 
-Dessa forma, definimos a equação da órbita, que representa a equação polar de uma cônica( elipses, hiperboles e parábolas ).
+Dessa forma, definimos a equação da órbita, que representa a equação polar de uma cônica( elipses, hiperboles e parábolas ). Dessa forma, a nossa órbita depende do valor de $\epsilon$, pois se denominador for 0, r vai para o infinito e teremos uma trajetória aberta, caso contrário, teremos uma orbita fechada. Assim, a perguntar a se fazer é $1 + \epsilon cos{\phi} = 0? \to \cos{\phi} = \- \frac{1}{\epsilon}$, para isso iremos analisar os casos em que $\epsilon$ é menor que 1, igual a 1 e maior que 1. Se for menor que 1, isso nunca pode acontecer, assim, teremos uma trajetória limitada. Se for igual a um ou maior que um, é possivel a condição, então teremos órbitas ilimitadas. Olhando para o caso menor que 1, teremos r_{mín} para o denominador máximo, que é $\frac{1}{1 + \epsilon}$ e r{máx} = $\frac{1}{1 - \epsilon}$. Além disso, cabe destacar que o r é periodico, com período $2\pi$ que é o mesmo do $\phi$, possuem o mesmo período, que indica a órbita fechada. **O r mínimo recebe o nome de periélio da trajetório, e o r máximo se chama afélio.**
 
+Supondo denominador não nulo, e que epsilon seja menor que 1 e maior que zero:
 
+$$
+\begin{align}
+r(\phi) &= \frac{c}{1 + \epsilon \cos{\phi}} \\
+r + r \epsilon \cos{\phi} = c \\
+r = c - r \epsilon \cos{\phi} = c - \epsilon x \\
+x^2 + y^2 = c^2 = \epsilon^2 x^2 - 2 c \epsilon x \\
+x^2(1 - \epsilon^2) +  2 c \epsilon x + y^2 = c^2 \\
+\end{align}
+$$
 
+Assim, completando os quadrados e agrupando os termos, temos:
 
+$$
+\begin{align}
+\frac{\left(x + d\right)^2}{a^2} + \frac{y^2}{b^2} = 1 \\
+a = \frac{c}{1 - \epsilon^2} \\
+b = \frac{c}{\sqrt{1 - \epsilon^2}} \\
+d = \frac{c \epsilon}{1 - \epsilon^2} = \epsilon a
+\end{align}
+$$
+
+Obtendo-se a equação de uma elipse deslocada, em coordenadas cartesianas. Sendo `d` a distância focal, `a` é o semieixo maior e `b` semieixo menor.
+ Para $\epsilon = 1$, temos a equação:
+
+$$
+\begin{align}
+y^2 + 2 c x = c^2 \\
+\end{align}
+$$
+
+Que resulta na formula de uma parábola deitada, que r vai para infinito quando $\phi$ vai para $\pi$. Para $\epsilon$ menor que 1, terá como resultado uma hiperbole. Agora, buscaremos provar a terceira lei de Kepler a partir da segunda mais os resultados obtidos sobre o formato da órbita dos planetas, pois sabemos que a taxa das áreas varridas vezes o período da órbita($\tau$), teremos a área total de uma elipse, que é dada por $A_{total} = \pi a b$, sendo **a** e **b**, respectivamente, o semieixo maior e o semieixo menor. 
+
+$$
+\begin{align}
+\frac{d A}{dt} = \frac{l}{2 \mu} \\
+\frac{l}{2 \mu} \tau = \pi a b \\
+\tau^2 = \frac{\pi^2 a^2 b^2 4 \mu^2}{l^2} = \left(\frac{4 \pi^2 \mu}{\gamma}\right) a^3 \\
+\end{align}
+$$
+
+No sistema gravitacional da órbitas em relação ao Sol(massa muito grande), teremos:
+
+$$
+\begin{align}
+\tau^2 = \frac{\pi^2 a^2 b^2 4 \mu^2}{l^2} = \left(\frac{4 \pi^2 \mu}{\gamma}\right) a^3 \\
+\gamma = G M m \\
+\mu = \frac{M m}{M + m} \simeq m \\
+\tau^2 \simeq \frac{4 \pi^2}{GM} a^3
+\end{align}
+$$
+
+Relação entre energia e excentricidade
+Sabemos que a energia mecanica desse sistema é conservada, e esta energia foi desdobrada em duas partes, uma associada a interação gravitacional, e uma associada ao movimento que mantém o momento angular constante. Isso deu origem, a energia potencial efetiva($U_{ef}(r) = \- \frac{l^2}{2 \mu r^2}$).
+
+(Gráfico energia potencial efetiva)
+
+Nos pontos de retorno, a energia potencial efetiva, é a energia total, ou seja, a energia cinética é zero. Assim, podemos deixar a energia mecânica em função de $\epsilon$:
+
+$$
+\begin{align}
+U_{ef}(r_{\text{mín}}) = E &= - \frac{\gamma}{\frac{c}{1 + \epsilon}} + \frac{l^2}{2 \mu \left(\frac{c}{1 + \epsilon}\right)^2}, \\
+E &= \left( 1 + \epsilon \right) \left[ - \frac{\gamma}{c} + \frac{l^2 \left(1 + \epsilon\right)}{2 \mu c^2} \right] \\
+\end{align}
+$$
+
+Substituindo c por $\frac{l^2}{\gamma \mu}$, e fazendo os devidos calculos, teremos:
+
+$$
+\begin{align}
+E &= \frac{\gamma^2 \mu}{2 l^2} \left(\epsilon^2 - 1 \right) \\
+\end{align}
+$$
+
+Dessa forma, percebemos que para excenticidade menor que 1, teremos energia negativa, assim orbitas limitadas. Para energia igual a zero(E = 0), teremos $\epsilon = 1$, que descreve a órbita parabólica e energia positiva para $\epsilon > 1$. Assim, dado a excentricidade e o momento angular, sabemos qual é a energia(e vice-versa). Nota-se que o valor mínimo da energia é quando excentricidade é igual a 0, fixados $\mu$ e l, teremos uma circunferência.  
 
 
 </p>
-
-
- 
-
- 
-
- 
 
 ## O problema de três corpos
 O Problema de Três Corpos consiste em determinar o movimento de três corpos, dadas suas 
