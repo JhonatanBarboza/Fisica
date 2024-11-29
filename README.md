@@ -64,7 +64,7 @@ $$
 \end{align}
 $$
 
-Buscaremos simplificar essa equação, visando retirar as redundâncias e deixarmos tudo em termos de r e $\vec{R}$, para isso, chamaremos $m_1$ + $m_2$ = $M$, e juntaremos a equação da coordenada relativa com a equação do vetor posição do centro de massa, de forma a deixar os vetores $\vec{r_1}$ e $\vec{r_2}$ em função de $\vec{r}$ e $\vec{R}$. Para isso, multiplica-se a equação da coordenada relativa por \frac{m_2}{M} e somado a equação da posição do centro de massa.
+Buscaremos simplificar essa equação, visando retirar as redundâncias e deixarmos tudo em termos de r e $\vec{R}$, para isso, chamaremos $m_1$ + $m_2$ = $M$, e juntaremos a equação da coordenada relativa com a equação do vetor posição do centro de massa, de forma a deixar os vetores $\vec{r_1}$ e $\vec{r_2}$ em função de $\vec{r}$ e $\vec{R}$. Para isso, multiplica-se a equação da coordenada relativa por $\frac{m_2}{M}$ e somado a equação da posição do centro de massa.
 
 $$ 
 \begin{align}
@@ -131,7 +131,7 @@ Essa equação é uma forma de visualizar a segunda lei de newton, com a força 
 
 (imagem novo sistema com centro de massa como origem)
 
-Nesse novo referencial, o momento total é zero, assim dado um movimento em $m_1$, $m_2$ terá movimento na mesma direção, porém em sentido contrário com velocidade menor, dado um $m_2$ > $m_1$. Reescrevendo as coordenadas na nova origem(sendo \vec{R} = \vec{0}), temos:
+Nesse novo referencial, o momento total é zero, assim dado um movimento em $m_1$, $m_2$ terá movimento na mesma direção, porém em sentido contrário com velocidade menor, dado um $m_2$ > $m_1$. Reescrevendo as coordenadas na nova origem(sendo $\vec{R} = \vec{0}$), temos:
 
 $$
 \begin{align}
@@ -441,3 +441,4 @@ python spaceSim.py
 
 ## Referências
 https://github.com/JhonatanBarboza/Simulacao_Universo
+Mecânica Clássica, de John Taylor
