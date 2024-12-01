@@ -20,7 +20,7 @@ Esse é o problema de $3$ (e, consequentemente) de $N$ corpos. Não conseguimos 
 A solução é aproximar e resolver as equações **numericamente**, calculando iterativamente as velocidades e posições de cada corpo conforme eles interagem entre si em pequenos intervalos de tempo. Há múltiplos métodos de simular esse sistema, e o utilizado pos nós foi o mais simples, o **método de Euler**.
 
 ## Conceitos de Física e Modelo Matemático
-<p> Colocaremos como origem do nosso sistema de coordendas ortonormal um ponto que não é nenhuma das massas. Temos assim um referencial inercial. Seja também o nosso sistema de coordenadas ortonormal dado pelos versores $(\hat{i} $, $ \hat{j})$ ao longo dos eixos $(x, y)$, respectivamente. </p>
+Colocaremos como origem do nosso sistema de coordendas ortonormal um ponto que não é nenhuma das massas. Temos assim um referencial inercial. Seja também o nosso sistema de coordenadas ortonormal dado pelos versores ($\hat{i},\hat{j}$) ao longo dos eixos ($x, y$), respectivamente.
 
 ### Gravitação
 Segundo a Lei da Gravitação Universal, a força gravitacional $\vec{F_g}$ entre duas massas $m_1$ e $m_2$, a uma distância $r$ uma da outra é
@@ -48,7 +48,7 @@ Como a única força atuante no sistema é a gravitacional, temos:
 $$ \begin{align} \vec{a_i}(t) &= \dot{\vec{v_i}}(t), \\ \vec{v_i}(t) &= \dot{\vec{r_i}}(t), \\ \ddot{\vec{r_i}}(t) &= \frac{\vec{F_g}}{m_i}. \end{align} $$
 </p>
 
-<p> Como discutido anteriormente, é díficil obter a equação explícita de $x(t)$ e $y(t)$ em $\vec{r}(t) = x(t) \hat{i} + y(t) \hat{j}$ com a EDO obtida. Utilizamos, então, o Método de Euler. </p>s
+Como discutido anteriormente, é díficil obter a equação explícita de $x(t)$ e $y(t)$ em $\vec{r}(t) = x(t)\hat{i} + y(t)\hat{j}$ com a EDO obtida. Utilizamos, então, o Método de Euler.
 
 ### Método de Euler
 1. Para cada corpo $i$, somamos as forças gravitacionais exercidas por todos os outros corpos ($j$):
