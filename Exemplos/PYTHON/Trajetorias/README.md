@@ -9,7 +9,7 @@
 ### Sistema com dois corpos
   Inicialmente, estudaremos o movimento entre os dois corpos como partículas, pois para descrever a trajetória, a composição interna dos corpos não é relevante para o movimento, logo será estudando como o movimento de uma párticula sujeita a uma força central. Essas forças de interação, são forças centrais e conservativas.
   
-  (imagem do sistema)
+![sistema dois corpos](Imagens/sistema dois corpos.png)
  
  A partir do desenho e da Lei da Gravitação Universal de Newton, obtém-se o módulo da força que 2 sofre por causa da presença de 1 ( $\vec{F_{21}}$ ), e a direção será dada por esse valor absoluto vezes a direção unitária, dada pelo vetor $|\vec{r_2} - \vec{r_1}|$ pelo seu módulo, sendo que sua direção é contrária a força, por isso sinal é negativo.
 
@@ -124,7 +124,7 @@ $$
 
 Essa equação é uma forma de visualizar a segunda lei de newton, com a força que age sobre uma partícula fictícia e é igualada a massa dessa particula vezes sua aceleração. Tais conclusões e resoluções sobre objetos inexistentes servem para que quando obtivermos as soluções para R e r, podermos obter $r_1$ e $r_2$, e para alguns casos, isso não importa, pois vendo o caso Terra e Sol, o centro de massa ficara dentro do sol, de forma que o movimento que buscamos, a órbita da Terra, é descrita aproxidamente pelo r, tendo em vista que o sol vai ter um movimento mínimo, podendo ser ignorado. Portanto, adotaremos um referencial com origem no centro de massa do sistema. Como o centro de massa se move com velocidade constante em relação a um referencial inercial (na ausência de forças externas), esse novo referencial também será inercial. Dessa forma, com o referencial no centro de massa, ignorando o movimento do centro de massa, e quando ele coincide com a partícula mais massiva, o problema foi reduzido a um problema de apenas uma partícula, assim usaremos ferramentas de problemas unidimensionais.
 
-(imagem novo sistema com centro de massa como origem)
+![origem centro de massa](Imagens/origem_cm.png)
 
 Nesse novo referencial, o momento total é zero, assim dado um movimento em $m_1$, $m_2$ terá movimento na mesma direção, porém em sentido contrário com velocidade menor, dado um $m_2$ > $m_1$. Reescrevendo as coordenadas na nova origem(sendo $\vec{R} = \vec{0}$), temos:
 
@@ -221,7 +221,7 @@ $$
 
 ### Energia potencial efetiva
 
-(gráfico)
+![gráfico energia efetiva](Imagens/grafEnergia.png)
 
 No começo a parcela positiva domina, pois sobe mais depressa, já no final, a parcela negativa que domina, pois se aproxima do zero mais lentamente, dando esse resultado acima. Dessa forma, nosso problema se resume a analisar o percurso de uma partícula de massa \$mu$ que se move sujeita a ação dessa energia potencial. 
  A análise do gráfico de energia potencial permite determinar se as trajetórias de uma partícula são fechadas ou abertas com base na energia total do sistema. Para trajetórias fechadas, a energia é menor que a energia de escape, confinando a partícula em uma região finita. Para trajetórias abertas, a energia é suficiente para a partícula escapar e se mover indefinidamente, seguindo uma trajetória não restrita. Cabe destacar que no ponto de mínimo da função, a trajetória é uma circunferência.
@@ -243,7 +243,7 @@ Portanto, essa quantidade de energia é conservada( não depende do tempo ), sen
  
  Dessa forma, podemos obter a segunda lei de kepler, dado a figura abaixo:
  
- (figura de dois vetor, com um angulo d fi em um tempo dt)
+ ![segundalei](Imagens/2leikepler.png)
  
  Buscamos calcular área dessa figura, aproximando essa curva para um t infinitesimal, teremos uma reta, assim basta calcularmos a área de um triângulo:
 
