@@ -59,10 +59,50 @@ $$ \begin{align} \vec{a_i}(t) &= \frac{\vec{F_i}}{m_i}. \end{align} $$
 
 $$ \begin{align} \vec{v_i}(t + \Delta t) &= \vec{a_i}(t) \Delta t + \vec{v_i}(t), \\ \vec{r_i}(t + \Delta t) &= \vec{v_i}(t) \Delta t + \vec{r_i}(t). \end{align} $$
 
-## Implementação
 
+## Implementação
+### Bibliotecas Usadas
+**pygame**: Utilizado para realizar a simulação em si, mostrando as estrelas e os planetas se movendo na tela e processando eventos.
+
+**pygame_gui**: Utilizado para fazer a interface da simulação (sliders e botões).
+
+**math**: Utilizado para cálculos simples como raízes quadradadas.
+
+**random**: Utilizado para gerar condições iniciais aleatórias.
+
+### Parâmetros da Simulação
+Podem ser definidos alterando valores dentro do próprio código. Arbitrários.
+
+- **Estrelas/Planetas**
+  - Constante gravitacional (G)
+  - Raio
+  - Cor (RGB)
+  - Quantidade (slider)
+  - Range de velocidade
+  - Range de massa
+
+Valores como a posição e velocidade iniciais em cada eixo de um corpo podem ser manipulados mais especificamente alterando manualmente os valores de cada objeto no código.
+
+- **Janela/Escala**
+  - Tamanho da janela do pygame
+  - Escala da simulação
 
 ## Como Usar
 
+Certifique-se que Python está instalado (versão 3+).
+
+Execute o seguinte comando para baixar as dependências:
+```bash
+pip install -r requirements.txt
+```
+
+Execute o programa:
+```bash
+python main.py
+```
 
 ## Referências
+(1) Bernardes, E. de S. (2024). Dinâmica-v4 (Notas de aula). 7600105 - Física Básica I. Universidade de São Paulo, São Carlos.
+(2) Bernardes, E. de S. (2024). Gravitação (Notas de aula). 7600105 - Física Básica I. Universidade de São Paulo, São Carlos.
+(3) Wikipedia. (2024). Three-body problem. https://en.wikipedia.org/wiki/Three-body_problem.
+(4) Barboza, J. (2024). Simulação Universo. https://github.com/JhonatanBarboza/Simulacao_Universo.
