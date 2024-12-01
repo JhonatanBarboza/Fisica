@@ -152,22 +152,6 @@ def atualizar_informacoes():
   QUANT_ESTRELAS = int(slider_estrelas.get_current_value())
   QUANT_PLANETAS = int(slider_planetas.get_current_value())
 
-def modulo(x: float) -> float:
-  """
-  Retorna o módulo de um número
-
-  Parâmetros:
-    x (float): Número
-
-  Retorno
-    modulo (float): Módulo de x
-  """
-  modulo = x
-  if x < 0:
-    modulo = -x
-  
-  return modulo
-
 def gerar_posicao_aleatoria() -> tuple:
   """
   Gera coordenadas (x, y) aleatórias dentro do espaço virtual definido
