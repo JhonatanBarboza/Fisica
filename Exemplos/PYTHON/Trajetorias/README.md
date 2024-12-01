@@ -6,6 +6,7 @@
 # Gravitação
 ## O problema de dois corpos sob a ação de uma força central
   Um sistema de dois corpos é um modelo teórico em que dois objetos interagem exclusivamente sob a influência de forças mútuas, como a gravidade. Nesse contexto, o centro de massa desempenha um papel crucial: ele é o ponto onde o momento total do sistema é conservado, e ambos os corpos orbitam ao seu redor. Em muitos casos, especialmente em sistemas isolados, assume-se que o momento angular total em relação ao centro de massa é constante. Isso significa que, se o momento angular inicial é zero, os corpos se moverão de maneira a preservar essa condição. Além disso, a energia total do sistema é a soma das energias cinética e potencial gravitacional, e sua conservação determina as possíveis trajetórias. A interação entre essas energias define se o movimento é uma órbita fechada (elipse ou círculo), aberta (parábola ou hipérbole), ou mesmo uma colisão direta. Esses princípios fornecem a base para compreender a dinâmica em sistemas gravitacionais, ajudando a prever as configurações e comportamentos possíveis.
+### Sistema com dois corpos
   Inicialmente, estudaremos o movimento entre os dois corpos como partículas, pois para descrever a trajetória, a composição interna dos corpos não é relevante para o movimento, logo será estudando como o movimento de uma párticula sujeita a uma força central. Essas forças de interação, são forças centrais e conservativas.
   
   (imagem do sistema)
@@ -24,7 +25,7 @@
 
   $$ 
  \begin{align}
- U(|\vec{r_2} - \vec{r_1}|) = -G\frac{m_1 m_2}{|\vec{r_2} - \vec{r_1}|}
+ U(|\vec{r_2} - \vec{r_1}|) &= -G\frac{m_1 m_2}{|\vec{r_2} - \vec{r_1}|}
  \end{align}
  $$
  </p>
@@ -35,8 +36,8 @@ Coordenada relativa é definida como:
  <p>
  $$ 
  \begin{align}
- \vec{r} = \vec{r_1} - \vec{r_2} \\
-  r = \left| \vec{r} \right|
+ \vec{r} &= \vec{r_1} - \vec{r_2} \\
+  r &= \left| \vec{r} \right|
 \end{align}
  $$
  
@@ -44,7 +45,7 @@ Assim, como conhecemos a energia potencial associada ao problema, podemos tomar 
 
 $$ 
 \begin{align}
- L = E_c - U = \frac{1}{2}m_1\dot{\vec{r_1}}^2 + \frac{1}{2}m_2\dot{\vec{r_2}}^2 - U(r)
+ L &= E_c - U &= \frac{1}{2}m_1\dot{\vec{r_1}}^2 + \frac{1}{2}m_2\dot{\vec{r_2}}^2 - U(r)
 \end{align}
 $$
   
@@ -52,7 +53,7 @@ Além disso, usaremos o vetor posição do centro de massa dado por:
 
 $$ 
 \begin{align}
-\vec{R} = \frac{\vec{r_1}m_1 + \vec{r_2}m_2}{m_1 + m_2} 
+\vec{R} &= \frac{\vec{r_1}m_1 + \vec{r_2}m_2}{m_1 + m_2} 
 \end{align}
 $$
 
@@ -60,10 +61,10 @@ Buscaremos simplificar essa equação, visando retirar as redundâncias e deixar
 
 $$ 
 \begin{align}
-\vec{r}\frac{m_2}{M} = \vec{r_1}\frac{m_2}{M} - \vec{r_2}\frac{m_2}{M} \\
-\vec{R} = \frac{\vec{r_1}m_1}{M} + \frac{\vec{r_2}m_2}{M} \\
-\vec{r}\frac{m_2}{M} + \vec{R} = \vec{r_1}\frac{m_2}{M} + \frac{\vec{r_1}m_1}{M} \\
-\vec{r_1} = \vec{r}\frac{m_2}{M} + \vec{R}
+\vec{r}\frac{m_2}{M} &= \vec{r_1}\frac{m_2}{M} - \vec{r_2}\frac{m_2}{M} \\
+\vec{R} &= \frac{\vec{r_1}m_1}{M} + \frac{\vec{r_2}m_2}{M} \\
+\vec{r}\frac{m_2}{M} + \vec{R} &= \vec{r_1}\frac{m_2}{M} + \frac{\vec{r_1}m_1}{M} \\
+\vec{r_1} &= \vec{r}\frac{m_2}{M} + \vec{R}
 \end{align}
 $$
 
@@ -71,7 +72,7 @@ Analogamente poderemos manipular as equações para obter $r_2$, que será dado 
 
 $$ 
 \begin{align}
-\vec{r_2} = \vec{R} - \vec{r}\frac{m_1}{M} 
+\vec{r_2} &= \vec{R} - \vec{r}\frac{m_1}{M} 
 \end{align}
 $$
 
@@ -79,8 +80,8 @@ Para substituir na equação é necessário calcular $\dot{\vec{r_1}}$ e $\dot{\
 
 $$ 
 \begin{align}
-\vec{r_1} = \vec{r}\frac{m_2}{M} + \vec{R} \to \dot{\vec{r_1}} = \dot{\vec{r}}\frac{m_2}{M} + \dot{\vec{R}} \\ 
-\vec{r_2} = \vec{R} - \vec{r}\frac{m_1}{M} \to \dot{\vec{r_2}} = \dot{\vec{R}} - \dot{\vec{r}}\frac{m_1}{M} 
+\vec{r_1} &= \vec{r}\frac{m_2}{M} + \vec{R} \to \dot{\vec{r_1}} &= \dot{\vec{r}}\frac{m_2}{M} + \dot{\vec{R}} \\ 
+\vec{r_2} &= \vec{R} - \vec{r}\frac{m_1}{M} \to \dot{\vec{r_2}} &= \dot{\vec{R}} - \dot{\vec{r}}\frac{m_1}{M} 
 \end{align}
 $$
 
@@ -88,7 +89,7 @@ Substituindo na equação da lagrangiana
 
 $$ 
 \begin{align}
-L = \frac{1}{2} m_1 \left( \dot{\vec{r}} + \frac{m_2}{M} \dot{\vec{R}} \right)^2 + \frac{1}{2} m_2 \left( \dot{\vec{R}} - \frac{m_1}{M} \dot{\vec{r}} \right)^2 - U(r)
+L &= \frac{1}{2} m_1 \left( \dot{\vec{r}} + \frac{m_2}{M} \dot{\vec{R}} \right)^2 + \frac{1}{2} m_2 \left( \dot{\vec{R}} - \frac{m_1}{M} \dot{\vec{r}} \right)^2 - U(r)
 \end{align}
 $$
 
@@ -96,7 +97,7 @@ Após feito os cálculos, ficaremos com
 
 $$ 
 \begin{align}
-L = \frac{1}{2} M \dot{\vec{R}}^2 + \frac{1}{2} \frac{m_1 + m_2}{M} \dot{\vec{r}}^2 - U(r)
+L &= \frac{1}{2} M \dot{\vec{R}}^2 + \frac{1}{2} \frac{m_1 + m_2}{M} \dot{\vec{r}}^2 - U(r)
 \end{align}
 $$
 
@@ -104,7 +105,7 @@ Com esse resultado, obtemos que a trajetória depende apenas da coordenada do ce
 
 $$ 
 \begin{align}
-L = \frac{1}{2} M \dot{\vec{R}}^2 + \frac{1}{2} \mu \dot{\vec{r}}^2 - U(r)
+L &= \frac{1}{2} M \dot{\vec{R}}^2 + \frac{1}{2} \mu \dot{\vec{r}}^2 - U(r)
 \end{align}
 $$
 
@@ -113,9 +114,9 @@ Tendo em vista que a equação não depende de $\vec{R}$, apenas depende de $\do
 
 $$ 
 \begin{align}
-\frac{\partial L}{\partial q_i} = \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q}_i} \right) \\
-\frac{\partial L}{\partial \vec{r}} = \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{\vec{r}}} \right)\\
-\- \nabla U(r) = \mu \ddot{\vec{r}}
+\frac{\partial L}{\partial q_i} &= \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q}_i} \right) \\
+\frac{\partial L}{\partial \vec{r}} &= \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{\vec{r}}} \right)\\
+\- \nabla U(r) &= \mu \ddot{\vec{r}}
 \end{align}
 $$
 
@@ -127,8 +128,8 @@ Nesse novo referencial, o momento total é zero, assim dado um movimento em $m_1
 
 $$
 \begin{align}
-\vec{r_1} = \vec{r}\frac{m_2}{M} \\
-\vec{r_2} = \- \vec{r}\frac{m_1}{M} 
+\vec{r_1} &= \vec{r}\frac{m_2}{M} \\
+\vec{r_2} &= \- \vec{r}\frac{m_1}{M} 
 \end{align}
 $$
 
@@ -136,8 +137,8 @@ Lembrando que o sistema é isolado, então o momento angular total será conserv
 
 $$
 \begin{align}
-\vec{L} = \vec{r_1} \times \vec{p_1} + \vec{r_2} \times \vec{p_2} \\
-\vec{L} = m_1\vec{r_1} \times \dot{\vec{r_1}} + m_2\vec{r_2} \times \dot{\vec{r_2}}
+\vec{L} &= \vec{r_1} \times \vec{p_1} + \vec{r_2} \times \vec{p_2} \\
+\vec{L} &= m_1\vec{r_1} \times \dot{\vec{r_1}} + m_2\vec{r_2} \times \dot{\vec{r_2}}
 \end{align}
 $$
 
@@ -145,8 +146,8 @@ Calculando para o centro de massa e deixando a equação em termos de r:
 
 $$
 \begin{align}
-\vec{L} = m_1\left(\frac{m_2}{M} \right)^2 \times \dot{\vec{r}} + m_2\left(\frac{m_1}{M} \right)^2 \times \dot{\vec{r}} \\
-\vec{L} = \frac{m_1 m_2}{M} \vec{r} \times \dot{\vec{r}} = \vec{r} \times \mu \dot{\vec{r}}
+\vec{L} &= m_1\left(\frac{m_2}{M} \right)^2 \times \dot{\vec{r}} + m_2\left(\frac{m_1}{M} \right)^2 \times \dot{\vec{r}} \\
+\vec{L} &= \frac{m_1 m_2}{M} \vec{r} \times \dot{\vec{r}} &= \vec{r} \times \mu \dot{\vec{r}}
 \end{align}
 $$
 
@@ -154,17 +155,17 @@ Tal resultado remete ao momento angular de uma partícula, que é o produto do v
 
 $$
 \begin{align}
-\hat{r} = \cos\phi \, \hat{i} + \sin\phi \, \hat{j}, \quad \\
-\hat{\phi} = -\sin\phi \, \hat{i} + \cos\phi \, \hat{j}.
+\hat{r} &= \cos\phi \, \hat{i} + \sin\phi \, \hat{j}, \quad \\
+\hat{\phi} &= -\sin\phi \, \hat{i} + \cos\phi \, \hat{j}.
 \end{align}
 $$
  Assim, substituindo os termos teremos:
 $$
 \begin{align}
-\vec{r} = r\hat{r} \\
-\dot{\vec{r}} = \dot{r}\hat{r} + r\dot{\hat{r}} = \dot{r}\hat{r} + r\dot{\phi}\hat{\phi} \\
-\dot{\vec{r}}^2 = \dot{r}^2 + r^2{\dot{\phi}}^2 \\
-L_{rel} = \frac{1}{2} \mu \left(\dot{r}^2 + r^2{\dot{\phi}}^2 \right) - U(r) \\
+\vec{r} &= r\hat{r} \\
+\dot{\vec{r}} &= \dot{r}\hat{r} + r\dot{\hat{r}} = \dot{r}\hat{r} + r\dot{\phi}\hat{\phi} \\
+\dot{\vec{r}}^2 &= \dot{r}^2 + r^2{\dot{\phi}}^2 \\
+L_{rel} &= \frac{1}{2} \mu \left(\dot{r}^2 + r^2{\dot{\phi}}^2 \right) - U(r) \\
 \end{align}
 $$
 
@@ -172,9 +173,9 @@ Analisando o resultado da equação, temos que ela não depende de $\phi$, sendo
 
 $$ 
 \begin{align}
-\frac{\partial L}{\partial q_i} = \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q}_i} \right) \\
-\frac{\partial L}{\partial \dot{\phi}} = \mu r^2 \dot{\phi} = constante = l \\
-\dot{\phi} = \frac{l}{\mu r^2}
+\frac{\partial L}{\partial q_i} &= \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q}_i} \right) \\
+\frac{\partial L}{\partial \dot{\phi}} &= \mu r^2 \dot{\phi} &= constante &= l \\
+\dot{\phi} &= \frac{l}{\mu r^2}
 \end{align}
 $$
 
@@ -182,11 +183,11 @@ Sendo que nesse caso, que está assumindo papel de $q_i$ é o $\phi$, e não tem
 
 $$ 
 \begin{align}
-\frac{\partial L}{\partial r} = \mu r \dot{\phi}^2 - \frac{\partial U}{\partial r} \\
-\frac{\partial L}{\partial \dot{r}} = \mu \dot{r} \\
-\dot{\phi} = \frac{l}{\mu r^2} \\
-\mu r \frac{l^2}{\mu^2 r^4} - \frac{\partial U}{\partial r} = \mu \ddot{r} \\
-\dot{\frac{l^2}{\mu r^3}} - \frac{\partial U}{\partial r} = \mu \ddot{r}
+\frac{\partial L}{\partial r} &= \mu r \dot{\phi}^2 - \frac{\partial U}{\partial r} \\
+\frac{\partial L}{\partial \dot{r}} &= \mu \dot{r} \\
+\dot{\phi} &= \frac{l}{\mu r^2} \\
+\mu r \frac{l^2}{\mu^2 r^4} - \frac{\partial U}{\partial r} &= \mu \ddot{r} \\
+\dot{\frac{l^2}{\mu r^3}} - \frac{\partial U}{\partial r} &= \mu \ddot{r}
 \end{align}
 $$
 
@@ -196,8 +197,8 @@ Sua natureza matemática permite que possamos associar a ela uma energia potenci
 
 $$ 
 \begin{align}
-U_{cf} = \displaystyle\int \frac{l^2}{\mu r^3} = \frac{l^2}{2\mu r^2} \\
-U_{total} = U + U_{cf} = U(r) + \frac{l^2}{2\mu r^2}
+U_{cf} &= \displaystyle\int \frac{l^2}{\mu r^3} &= \frac{l^2}{2\mu r^2} \\
+U_{total} &= U + U_{cf} &= U(r) + \frac{l^2}{2\mu r^2}
 \end{align}
 $$
 
@@ -207,8 +208,8 @@ Exemplo do gráfico da energia para sistema gravitacional:
 
 $$ 
 \begin{align}
-U_{cf} = \frac{l^2}{2\mu r^2} \\
-U(r) = \- \frac{G m_1 m_2}{r}
+U_{cf} &= \frac{l^2}{2\mu r^2} \\
+U(r) &= \- \frac{G m_1 m_2}{r}
 \end{align}
 $$
 
@@ -221,10 +222,10 @@ Provando o resultado anterior, garantindo a conservação da energia:
 
 $$ 
 \begin{align}
-\mu \ddot{r} = \- \frac{d U_{efetivo}}{d r} \\
-\mu \frac{d \dot{r}^2}{dt} = \- \frac{d U_{efetivo}}{d r} \frac{dr}{dt} = \- \frac{d U_{efetivo}}{d t} \\
-\frac{d}{d t} \left( \frac{1}{2} \mu \dot{r}^2 \right) + \frac{d U_{efetivo}}{d t} = 0 \\
-\frac{1}{2} \mu \dot{r}^2 + U_{efetivo} (r) = constante = E
+\mu \ddot{r} &= \- \frac{d U_{efetivo}}{d r} \\
+\mu \frac{d \dot{r}^2}{dt} &= \- \frac{d U_{efetivo}}{d r} \frac{dr}{dt} &= \- \frac{d U_{efetivo}}{d t} \\
+\frac{d}{d t} \left( \frac{1}{2} \mu \dot{r}^2 \right) + \frac{d U_{efetivo}}{d t} &= 0 \\
+\frac{1}{2} \mu \dot{r}^2 + U_{efetivo} (r) &= constante &= E
 \end{align}
 $$
 
@@ -235,9 +236,9 @@ Portanto, essa quantidade de energia é conservada( não depende do tempo ), sen
 
  $$ 
 \begin{align}
-dA = \frac{1}{2} r(t) r(t + dt) \sin{\phi} \\
+dA &= \frac{1}{2} r(t) r(t + dt) \sin{\phi} \\
 dt \to 0 \\
-\frac{dA}{dt} = \frac{1}{2} r(t) r(t + 0) \frac{d\phi}{dt} = \frac{1}{2} r(t)^2 \dot{\phi}
+\frac{dA}{dt} &= \frac{1}{2} r(t) r(t + 0) \frac{d\phi}{dt} &= \frac{1}{2} r(t)^2 \dot{\phi}
 \end{align}
 $$
 
@@ -245,8 +246,8 @@ Assim, obtemos a velocidade areolar, e conforme a segunda lei de Kepler, áreas 
 
  $$ 
 \begin{align}
-\frac{dA}{dt} = \frac{1}{2} r(t)^2 \frac{l}{\mu r^2}
-\frac{dA}{dt} = \frac{l}{2 \mu}
+\frac{dA}{dt} &= \frac{1}{2} r(t)^2 \frac{l}{\mu r^2}
+\frac{dA}{dt} &= \frac{l}{2 \mu}
 \end{align}
 $$
 
@@ -255,14 +256,14 @@ Portanto, essa velocidade é a razão de duas constantes, ou seja, ela não vari
 
  $$ 
 \begin{align}
-\mu \ddot{r} =  F + \frac{l^2}{\mu r^3} \\
-u = \frac{1}{r} \\
-\frac{dr}{dt} = \frac{dr}{d \phi} \frac{d \phi}{d t} = \frac{dr}{d\phi} \dot{\phi} \\
-\frac{dr}{dt} = \frac{l}{\mu r^2} \frac{dr}{d \phi} \therefore \\
-\frac{d^2r}{dt^2} = \left(\frac{l}{\mu r^2}\right) \frac{d^2r}{d \phi^2} \\
-r = \frac{1}{u} \to \frac{dr}{d \phi} \left(\frac{1}{u}\right) = \- \frac{1}{u^2} \frac{d u}{d \phi} \\
-\frac{dr}{dt} = \frac{l}{\mu r^2} \- \frac{1}{u^2} \frac{d u}{d \phi} = \frac{dr}{dt} = \- \frac{-l}{\mu} \frac{du}{d \phi} \\
-\frac{d^2r}{dt^2} = \- (\frac{l u^2}{\mu} \frac{l}{\mu} \frac{d^2u}{d \phi^2} = \- \frac{l^2u^2}{\mu^2} \frac{d^2u}{d \phi^2} \\
+\mu \ddot{r} &=  F + \frac{l^2}{\mu r^3} \\
+u &= \frac{1}{r} \\
+\frac{dr}{dt} &= \frac{dr}{d \phi} \frac{d \phi}{d t} &= \frac{dr}{d\phi} \dot{\phi} \\
+\frac{dr}{dt} &= \frac{l}{\mu r^2} \frac{dr}{d \phi} \therefore \\
+\frac{d^2r}{dt^2} &= \left(\frac{l}{\mu r^2}\right) \frac{d^2r}{d \phi^2} \\
+r &= \frac{1}{u} \to \frac{dr}{d \phi} \left(\frac{1}{u}\right) &= \- \frac{1}{u^2} \frac{d u}{d \phi} \\
+\frac{dr}{dt} &= \frac{l}{\mu r^2} \- \frac{1}{u^2} \frac{d u}{d \phi} &= \frac{dr}{dt} &= \- \frac{-l}{\mu} \frac{du}{d \phi} \\
+\frac{d^2r}{dt^2} &= \- (\frac{l u^2}{\mu} \frac{l}{\mu} \frac{d^2u}{d \phi^2} &= \- \frac{l^2u^2}{\mu^2} \frac{d^2u}{d \phi^2} \\
 \end{align}
 $$
 
@@ -283,6 +284,7 @@ Dessa forma, obtemos a equação de um oscilador, pois temos uma constante, que 
 (imagem do sistema e do porque é uma reta)
 
  Dessa forma, temos que a trajetória de uma linha reta em coordenadas polares dada por:
+ 
 $$
 \begin{align}
 r(\phi) \cos{\phi - \delta} &= r_0 \\
@@ -318,10 +320,10 @@ Supondo denominador não nulo, e que epsilon seja menor que 1 e maior que zero:
 $$
 \begin{align}
 r(\phi) &= \frac{c}{1 + \epsilon \cos{\phi}} \\
-r + r \epsilon \cos{\phi} = c \\
-r = c - r \epsilon \cos{\phi} = c - \epsilon x \\
-x^2 + y^2 = c^2 = \epsilon^2 x^2 - 2 c \epsilon x \\
-x^2(1 - \epsilon^2) +  2 c \epsilon x + y^2 = c^2 \\
+r + r \epsilon \cos{\phi} &= c \\
+r = c - r \epsilon \cos{\phi} &= c - \epsilon x \\
+x^2 + y^2 &= c^2 &= \epsilon^2 x^2 - 2 c \epsilon x \\
+x^2(1 - \epsilon^2) +  2 c \epsilon x + y^2 &= c^2 \\
 \end{align}
 $$
 
@@ -329,10 +331,10 @@ Assim, completando os quadrados e agrupando os termos, temos:
 
 $$
 \begin{align}
-\frac{\left(x + d\right)^2}{a^2} + \frac{y^2}{b^2} = 1 \\
-a = \frac{c}{1 - \epsilon^2} \\
-b = \frac{c}{\sqrt{1 - \epsilon^2}} \\
-d = \frac{c \epsilon}{1 - \epsilon^2} = \epsilon a
+\frac{\left(x + d\right)^2}{a^2} + \frac{y^2}{b^2} &= 1 \\
+a &= \frac{c}{1 - \epsilon^2} \\
+b &= \frac{c}{\sqrt{1 - \epsilon^2}} \\
+d &= \frac{c \epsilon}{1 - \epsilon^2} &= \epsilon a
 \end{align}
 $$
 
@@ -341,7 +343,7 @@ Obtendo-se a equação de uma elipse deslocada, em coordenadas cartesianas. Send
 
 $$
 \begin{align}
-y^2 + 2 c x = c^2 \\
+y^2 + 2 c x &= c^2 \\
 \end{align}
 $$
 
@@ -349,9 +351,9 @@ Que resulta na formula de uma parábola deitada, que r vai para infinito quando 
 
 $$
 \begin{align}
-\frac{d A}{dt} = \frac{l}{2 \mu} \\
-\frac{l}{2 \mu} \tau = \pi a b \\
-\tau^2 = \frac{\pi^2 a^2 b^2 4 \mu^2}{l^2} = \left(\frac{4 \pi^2 \mu}{\gamma}\right) a^3 \\
+\frac{d A}{dt} &= \frac{l}{2 \mu} \\
+\frac{l}{2 \mu} \tau &= \pi a b \\
+\tau^2 &= \frac{\pi^2 a^2 b^2 4 \mu^2}{l^2} &= \left(\frac{4 \pi^2 \mu}{\gamma}\right) a^3 \\
 \end{align}
 $$
 
@@ -359,10 +361,10 @@ No sistema gravitacional da órbitas em relação ao Sol(massa muito grande), te
 
 $$
 \begin{align}
-\tau^2 = \frac{\pi^2 a^2 b^2 4 \mu^2}{l^2} = \left(\frac{4 \pi^2 \mu}{\gamma}\right) a^3 \\
-\gamma = G M m \\
-\mu = \frac{M m}{M + m} \simeq m \\
-\tau^2 \simeq \frac{4 \pi^2}{GM} a^3
+\tau^2 &= \frac{\pi^2 a^2 b^2 4 \mu^2}{l^2} &= \left(\frac{4 \pi^2 \mu}{\gamma}\right) a^3 \\
+\gamma &= G M m \\
+\mu &= \frac{M m}{M + m} &\simeq m \\
+\tau^2 &\simeq \frac{4 \pi^2}{GM} a^3
 \end{align}
 $$
 
