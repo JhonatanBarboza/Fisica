@@ -42,7 +42,9 @@ $$ \begin{align} \vec{F_i}(t) &= m_i \vec{a_i}(t). \end{align} $$
 
 Como a única força atuante no sistema é a gravitacional, temos:
 
+<p>
 $$ \begin{align} \vec{a_i}(t) &= \dot{\vec{v_i}}(t), \\ \vec{v_i}(t) &= \dot{\vec{r_i}}(t), \\ \ddot{\vec{r_i}}(t) &= \frac{\vec{F_g}}{m_i}. \end{align} $$
+</p>
 
 Como discutido anteriormente, é díficil obter a equação explícita de $x(t)$ e $y(t)$ em $\vec{r}(t) = x(t) \hat{i} + y(t) \hat{j}$ com a EDO obtida. Utilizamos, então, o Método de Euler.
 
@@ -57,8 +59,9 @@ $$ \begin{align} \vec{a_i}(t) &= \frac{\vec{F_i}}{m_i}. \end{align} $$
 
 3. Atualizamos a velocidade e a posição do corpo $i$:
 
+<p>
 $$ \begin{align} \vec{v_i}(t + \Delta t) &= \vec{a_i}(t) \Delta t + \vec{v_i}(t), \\ \vec{r_i}(t + \Delta t) &= \vec{v_i}(t) \Delta t + \vec{r_i}(t). \end{align} $$
-
+</p>
 
 ## Implementação
 ### Bibliotecas Usadas
@@ -103,6 +106,9 @@ python main.py
 
 ## Referências
 (1) Bernardes, E. de S. (2024). Dinâmica-v4 (Notas de aula). 7600105 - Física Básica I. Universidade de São Paulo, São Carlos.
+
 (2) Bernardes, E. de S. (2024). Gravitação (Notas de aula). 7600105 - Física Básica I. Universidade de São Paulo, São Carlos.
+
 (3) Wikipedia. (2024). Three-body problem. https://en.wikipedia.org/wiki/Three-body_problem.
+
 (4) Barboza, J. (2024). Simulação Universo. https://github.com/JhonatanBarboza/Simulacao_Universo.
