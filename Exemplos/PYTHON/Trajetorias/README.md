@@ -109,6 +109,8 @@ L &= \frac{1}{2} M \dot{\vec{R}}^2 + \frac{1}{2} \mu \dot{\vec{r}}^2 - U(r)
 \end{align}
 $$
 
+### Aonde está contida a trajetória?
+
 Tendo em vista que a equação não depende de $\vec{R}$, apenas depende de $\dot{\vec{R}}$, portanto, essa coordenada é cíclica( ignorável ), tendo uma lei de conservação associada a essa coordenda sobre o momento total do sistema, logo o momento total do sistema é conservado. Outra conclusão é que podemos imaginar essa equação como compostas por duas partes, uma dependente da coordenada $\dot{\vec{R}}$ e a outra só dependendo de $\vec{r}$ e $\dot{\vec{r}}$, ou seja, mostra-nos que temos dois problemas separáveis, distintos e independentes. Bom, como a R é coordenada ignorável, significa que $M\ddot{\vec{R}} = 0$ e isso está associado ao fato de um sistema isolado, que só depende de forças externas e como não há forças externas, logo, seu momento associado ao centro de massa é constante, por consequência, $M\dot{\vec{R}} = constante$ ( momento total do sistema ), velocidade do centro de massa é uma constante do movimento, ou seja, centro de massa executa um movimento uniforme.
  Analisando, a equação de movimento para coordenada relativa. Toma-se a derivada de L em relação a posição, denotada por $q_i$, e como é um vetor, significa tomar o seu gradiente dessa função escalar, e menos resultado, obtém-se a força.
 
@@ -151,7 +153,11 @@ $$
 \end{align}
 $$
 
-Tal resultado remete ao momento angular de uma partícula, que é o produto do vetor posição pelo vetor momento associado a ele, sendo a massa pela derivada do vetor posição, sendo a massa representada pela massa reduzida. Bom, como o momento angular total é uma quantidade conservada, a direção do momento angular é fixa, assim, o movimento dessa partícula ficticia se da em uma plano que é perpendicular a esse momento angular, assim, como a coordenada relativa está associada a essa partícula, isso significa que vetor vai trafegar em um plano perpendicular ao momento angular. Logo, a primeira consequência da Lei da Gravitação Universal é que o movimento planetário é um movimento plano, assim, só é preciso duas coordenadas escalares para determinar o vetor coordenada relativa, que será medida a partir de um centro de massa, que para o sistema planetária, irá estar associada a distância do planeta ao Sol. Dessa forma, serão adotadas coordenadas polares bidimensionais. Portanto, iremos, inicialmente, escrever os termos da energia cinética nesse novo sistema de coordenadas dado por:
+Tal resultado remete ao momento angular de uma partícula, que é o produto do vetor posição pelo vetor momento associado a ele, sendo a massa pela derivada do vetor posição, sendo a massa representada pela massa reduzida. Bom, como o momento angular total é uma quantidade conservada, a direção do momento angular é fixa, assim, o movimento dessa partícula ficticia se da em uma plano que é perpendicular a esse momento angular, assim, como a coordenada relativa está associada a essa partícula, isso significa que vetor vai trafegar em um plano perpendicular ao momento angular.
+
+### Trajetória plana e novo sistema de coordenadas
+
+Logo, a primeira consequência da Lei da Gravitação Universal é que o movimento planetário é um movimento plano, assim, só é preciso duas coordenadas escalares para determinar o vetor coordenada relativa, que será medida a partir de um centro de massa, que para o sistema planetária, irá estar associada a distância do planeta ao Sol. Dessa forma, serão adotadas coordenadas polares bidimensionais. Portanto, iremos, inicialmente, escrever os termos da energia cinética nesse novo sistema de coordenadas dado por:
 
 $$
 \begin{align}
@@ -213,6 +219,8 @@ U(r) &= \- \frac{G m_1 m_2}{r}
 \end{align}
 $$
 
+### Energia potencial efetiva
+
 (gráfico)
 
 No começo a parcela positiva domina, pois sobe mais depressa, já no final, a parcela negativa que domina, pois se aproxima do zero mais lentamente, dando esse resultado acima. Dessa forma, nosso problema se resume a analisar o percurso de uma partícula de massa \$mu$ que se move sujeita a ação dessa energia potencial. 
@@ -230,8 +238,13 @@ $$
 $$
 
 Portanto, essa quantidade de energia é conservada( não depende do tempo ), sendo dada pela soma da energia cinética mais o potencial efetivo, que engloba a energia potencial real e a energia potencial centrífuga, que pode ser associada a energia cinética de rotação.
+
+### Segunda lei de kepler
+ 
  Dessa forma, podemos obter a segunda lei de kepler, dado a figura abaixo:
+ 
  (figura de dois vetor, com um angulo d fi em um tempo dt)
+ 
  Buscamos calcular área dessa figura, aproximando essa curva para um t infinitesimal, teremos uma reta, assim basta calcularmos a área de um triângulo:
 
  $$ 
@@ -252,6 +265,9 @@ Assim, obtemos a velocidade areolar, e conforme a segunda lei de Kepler, áreas 
 $$
 
 Portanto, essa velocidade é a razão de duas constantes, ou seja, ela não varia no tempo. Sendo verdadeiro, sempre quando existir uma força central, não apenas para o cenário gravitacional.
+
+### Resolvendo EDO
+
  Agora, iremos resolver a equação radial, adotando $\- \frac{d U}{dr} = F_g$, faremos um substituição de variável não trivial, mas com esse resultado faremos a nova variável como função do angulo $\phi$, tendo em vista que queremos a forma dessa trajetória, que será dada em função de $\phi$, que será obtida através da regra da cadeia, temos:
 
  $$ 
@@ -279,7 +295,7 @@ F &= - \frac{\gamma}{r^2} = - \gamma u^2, \quad \gamma = \text{constante}, \\
 \end{align}
 $$
 
-Dessa forma, obtemos a equação de um oscilador, pois temos uma constante, que torna a equação não homogenea, ou seja, possui uma força ou pertubação externa do problema. A equação homogenea, seria apenas  $\frac{d^2u}{d \phi^2} + u = 0$, que é a equação de um oscilador harmonico, no entanto, por conta da força externa, temos um oscilador forçado com uma força constante. Note que essa equação é verdade para qualquer força central, dado uma força nula ($F = 0$), tendo $\ddot{u} + u = 0$ e tem como solução $u(\phi) = A \cos{\phi - \delta}$, porém se força é nula, trajetória deveria ser uma reta:
+Desse modo, obtemos a equação de um oscilador, pois temos uma constante, que torna a equação não homogenea, ou seja, possui uma força ou pertubação externa do problema. A equação homogenea, seria apenas  $\frac{d^2u}{d \phi^2} + u = 0$, que é a equação de um oscilador harmonico, no entanto, por conta da força externa, temos um oscilador forçado com uma força constante. Note que essa equação é verdade para qualquer força central, dado uma força nula ($F = 0$), tendo $\ddot{u} + u = 0$ e tem como solução $u(\phi) = A \cos{\phi - \delta}$, porém se força é nula, trajetória deveria ser uma reta:
 
 (imagem do sistema e do porque é uma reta)
 
@@ -313,7 +329,11 @@ c &= \frac{l^2}{\gamma \mu}
 \end{align}
 $$
 
-Dessa forma, definimos a equação da órbita, que representa a equação polar de uma cônica( elipses, hiperboles e parábolas ). Dessa forma, a nossa órbita depende do valor de $\epsilon$, pois se denominador for 0, r vai para o infinito e teremos uma trajetória aberta, caso contrário, teremos uma orbita fechada. Assim, a perguntar a se fazer é $1 + \epsilon cos{\phi} = 0? \to \cos{\phi} = \- \frac{1}{\epsilon}$, para isso iremos analisar os casos em que $\epsilon$ é menor que 1, igual a 1 e maior que 1. Se for menor que 1, isso nunca pode acontecer, assim, teremos uma trajetória limitada. Se for igual a um ou maior que um, é possivel a condição, então teremos órbitas ilimitadas. Olhando para o caso menor que 1, teremos r_{mín} para o denominador máximo, que é $\frac{1}{1 + \epsilon}$ e r{máx} = $\frac{1}{1 - \epsilon}$. Além disso, cabe destacar que o r é periodico, com período $2\pi$ que é o mesmo do $\phi$, possuem o mesmo período, que indica a órbita fechada. **O r mínimo recebe o nome de periélio da trajetório, e o r máximo se chama afélio.**
+Portanto, definimos a equação da órbita, que representa a equação polar de uma cônica( elipses, hiperboles e parábolas ). 
+
+### Análise das trajetórias
+
+Assim, a nossa órbita depende do valor de $\epsilon$, pois se denominador for 0, r vai para o infinito e teremos uma trajetória aberta, caso contrário, teremos uma orbita fechada. Assim, a perguntar a se fazer é $1 + \epsilon cos{\phi} = 0? \to \cos{\phi} = \- \frac{1}{\epsilon}$, para isso iremos analisar os casos em que $\epsilon$ é menor que 1, igual a 1 e maior que 1. Se for menor que 1, isso nunca pode acontecer, assim, teremos uma trajetória limitada. Se for igual a um ou maior que um, é possivel a condição, então teremos órbitas ilimitadas. Olhando para o caso menor que 1, teremos r_{mín} para o denominador máximo, que é $\frac{1}{1 + \epsilon}$ e r{máx} = $\frac{1}{1 - \epsilon}$. Além disso, cabe destacar que o r é periodico, com período $2\pi$ que é o mesmo do $\phi$, possuem o mesmo período, que indica a órbita fechada. **O r mínimo recebe o nome de periélio da trajetório, e o r máximo se chama afélio.**
 
 Supondo denominador não nulo, e que epsilon seja menor que 1 e maior que zero:
 
@@ -368,7 +388,8 @@ $$
 \end{align}
 $$
 
-Relação entre energia e excentricidade
+### Relação entre energia e excentricidade
+
 Sabemos que a energia mecanica desse sistema é conservada, e esta energia foi desdobrada em duas partes, uma associada a interação gravitacional, e uma associada ao movimento que mantém o momento angular constante. Isso deu origem, a energia potencial efetiva($U_{ef}(r) = \- \frac{l^2}{2 \mu r^2}$).
 
 (Gráfico energia potencial efetiva)
