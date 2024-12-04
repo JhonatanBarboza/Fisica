@@ -10,7 +10,7 @@ clock = pygame.time.Clock()
 
 # Constantes
 G = 6.67430  # Constante gravitacional
-NUM_ESTRELAS = 3
+NUM_ESTRELAS = 2
 RAIO_PROPORCIONALIDADE = 2  # Constante de ajuste para o raio
 ESCALA = 200  # Fator de escala
 COLISAO = 1   #1 ativado, 0 desativado
@@ -34,44 +34,80 @@ class CorpoCeleste:
         self.trajetoria = []  # Histórico da trajetória
 
     def atualizar_trajetoria(self):
-        if len(self.trajetoria) > 1000:  # Limitar o número de pontos armazenados
+        if len(self.trajetoria) > 10000:  # Limitar o número de pontos armazenados
             self.trajetoria.pop(0)
         self.trajetoria.append((self.x, self.y))
 
 class Estrela(CorpoCeleste):
     pass
 
-# Função para criar estrelas
 def criar_estrelas(num_estrelas):
     estrelas = []
     if NUM_ESTRELAS > 0:
+        # Central star
         x = ESPACO_VIRTUAL_LARGURA / 2
         y = ESPACO_VIRTUAL_ALTURA / 2
-        massa = 200000000
+        massa = 2000000000
         raio = calcular_raio(massa)
         estrelas.append(Estrela(x, y, 0, 0, massa, raio))
 
     if NUM_ESTRELAS > 1:
-        x = ESPACO_VIRTUAL_LARGURA / 2 - 30000
-        y = ESPACO_VIRTUAL_ALTURA / 2 + 30000
-        massa = 200000000
-        raio = calcular_raio(massa)
-        estrelas.append(Estrela(x, y, 150, 50, massa, raio))
+        # Calculate orbital parameters for circular orbit
+        distancia_orbital = 30000  # Distance from central star
+        massa_central = estrelas[0].massa
+        
+        # Calculate orbital velocity for a circular orbit
+        # v = sqrt(G * M / r)
+        velocidade_orbital = math.sqrt(G * massa_central / distancia_orbital)
+        
+        # Position the second star in a circular orbit
+        angulo = math.pi / 4  # 45-degree angle, you can adjust this
+        x = x + distancia_orbital * math.cos(angulo)
+        y = y + distancia_orbital * math.sin(angulo)
+        
+        # Tangential velocity for circular orbit
+        vx = -velocidade_orbital * math.sin(angulo)
+        vy = velocidade_orbital * math.cos(angulo)
+        
+        massa = 100000
+        raio = calcular_raio(massa) * 10
+        estrelas.append(Estrela(x, y, vx, vy, massa, raio))
 
     if NUM_ESTRELAS > 2:
-        x = ESPACO_VIRTUAL_LARGURA / 2 + 30000
-        y = ESPACO_VIRTUAL_ALTURA / 2 - 30000
-        massa = 200000000
-        raio = calcular_raio(massa)
-        estrelas.append(Estrela(x, y, -50, -70, massa, raio))
+        # Similar approach for the third star
+        distancia_orbital = 50000  # Different distance for third star
+        velocidade_orbital = math.sqrt(G * massa_central / distancia_orbital)
+        
+        angulo = -math.pi / 4  # Opposite angle
+        x = x + distancia_orbital * math.cos(angulo)
+        y = y + distancia_orbital * math.sin(angulo)
+        
+        vx = -velocidade_orbital * math.sin(angulo)
+        vy = velocidade_orbital * math.cos(angulo)
+        
+        massa = 100000
+        raio = calcular_raio(massa) * 20
+        estrelas.append(Estrela(x, y, vx, vy, massa, raio))
 
     if NUM_ESTRELAS > 3:
         for _ in range(num_estrelas-3):
-            x = ESPACO_VIRTUAL_LARGURA / 2 + random.randint(-100000, 100000)
-            y = ESPACO_VIRTUAL_ALTURA / 2 + random.randint(-100000, 100000)
-            massa = random.randint(100000, 100000000)
+            # Random positioning but closer to the center
+            distancia_orbital = random.uniform(20000, 80000)
+            angulo = random.uniform(0, 2 * math.pi)
+            
+            x = ESPACO_VIRTUAL_LARGURA / 2 + distancia_orbital * math.cos(angulo)
+            y = ESPACO_VIRTUAL_ALTURA / 2 + distancia_orbital * math.sin(angulo)
+            
+            # Calculate orbital velocity
+            velocidade_orbital = math.sqrt(G * massa_central / distancia_orbital)
+            
+            # Tangential velocity for circular orbit
+            vx = -velocidade_orbital * math.sin(angulo)
+            vy = velocidade_orbital * math.cos(angulo)
+            
+            massa = random.randint(10000, 50000)
             raio = calcular_raio(massa)
-            estrelas.append(Estrela(x, y, random.randint(-300, 300), random.randint(-300, 300), massa, raio))
+            estrelas.append(Estrela(x, y, vx, vy, massa, raio))
 
     return estrelas
 
@@ -233,6 +269,12 @@ while rodando:
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
             rodando = False
+        elif evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_SPACE:
+                    estrelas[1].vx *= 1.15
+                    estrelas[1].vy *= 1.15
+     
+        
 
     tela.fill((0, 0, 0))
     if COLISAO == 1:
@@ -245,6 +287,6 @@ while rodando:
 
 
     pygame.display.flip()
-    clock.tick(60)
+    clock.tick(30)
 
 pygame.quit()
