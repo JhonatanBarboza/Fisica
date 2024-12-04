@@ -10,7 +10,7 @@ clock = pygame.time.Clock()
 
 # Constantes
 G = 6.67430  # Constante gravitacional
-NUM_ESTRELAS = 2
+NUM_ESTRELAS = 3
 RAIO_PROPORCIONALIDADE = 2  # Constante de ajuste para o raio
 ESCALA = 200  # Fator de escala
 COLISAO = 1   #1 ativado, 0 desativado
@@ -45,24 +45,24 @@ class Estrela(CorpoCeleste):
 def criar_estrelas(num_estrelas):
     estrelas = []
     if NUM_ESTRELAS > 0:
-        x = ESPACO_VIRTUAL_LARGURA / 5
-        y = ESPACO_VIRTUAL_ALTURA / 5
-        massa = 200000200
+        x = ESPACO_VIRTUAL_LARGURA / 2 - 10000
+        y = ESPACO_VIRTUAL_ALTURA / 2 - 1000
+        massa = 20000000
         raio = calcular_raio(massa)
-        estrelas.append(Estrela(x, y, 700, 700, massa, raio))
+        estrelas.append(Estrela(x, y, 300, 300, massa, raio))
 
     if NUM_ESTRELAS > 1:
-        x = ESPACO_VIRTUAL_LARGURA - 30000
-        y = ESPACO_VIRTUAL_ALTURA  - 30000
+        x = ESPACO_VIRTUAL_LARGURA / 2 - 20000
+        y = ESPACO_VIRTUAL_ALTURA / 2 + 20000
         massa = 200000000
         raio = calcular_raio(massa)
-        estrelas.append(Estrela(x, y, -700, -700, massa, raio))
+        estrelas.append(Estrela(x, y, -300, -300, massa, raio))
 
     if NUM_ESTRELAS > 2:
         x = ESPACO_VIRTUAL_LARGURA / 2 + 30000
         y = ESPACO_VIRTUAL_ALTURA / 2 - 30000
-        massa = 100000
-        raio = calcular_raio(massa) * 20
+        massa = 20000000
+        raio = calcular_raio(massa)
         estrelas.append(Estrela(x, y, -300, -300, massa, raio))
 
 
