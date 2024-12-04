@@ -20,7 +20,7 @@ Esse é o problema de $3$ (e, consequentemente) de $N$ corpos. Não conseguimos 
 A solução é aproximar e resolver as equações **numericamente**, calculando iterativamente as forças, acelerações, velocidades e posições de cada corpo conforme eles interagem entre si em pequenos intervalos de tempo. Há múltiplos métodos de simular esse sistema, e o utilizado pos nós foi o mais simples, o **método de Euler**.
 
 ## Conceitos de Física e Modelo Matemático
-Colocaremos como origem do nosso sistema de coordendas ortonormal um ponto que não é nenhuma das massas. Temos assim um referencial inercial. Seja também o nosso sistema de coordenadas ortonormal dado pelos versores ($\hat{i} \ \hat{j}$) ao longo dos eixos ($x, y$), respectivamente.
+Colocaremos como origem do nosso sistema de coordendas ortonormal um ponto que não é nenhuma das massas. Temos assim um referencial inercial. Seja também o nosso sistema de coordenadas ortonormal dado pelos versores ($\hat{i}, \hat{j}$) ao longo dos eixos ($x, y$), respectivamente.
 
 ### Gravitação
 Segundo a Lei da Gravitação Universal, a força gravitacional $\vec{F_g}$ entre duas massas $m_1$ e $m_2$, a uma distância $r$ uma da outra é
@@ -89,7 +89,7 @@ Note que, em cada um desses passos, temos o valor numérico! É por isso que o m
 
 O método de Euler é o mais simples e fácil de implementar, por isso decidimos implementá-lo em vez de outros métodos como a Integração de Vernet e o método de Runge-Kutta. É importante notar, contudo, que para $\Delta t$ muito grandes ou mudanças muito abruptas no comportamento da função, esse método perde sua acurácia. Mas o maior problema desse método é sua **dificuldade em conservar energia** em movimentos circulares/harmônicos, justamente devido ao acúmulo de erros ao decorrer do tempo.
 
-O método de Euler é, na verdade, um caso específico do de Runge-Kutta, que por sua vez usa uma expansão de Taylor de grau maior que $1$. Já o método de Verlet também usa uma expansão de Taylor
+O método de Euler é, na verdade, um caso específico do de Runge-Kutta, que por sua vez usa uma expansão de Taylor de grau maior que $1$. Já o método de Verlet também usa uma expansão de Taylor, mas consegue conservar energias e propriedades geométricas (**simplético**). Ele utiliza a posição atual e passada, além da aceleração atual da partícula, para calcular sua posição, sem ter que calcular a velocidade do corpo a cada passo (como é feito no método de Euler).
 
 ## Implementação
 ### Bibliotecas Usadas
