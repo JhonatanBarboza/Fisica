@@ -15,9 +15,9 @@ Caso a massa desse terceiro corpo seja muito pequena em relação aos outros doi
 
 Em outras palavras, teremos um sistema impossível de equações! Mesmo utilizando o conceito de *centro de massa*, que reduz a quantidade de variáveis desconhecidas, ainda não conseguimos obter uma solução geral para o sistema.
 
-Esse é o problema de $3$ (e, consequentemente) de $N$ corpos. Não conseguimos obter (salvo algumas exceções, em que as condições iniciais permitem que as equações sejam resolvidas, como os casos *Euler* e *Lagrange*) as equações das trajetórias dos corpos. Então como saber o comportamento dos corpos nesse sistema?
+Esse é o problema de $3$ (e, consequentemente) de $N$ corpos. Não conseguimos obter (salvo algumas exceções, em que as condições iniciais permitem que as equações sejam resolvidas, como os casos *Euler* e *Lagrange*) as equações das trajetórias dos corpos a partir das EDO's. Então como saber o comportamento dos corpos nesse sistema?
 
-A solução é aproximar e resolver as equações **numericamente**, calculando iterativamente as velocidades e posições de cada corpo conforme eles interagem entre si em pequenos intervalos de tempo. Há múltiplos métodos de simular esse sistema, e o utilizado pos nós foi o mais simples, o **método de Euler**.
+A solução é aproximar e resolver as equações **numericamente**, calculando iterativamente as forças, acelerações, velocidades e posições de cada corpo conforme eles interagem entre si em pequenos intervalos de tempo. Há múltiplos métodos de simular esse sistema, e o utilizado pos nós foi o mais simples, o **método de Euler**.
 
 ## Conceitos de Física e Modelo Matemático
 Colocaremos como origem do nosso sistema de coordendas ortonormal um ponto que não é nenhuma das massas. Temos assim um referencial inercial. Seja também o nosso sistema de coordenadas ortonormal dado pelos versores ($\hat{i},\hat{j}$) ao longo dos eixos ($x, y$), respectivamente.
@@ -44,13 +44,25 @@ $$ \begin{align} \vec{F_i}(t) &= m_i \vec{a_i}(t). \end{align} $$
 
 Como a única força atuante no sistema é a gravitacional, temos:
 
-<p>
 $$ \begin{align} \vec{a_i}(t) &= \dot{\vec{v_i}}(t), \\ \vec{v_i}(t) &= \dot{\vec{r_i}}(t), \\ \ddot{\vec{r_i}}(t) &= \frac{\vec{F_g}}{m_i}. \end{align} $$
-</p>
 
 Como discutido anteriormente, é díficil obter a equação explícita de $x(t)$ e $y(t)$ em $\vec{r}(t) = x(t)\hat{i} + y(t)\hat{j}$ com a EDO obtida. Utilizamos, então, o Método de Euler.
 
 ### Método de Euler
+O método de Euler é um método numérico de aproximar soluções para equações diferenciais. Dado uma função $y(t)$ e um ponto $y(t_0) = y_0$, chamaremos $\frac{d y}{d t} = f(y, t)$. A reta tangente a $t = t_0$ pode ser dada por:
+
+$$ \begin{align} y &= y_0 + f(y_0, t_0) (t - t_0). \end{align} $$
+
+Aplicando essa equação para $t_1$ muito próximo de $t_0$, e $t_2$ muito próximos de $t_1$, temos:
+
+$$ \begin{align} y_1 &= y_0 + f(y_0, t_0) (t_1 - t_0), \\ y_2 &= y_1 + f(y_1, t_1) (t_2 - t_1). \end{align} $$
+
+E assim por diante. Generalizando:
+
+$$ \begin{align} y_{i+1} &= y_i + f(y_i, t_i) (t_{i+1} - t_i), \\ f(y, t)& = \frac{d y}{d t}. \end{align} $$
+
+Aplicando o método no nosso caso:
+
 1. Para cada corpo $i$, somamos as forças gravitacionais exercidas por todos os outros corpos ($j$):
 
 $$ \begin{align} \vec{F_i} &= - G \sum_{j \neq i} \frac{m_i m_j}{r_{ij}^2} \hat{r_{ij}}. \end{align} $$
@@ -113,4 +125,4 @@ python main.py
 
 (3) Wikipedia. (2024). Three-body problem. https://en.wikipedia.org/wiki/Three-body_problem.
 
-(4) Barboza, J. (2024). Simulação Universo. https://github.com/JhonatanBarboza/Simulacao_Universo.
+(4) Lamar University. (2024). Euler's Method. https://tutorial.math.lamar.edu/classes/de/eulersmethod.aspx.

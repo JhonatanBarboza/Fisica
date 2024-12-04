@@ -14,9 +14,8 @@ QUANT_ESTRELAS = 500 # Quantidade inicial padrão de estrelas
 LIM_INF_VEL_ESTRELA = 0
 LIM_SUP_VEL_ESTRELA = 0
 # Range da massa da estrela
-LIM_INF_MASSA_ESTRELA = 100000000
+LIM_INF_MASSA_ESTRELA = 10000000
 LIM_SUP_MASSA_ESTRELA = 100000000
-
 
 # Planetas
 RAIO_PLANETA = 25
@@ -35,7 +34,7 @@ pg.init() # Inicializando o pygame
 ### CONFIGURAÇÕES DA JANELA/GUI ###
 LARGURA, ALTURA = 1250, 700 # Dimensões da janela
 # Configurações do espaço virtual
-ESCALA = 7
+ESCALA = 10
 ESPACO_VIRT_LARG = LARGURA * ESCALA
 ESPACO_VIRT_ALT = ALTURA * ESCALA
 
@@ -245,7 +244,7 @@ def interacao_corpos(corpoA, corpoB : CorpoCeleste):
     # Calculando o valor da força gravitacional entre esses dois corpos
     forcaGrav = G * corpoA.massa * corpoB.massa / (distanciaAB ** 2)
 
-    # Calculando as acelerações de cada corpo, em cada eixo
+    # Calculando as acelerações de cada corpo, em cada eixo, segundo a Segunda Lei de Newton
     ax_corpoA = forcaGrav * distX / (distanciaAB * corpoA.massa)
     ay_corpoA = forcaGrav * distY / (distanciaAB * corpoA.massa)
 
