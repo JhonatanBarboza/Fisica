@@ -87,7 +87,7 @@ Note que, em cada um desses passos, temos o valor numérico! É por isso que o m
 
 #### Por que o Método de Euler?
 
-O método de Euler é o mais simples e fácil de implementar, por isso decidimos implementá-lo em vez de outros métodos como a Integração de Vernet e o método de Runge-Kutta. É importante notar, contudo, que para $\Delta t$ muito grandes ou mudanças muito abruptas no comportamento da função, esse método perde sua acurácia. Mas o maior problema desse método é sua **dificuldade em conservar energia** em movimentos circulares/harmônicos, justamente devido ao acúmulo de erros ao decorrer do tempo.
+O método de Euler é o mais simples e fácil de implementar, por isso decidimos implementá-lo em vez de outros métodos como o **método de Vernet** e o **método de Runge-Kutta**. É importante notar, contudo, que para $\Delta t$ muito grandes ou mudanças muito abruptas no comportamento da função, esse método perde sua acurácia. Mas o maior problema desse método é sua **dificuldade em conservar energia** em movimentos circulares/harmônicos, justamente devido ao acúmulo de erros ao decorrer do tempo.
 
 O método de Euler é, na verdade, um caso específico do de Runge-Kutta, que por sua vez usa uma expansão de Taylor de grau maior que $1$. Já o método de Verlet também usa uma expansão de Taylor, mas consegue conservar energias e propriedades geométricas (**simplético**). Ele utiliza a posição atual e passada, além da aceleração atual da partícula, para calcular sua posição, sem ter que calcular a velocidade do corpo a cada passo (como é feito no método de Euler).
 
