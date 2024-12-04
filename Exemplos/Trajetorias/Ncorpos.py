@@ -34,7 +34,7 @@ class CorpoCeleste:
         self.trajetoria = []  # Histórico da trajetória
 
     def atualizar_trajetoria(self):
-        if len(self.trajetoria) > 10000:  # Limitar o número de pontos armazenados
+        if len(self.trajetoria) > 1000:  # Limitar o número de pontos armazenados
             self.trajetoria.pop(0)
         self.trajetoria.append((self.x, self.y))
 
@@ -45,26 +45,25 @@ class Estrela(CorpoCeleste):
 def criar_estrelas(num_estrelas):
     estrelas = []
     if NUM_ESTRELAS > 0:
-        x = ESPACO_VIRTUAL_LARGURA / 2 - 10000
-        y = ESPACO_VIRTUAL_ALTURA / 2 - 1000
-        massa = 20000000
-        raio = calcular_raio(massa)
-        estrelas.append(Estrela(x, y, 300, 300, massa, raio))
-
-    if NUM_ESTRELAS > 1:
-        x = ESPACO_VIRTUAL_LARGURA / 2 - 20000
-        y = ESPACO_VIRTUAL_ALTURA / 2 + 20000
+        x = ESPACO_VIRTUAL_LARGURA / 2
+        y = ESPACO_VIRTUAL_ALTURA / 2
         massa = 200000000
         raio = calcular_raio(massa)
-        estrelas.append(Estrela(x, y, -300, -300, massa, raio))
+        estrelas.append(Estrela(x, y, 0, 0, massa, raio))
+
+    if NUM_ESTRELAS > 1:
+        x = ESPACO_VIRTUAL_LARGURA / 2 - 30000
+        y = ESPACO_VIRTUAL_ALTURA / 2 + 30000
+        massa = 200000000
+        raio = calcular_raio(massa)
+        estrelas.append(Estrela(x, y, 150, 50, massa, raio))
 
     if NUM_ESTRELAS > 2:
         x = ESPACO_VIRTUAL_LARGURA / 2 + 30000
         y = ESPACO_VIRTUAL_ALTURA / 2 - 30000
-        massa = 20000000
+        massa = 200000000
         raio = calcular_raio(massa)
-        estrelas.append(Estrela(x, y, -300, -300, massa, raio))
-
+        estrelas.append(Estrela(x, y, -50, -70, massa, raio))
 
     if NUM_ESTRELAS > 3:
         for _ in range(num_estrelas-3):
@@ -75,94 +74,52 @@ def criar_estrelas(num_estrelas):
             estrelas.append(Estrela(x, y, random.randint(-300, 300), random.randint(-300, 300), massa, raio))
 
     return estrelas
-    
-def calcular_velocidade(vx, vy):
-    """Calcula a magnitude da velocidade a partir das componentes."""
-    return math.sqrt(vx**2 + vy**2)
-
-def calcular_velocidade_relativa(corpoA, corpoB : CorpoCeleste):
-    """Calcula a velocidade relativa entre duas estrelas."""
-    vel1 = calcular_velocidade(corpoA.vx, corpoA.vy)
-    vel2 = calcular_velocidade(corpoB.vx, corpoB.vy)
-    return abs(vel1 - vel2)
 
 def verificar_colisoes(estrelas):
-    """
-    Detecta e processa colisões entre estrelas e entre planetas.
-
-    Para cada par de estrelas ou planetas, verifica se há colisão com base na distância
-    entre os centros e os raios dos corpos. Quando ocorre uma colisão, aplica as regras
-    de conservação do momento linear para calcular a nova velocidade, soma as massas 
-    e ajusta o raio do corpo resultante. O corpo de menor massa é "absorvido" e marcado 
-    como inativo.
-
-    Operações:
-        1. Verifica colisões entre estrelas:
-            - Se duas estrelas colidem, a estrela maior absorve a menor.
-            - A nova estrela resultante conserva o momento linear e acumula a massa e o volume.
-            - A estrela absorvida é desativada.
-
-        2. Verifica colisões entre planetas:
-            - Mesma lógica aplicada às estrelas, mas considerando planetas.
-
-    Nota: Os corpos desativados são ignorados nas verificações subsequentes.
-
-    Retorna:
-        None.
-    """
-    # Verificar colisões entre estrelas
-    for i in range(NUM_ESTRELAS):
+    for i in range(len(estrelas)):
         if not estrelas[i].ativo:
             continue
-        for j in range(i + 1, NUM_ESTRELAS):
+        for j in range(i + 1, len(estrelas)):
             if not estrelas[j].ativo:
                 continue
+            dx = estrelas[j].x - estrelas[i].x
+            dy = estrelas[j].y - estrelas[i].y
+            distancia = math.sqrt(dx**2 + dy**2)
 
-            # Calcular a distância entre duas estrelas
-            dx_estrelas = estrelas[j].x - estrelas[i].x
-            dy_estrelas = estrelas[j].y - estrelas[i].y
-            distancia_estrelas = math.sqrt(dx_estrelas ** 2 + dy_estrelas ** 2)
+            if distancia <= (estrelas[i].raio + estrelas[j].raio):
+                # Massa total
+                massa_total = estrelas[i].massa + estrelas[j].massa
 
-            if distancia_estrelas <= (estrelas[i].raio + estrelas[j].raio):  # Colisão detectada
-                massa_relativa = (estrelas[i].massa/(estrelas[i].massa + estrelas[j].massa))
-                velocidade_destruicao = 600
-                velocidade_relativa = calcular_velocidade_relativa(estrelas[i], estrelas[j])
-                # Caso em que corpos possuem massa semelhantes e velocidades altas, destroem-se.
-                if(0.4 <= massa_relativa and massa_relativa <= 0.6 and velocidade_relativa > velocidade_destruicao):
-                  estrelas[i].ativo = False  
-                  estrelas[j].ativo = False  
-                else:  
-                  if estrelas[i].massa >= estrelas[j].massa:  # Estrela i absorve j
-                      absorver_corpo(estrelas[i], estrelas[j])
-                  else:  # Estrela j absorve i
-                      absorver_corpo(estrelas[j], estrelas[i])                
+                # Centro de massa
+                cx = (estrelas[i].x * estrelas[i].massa + estrelas[j].x * estrelas[j].massa) / massa_total
+                cy = (estrelas[i].y * estrelas[i].massa + estrelas[j].y * estrelas[j].massa) / massa_total
 
-                   
-def absorver_corpo(corpoA, corpoB : CorpoCeleste):
-  """"
-  corpoA absorve corpoB.
-  
-  Conservação do momento linear:
-  - (v_A * m_A + v_B * m_B)/ m_A + m_B
-  
-  Parâmetros:
-    corpoA: corpo que irá absorver.
-    corpoB: corpo a ser absorvido. 
-  
-  Retorno:
-    None
-  """
-  
-  massa_total = corpoA.massa + corpoB.massa # Massa total do sistema.
-  # Preserva momento linear na direção x.
-  corpoA.vx = (corpoA.vx * corpoA.massa + corpoB.vx * corpoB.massa) / massa_total 
-  # Preserva momento linear na direção y.
-  corpoA.vy = (corpoA.vy * corpoA.massa + corpoB.vy * corpoB.massa) / massa_total
-  # Nova massa de A é a soma da massa dos dois corpos.
-  corpoA.massa = massa_total
-  # A partir da conservação do volume, temos o novo raio dado por:
-  corpoA.raio = (corpoA.raio ** 3 + corpoB.raio ** 3) ** (1 / 3)
-  corpoB.ativo = False  # Desativar corpoB
+                # Momento angular total antes da fusão
+                Lx = (estrelas[i].y - cy) * estrelas[i].massa * estrelas[i].vx + (estrelas[j].y - cy) * estrelas[j].massa * estrelas[j].vx
+                Ly = -(estrelas[i].x - cx) * estrelas[i].massa * estrelas[i].vy - (estrelas[j].x - cx) * estrelas[j].massa * estrelas[j].vy
+
+                # Velocidade resultante
+                vx_resultante = (estrelas[i].vx * estrelas[i].massa + estrelas[j].vx * estrelas[j].massa) / massa_total
+                vy_resultante = (estrelas[i].vy * estrelas[i].massa + estrelas[j].vy * estrelas[j].massa) / massa_total
+
+                # Ajuste para conservar o momento angular
+                vx_resultante += Lx / (massa_total * distancia**2)
+                vy_resultante += Ly / (massa_total * distancia**2)
+
+                # Atualizar estrela resultante
+                if estrelas[i].massa >= estrelas[j].massa:
+                    estrelas[i].vx = vx_resultante
+                    estrelas[i].vy = vy_resultante
+                    estrelas[i].massa = massa_total
+                    estrelas[i].raio = (estrelas[i].raio**3 + estrelas[j].raio**3)**(1/3)
+                    estrelas[j].ativo = False
+                else:
+                    estrelas[j].vx = vx_resultante
+                    estrelas[j].vy = vy_resultante
+                    estrelas[j].massa = massa_total
+                    estrelas[j].raio = (estrelas[j].raio**3 + estrelas[i].raio**3)**(1/3)
+                    estrelas[i].ativo = False
+
 
 # Função para calcular gravidade
 def calcular_gravidade_estrela(a, b):
@@ -288,6 +245,6 @@ while rodando:
 
 
     pygame.display.flip()
-    clock.tick(30)
+    clock.tick(60)
 
 pygame.quit()
