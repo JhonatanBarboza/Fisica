@@ -20,7 +20,7 @@ Esse é o problema de $3$ (e, consequentemente) de $N$ corpos. Não conseguimos 
 A solução é aproximar e resolver as equações **numericamente**, calculando iterativamente as forças, acelerações, velocidades e posições de cada corpo conforme eles interagem entre si em pequenos intervalos de tempo. Há múltiplos métodos de simular esse sistema, e o utilizado pos nós foi o mais simples, o **método de Euler**.
 
 ## Conceitos de Física e Modelo Matemático
-Colocaremos como origem do nosso sistema de coordendas ortonormal um ponto que não é nenhuma das massas. Temos assim um referencial inercial. Seja também o nosso sistema de coordenadas ortonormal dado pelos versores ($\hat{i},\hat{j}$) ao longo dos eixos ($x, y$), respectivamente.
+Colocaremos como origem do nosso sistema de coordendas ortonormal um ponto que não é nenhuma das massas. Temos assim um referencial inercial. Seja também o nosso sistema de coordenadas ortonormal dado pelos versores ($\hat{i} \ \hat{j}$) ao longo dos eixos ($x, y$), respectivamente.
 
 ### Gravitação
 Segundo a Lei da Gravitação Universal, a força gravitacional $\vec{F_g}$ entre duas massas $m_1$ e $m_2$, a uma distância $r$ uma da outra é
@@ -83,7 +83,13 @@ $$ \begin{align} \vec{a_i}(t) &= \frac{\vec{F_i}}{m_i}. \end{align} $$
 $$ \begin{align} \vec{v_i}(t + \Delta t) &= \vec{a_i}(t) \Delta t + \vec{v_i}(t), \\ \vec{r_i}(t + \Delta t) &= \vec{v_i}(t) \Delta t + \vec{r_i}(t). \end{align} $$
 </p>
 
-Note que, em cada um desses passos, temos o valor numérico! É por isso que o método de Euler consegue aproximar bem uma equação diferencial, principalmente na computação: conseguimos obter facilmente o valor da força total, aceleração, velocidade e posição em cada passo.
+Note que, em cada um desses passos, temos o valor numérico! É por isso que o método de Euler consegue aproximar bem uma equação diferencial, principalmente na computação: conseguimos obter facilmente o valor da força total, aceleração, velocidade e posição para cada corpo.
+
+#### Por que o Método de Euler?
+
+O método de Euler é o mais simples e fácil de implementar, por isso decidimos implementá-lo em vez de outros métodos como a Integração de Vernet e o método de Runge-Kutta. É importante notar, contudo, que para $\Delta t$ muito grandes ou mudanças muito abruptas no comportamento da função, esse método perde sua acurácia. Mas o maior problema desse método é sua **dificuldade em conservar energia** em movimentos circulares/harmônicos, justamente devido ao acúmulo de erros ao decorrer do tempo.
+
+O método de Euler é, na verdade, um caso específico do de Runge-Kutta, que por sua vez usa uma expansão de Taylor de grau maior que $1$. Já o método de Verlet também usa uma expansão de Taylor
 
 ## Implementação
 ### Bibliotecas Usadas
@@ -110,7 +116,7 @@ Valores como a posição e velocidade iniciais em cada eixo de um corpo podem se
 
 - **Janela/Escala**
   - Tamanho da janela do pygame
-  - Escala da simulação
+  - Escala da simulação ("zoom")
 
 ## Como Usar
 
@@ -131,8 +137,12 @@ python main.py
 
 (2) Bernardes, E. de S. (2024). Gravitação (Notas de aula). 7600105 - Física Básica I. Universidade de São Paulo, São Carlos.
 
-(3) Wikipedia. (2024). Three-body problem. https://en.wikipedia.org/wiki/Three-body_problem.
+(3) Wikipedia. (2024). Problema dos 3 corpos. https://en.wikipedia.org/wiki/Three-body_problem.
 
-(4) Lamar University. (2024). Euler's Method. https://tutorial.math.lamar.edu/classes/de/eulersmethod.aspx.
+(4) Lamar University. (2024). Método de Euler. https://tutorial.math.lamar.edu/classes/de/eulersmethod.aspx.
 
-(5) LibreTexts. (2024). Euler's Method. https://math.libretexts.org/Courses/Monroe_Community_College/MTH_225_Differential_Equations/03%3A_Numerical_Methods/3.01%3A_Euler%27s_Method.
+(5) LibreTexts. (2024). Método de Euler. https://math.libretexts.org/Courses/Monroe_Community_College/MTH_225_Differential_Equations/03%3A_Numerical_Methods/3.01%3A_Euler%27s_Method.
+
+(6) Massachusetts Institute of Technology (MIT). (2024). Método de Runge-Kutta. https://web.mit.edu/10.001/Web/Course_Notes/Differential_Equations_Notes/node5.html.
+
+(7) University of Delaware. (2024). Método de Verlet. https://www.physics.udel.edu/~bnikolic/teaching/phys660/numerical_ode/node5.html.
