@@ -8,7 +8,7 @@ G = 6.67430 # Constante gravitacional com magnitude menor
 
 # Estrelas
 RAIO_ESTRELA = 50
-COR_ESTRELA = (255, 165, 0) #Laranja
+COR_ESTRELA = (255, 165, 0) # Laranja
 QUANT_ESTRELAS = 500 # Quantidade inicial padrão de estrelas
 # Range da velocidade das estrelas
 LIM_INF_VEL_ESTRELA = 0
@@ -19,7 +19,7 @@ LIM_SUP_MASSA_ESTRELA = 100000000
 
 # Planetas
 RAIO_PLANETA = 25
-COR_PLANETA = (144, 238, 144) # Verde
+COR_PLANETA = (255, 255, 255) # Branco
 QUANT_PLANETAS = 500 # Quantidade inicial padrão de planetas
 # Range da velocidade dos planetas
 LIM_INF_VEL_PLANETA = -1000

@@ -8,7 +8,7 @@ G = 6.67430 # Constante gravitacional com magnitude menor
 
 # Estrelas
 RAIO_ESTRELA = 60
-COR_ESTRELA = (255, 165, 0) #Laranja
+COR_ESTRELA = (255, 165, 0) # Laranja
 QUANT_ESTRELAS = 2 # Quantidade inicial padrão de estrelas
 # Range da velocidade das estrelas
 LIM_INF_VEL_ESTRELA = 0
@@ -19,7 +19,7 @@ LIM_SUP_MASSA_ESTRELA = 1
 
 # Planetas
 RAIO_PLANETA = 30
-COR_PLANETA = (144, 238, 144) # Verde
+COR_PLANETA = (255, 255, 255) # Branco
 QUANT_PLANETAS = 10000 # Quantidade inicial padrão de planetas
 # Range da velocidade dos planetas
 LIM_INF_VEL_PLANETA = 0
@@ -39,7 +39,7 @@ ESPACO_VIRT_LARG = LARGURA * ESCALA
 ESPACO_VIRT_ALT = ALTURA * ESCALA
 
 tela = pg.display.set_mode((LARGURA, ALTURA))
-pg.display.set_caption("Simulação Espaço") # Título da janela
+pg.display.set_caption("Simulação Galáxia") # Título da janela
 clock = pg.time.Clock() # Inicializando o clock para controlar o FPS
 
 gui = pg_gui.UIManager((LARGURA, ALTURA)) # Inicializando a GUI
