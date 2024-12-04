@@ -10,7 +10,7 @@ clock = pygame.time.Clock()
 
 # Constantes
 G = 6.67430  # Constante gravitacional
-NUM_ESTRELAS = 3
+NUM_ESTRELAS = 2
 RAIO_PROPORCIONALIDADE = 2  # Constante de ajuste para o raio
 ESCALA = 200  # Fator de escala
 COLISAO = 1   #1 ativado, 0 desativado
@@ -45,18 +45,18 @@ class Estrela(CorpoCeleste):
 def criar_estrelas(num_estrelas):
     estrelas = []
     if NUM_ESTRELAS > 0:
-        x = ESPACO_VIRTUAL_LARGURA / 2
-        y = ESPACO_VIRTUAL_ALTURA / 2
-        massa = 2000000000
+        x = ESPACO_VIRTUAL_LARGURA / 5
+        y = ESPACO_VIRTUAL_ALTURA / 5
+        massa = 200000200
         raio = calcular_raio(massa)
-        estrelas.append(Estrela(x, y, 0, 0, massa, raio))
+        estrelas.append(Estrela(x, y, 700, 700, massa, raio))
 
     if NUM_ESTRELAS > 1:
-        x = ESPACO_VIRTUAL_LARGURA / 2 - 30000
-        y = ESPACO_VIRTUAL_ALTURA / 2 + 30000
-        massa = 100000
-        raio = calcular_raio(massa) * 20
-        estrelas.append(Estrela(x, y, 300, 300, massa, raio))
+        x = ESPACO_VIRTUAL_LARGURA - 30000
+        y = ESPACO_VIRTUAL_ALTURA  - 30000
+        massa = 200000000
+        raio = calcular_raio(massa)
+        estrelas.append(Estrela(x, y, -700, -700, massa, raio))
 
     if NUM_ESTRELAS > 2:
         x = ESPACO_VIRTUAL_LARGURA / 2 + 30000
@@ -86,7 +86,7 @@ def calcular_velocidade_relativa(corpoA, corpoB : CorpoCeleste):
     vel2 = calcular_velocidade(corpoB.vx, corpoB.vy)
     return abs(vel1 - vel2)
 
-def verificar_colisoes():
+def verificar_colisoes(estrelas):
     """
     Detecta e processa colisões entre estrelas e entre planetas.
 
@@ -111,10 +111,10 @@ def verificar_colisoes():
         None.
     """
     # Verificar colisões entre estrelas
-    for i in range(QUANT_ESTRELAS):
+    for i in range(NUM_ESTRELAS):
         if not estrelas[i].ativo:
             continue
-        for j in range(i + 1, QUANT_ESTRELAS):
+        for j in range(i + 1, NUM_ESTRELAS):
             if not estrelas[j].ativo:
                 continue
 
@@ -137,32 +137,6 @@ def verificar_colisoes():
                   else:  # Estrela j absorve i
                       absorver_corpo(estrelas[j], estrelas[i])                
 
-    # Verificar colisões entre planetas
-    for i in range(QUANT_PLANETAS):
-        if not planetas[i].ativo:
-            continue
-        for j in range(i + 1, QUANT_PLANETAS):
-            if not planetas[j].ativo:
-                continue
-
-            # Calcular a distância entre dois planetas
-            dx_planetas = planetas[j].x - planetas[i].x
-            dy_planetas = planetas[j].y - planetas[i].y
-            distancia_planetas = math.sqrt(dx_planetas ** 2 + dy_planetas ** 2)
-
-            if distancia_planetas <= (planetas[i].raio + planetas[j].raio):  # Colisão detectada
-                massa_relativa = (planetas[i].massa/(planetas[i].massa + planetas[j].massa))
-                velocidade_destruicao = 600
-                velocidade_relativa = calcular_velocidade_relativa(planetas[i], planetas[j])
-                # Caso em que corpos possuem massa semelhantes e velocidades altas, destroem-se.
-                if(0.4 <= massa_relativa and massa_relativa <= 0.6 and velocidade_relativa > velocidade_destruicao):
-                  planetas[i].ativo = False  
-                  planetas[j].ativo = False  
-                else:  
-                  if planetas[i].massa >= planetas[j].massa:  # Estrela i absorve j
-                      absorver_corpo(planetas[i], planetas[j])
-                  else:  # Estrela j absorve i
-                      absorver_corpo(planetas[j], planetas[i])
                    
 def absorver_corpo(corpoA, corpoB : CorpoCeleste):
   """"
@@ -181,7 +155,7 @@ def absorver_corpo(corpoA, corpoB : CorpoCeleste):
   
   massa_total = corpoA.massa + corpoB.massa # Massa total do sistema.
   # Preserva momento linear na direção x.
-  corpoA.vx = (corpoA.vx * corpoA.massa + corpoA.vx * corpoB.massa) / massa_total 
+  corpoA.vx = (corpoA.vx * corpoA.massa + corpoB.vx * corpoB.massa) / massa_total 
   # Preserva momento linear na direção y.
   corpoA.vy = (corpoA.vy * corpoA.massa + corpoB.vy * corpoB.massa) / massa_total
   # Nova massa de A é a soma da massa dos dois corpos.
