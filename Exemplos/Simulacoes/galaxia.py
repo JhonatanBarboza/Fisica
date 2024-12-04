@@ -7,7 +7,7 @@ import random
 G = 6.67430 # Constante gravitacional com magnitude menor
 
 # Estrelas
-RAIO_ESTRELA = 80
+RAIO_ESTRELA = 60
 COR_ESTRELA = (255, 165, 0) #Laranja
 QUANT_ESTRELAS = 2 # Quantidade inicial padrão de estrelas
 # Range da velocidade das estrelas
@@ -18,9 +18,9 @@ LIM_INF_MASSA_ESTRELA = 1
 LIM_SUP_MASSA_ESTRELA = 1
 
 # Planetas
-RAIO_PLANETA = 45
+RAIO_PLANETA = 30
 COR_PLANETA = (144, 238, 144) # Verde
-QUANT_PLANETAS = 1000000 # Quantidade inicial padrão de planetas
+QUANT_PLANETAS = 10000 # Quantidade inicial padrão de planetas
 # Range da velocidade dos planetas
 LIM_INF_VEL_PLANETA = 0
 LIM_SUP_VEL_PLANETA = 0
@@ -143,14 +143,16 @@ class Planeta(CorpoCeleste):
 
 
 ### FUNÇÕES ###
+"""
 def atualizar_informacoes():
-  """
-  Atualiza a quantidade de estrelas e planetas (globalmente) com base no valor inserido no slider
-  """
+  
+  # Atualiza a quantidade de estrelas e planetas (globalmente) com base no valor inserido no slider
+
   global QUANT_ESTRELAS, QUANT_PLANETAS
   QUANT_ESTRELAS = int(slider_estrelas.get_current_value())
   QUANT_PLANETAS = int(slider_planetas.get_current_value())
-
+"""
+  
 def gerar_posicao_aleatoria() -> tuple:
   """
   Gera coordenadas (x, y) aleatórias dentro do espaço virtual definido
@@ -227,7 +229,7 @@ def criar_planetas(quant_planetas: int) -> list:
       x, y, # Coordendas iniciais x e y
       -75, # Vx
       150, # Vy
-      100, # Massa
+      1, # Massa
       RAIO_PLANETA, COR_PLANETA
     ))
 
@@ -373,7 +375,7 @@ while rodando:
       if evento.user_type == pg_gui.UI_BUTTON_PRESSED:
         if evento.ui_element == botao_iniciar:
           # Iniciando simulação
-          atualizar_informacoes()
+          #atualizar_informacoes()
           estrelas = criar_estrelas(QUANT_ESTRELAS)
           planetas = criar_planetas(QUANT_PLANETAS)
           sim_ativa = True
