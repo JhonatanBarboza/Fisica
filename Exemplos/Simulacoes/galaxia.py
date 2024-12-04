@@ -209,6 +209,6 @@ while rodando:
     desenhar_estrelas()
 
     pygame.display.flip()
-    clock.tick(30)  # 60 FPS
+    clock.tick(120)  # 60 FPS
 
 pygame.quit()
