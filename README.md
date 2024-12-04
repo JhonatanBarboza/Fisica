@@ -44,7 +44,9 @@ $$ \begin{align} \vec{F_i}(t) &= m_i \vec{a_i}(t). \end{align} $$
 
 Como a única força atuante no sistema é a gravitacional, temos:
 
+<p>
 $$ \begin{align} \vec{a_i}(t) &= \dot{\vec{v_i}}(t), \\ \vec{v_i}(t) &= \dot{\vec{r_i}}(t), \\ \ddot{\vec{r_i}}(t) &= \frac{\vec{F_g}}{m_i}. \end{align} $$
+</p>
 
 Como discutido anteriormente, é díficil obter a equação explícita de $x(t)$ e $y(t)$ em $\vec{r}(t) = x(t)\hat{i} + y(t)\hat{j}$ com a EDO obtida. Utilizamos, então, o Método de Euler.
 
@@ -55,13 +57,17 @@ $$ \begin{align} y &= y_0 + f(y_0, t_0) (t - t_0). \end{align} $$
 
 Aplicando essa equação para $t_1$ muito próximo de $t_0$, e $t_2$ muito próximos de $t_1$, temos:
 
+<p>
 $$ \begin{align} y_1 &= y_0 + f(y_0, t_0) (t_1 - t_0), \\ y_2 &= y_1 + f(y_1, t_1) (t_2 - t_1). \end{align} $$
+</p>
 
 E assim por diante. Generalizando:
 
+<p>
 $$ \begin{align} y_{i+1} &= y_i + f(y_i, t_i) (t_{i+1} - t_i), \\ f(y, t)& = \frac{d y}{d t}. \end{align} $$
+</p>
 
-Aplicando o método no nosso caso:
+Vamos aplicar esse método no nosso caso para obter a velocidade do corpo e, em seguida, sua posição:
 
 1. Para cada corpo $i$, somamos as forças gravitacionais exercidas por todos os outros corpos ($j$):
 
@@ -76,6 +82,8 @@ $$ \begin{align} \vec{a_i}(t) &= \frac{\vec{F_i}}{m_i}. \end{align} $$
 <p>
 $$ \begin{align} \vec{v_i}(t + \Delta t) &= \vec{a_i}(t) \Delta t + \vec{v_i}(t), \\ \vec{r_i}(t + \Delta t) &= \vec{v_i}(t) \Delta t + \vec{r_i}(t). \end{align} $$
 </p>
+
+Note que, em cada um desses passos, temos o valor numérico! É por isso que o método de Euler consegue aproximar bem uma equação diferencial, principalmente na computação: conseguimos obter facilmente o valor da força total, aceleração, velocidade e posição em cada passo.
 
 ## Implementação
 ### Bibliotecas Usadas
@@ -126,3 +134,5 @@ python main.py
 (3) Wikipedia. (2024). Three-body problem. https://en.wikipedia.org/wiki/Three-body_problem.
 
 (4) Lamar University. (2024). Euler's Method. https://tutorial.math.lamar.edu/classes/de/eulersmethod.aspx.
+
+(5) LibreTexts. (2024). Euler's Method. https://math.libretexts.org/Courses/Monroe_Community_College/MTH_225_Differential_Equations/03%3A_Numerical_Methods/3.01%3A_Euler%27s_Method.
