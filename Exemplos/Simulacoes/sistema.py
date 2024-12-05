@@ -37,6 +37,9 @@ LARGURA, ALTURA = 1250, 700 # Dimensões da janela
 ESCALA = 10
 ESPACO_VIRT_LARG = LARGURA * ESCALA
 ESPACO_VIRT_ALT = ALTURA * ESCALA
+# Configurações dos sliders
+SLIDER_LARG = 200
+SLIDER_ALT = 20
 
 tela = pg.display.set_mode((LARGURA, ALTURA))
 pg.display.set_caption("Simulação Sistema Solar") # Título da janela
@@ -52,7 +55,7 @@ rot_estrelas = pg_gui.elements.UILabel(
 )
 
 rot_planetas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((10, 110), (250, 30)), # Posição e tamanho do rótulo
+  relative_rect = pg.Rect((10, 70), (250, 30)), # Posição e tamanho do rótulo
   text = "Quantidade de Planetas", # Exibe a quantidade de planetas atualmente selecionada
   manager = gui, 
 )
@@ -64,21 +67,21 @@ rot_slider_estrelas = pg_gui.elements.UILabel(
 )
 
 rot_slider_planetas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((220, 110), (100, 50)), # Posição e tamanho do rótulo
+  relative_rect = pg.Rect((220, 70), (100, 50)), # Posição e tamanho do rótulo
   text = str(QUANT_PLANETAS), # Exibe a quantidade de planetas atualmente selecionada
   manager = gui, 
 )
 
 # Sliders
 slider_estrelas = pg_gui.elements.UIHorizontalSlider(
-  relative_rect = pg.Rect((10, 50), (200, 50)), # Posição e tamanho do rótulo
+  relative_rect = pg.Rect((10, 50), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
   start_value = QUANT_ESTRELAS, # Quantidade inicial padrão de estrelas
   value_range = (0, 1000), # Limites do slider
   manager = gui,
 )
 
 slider_planetas = pg_gui.elements.UIHorizontalSlider(
-  relative_rect = pg.Rect((10, 150), (200, 50)), # Posição e tamanho do rótulo
+  relative_rect = pg.Rect((10, 100), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
   start_value = QUANT_PLANETAS, # Quantidade inicial padrão de planetas
   value_range = (0, 1000), # Limites do slider
   manager = gui,

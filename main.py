@@ -6,10 +6,10 @@ import random
 ### PARÂMETROS DA SIMULAÇÃO ###
 G = 6.67430 # Constante gravitacional com magnitude menor
 
-# Estrelas
+# Estrelas - Valores iniciais padrão
 RAIO_ESTRELA = 50
 COR_ESTRELA = (255, 165, 0) # Laranja
-QUANT_ESTRELAS = 500 # Quantidade inicial padrão de estrelas
+QUANT_ESTRELAS = 1
 # Range da velocidade das estrelas
 LIM_INF_VEL_ESTRELA = 0
 LIM_SUP_VEL_ESTRELA = 0
@@ -17,10 +17,10 @@ LIM_SUP_VEL_ESTRELA = 0
 LIM_INF_MASSA_ESTRELA = 10000000
 LIM_SUP_MASSA_ESTRELA = 100000000
 
-# Planetas
+# Planetas - Valores padrão
 RAIO_PLANETA = 25
 COR_PLANETA = (255, 255, 255) # Branco
-QUANT_PLANETAS = 500 # Quantidade inicial padrão de planetas
+QUANT_PLANETAS = 200
 # Range da velocidade dos planetas
 LIM_INF_VEL_PLANETA = -1000
 LIM_SUP_VEL_PLANETA = 1000
@@ -34,9 +34,12 @@ pg.init() # Inicializando o pygame
 ### CONFIGURAÇÕES DA JANELA/GUI ###
 LARGURA, ALTURA = 1250, 700 # Dimensões da janela
 # Configurações do espaço virtual
-ESCALA = 10
+ESCALA = 10 # "Zoom": quanto menor, mais perto
 ESPACO_VIRT_LARG = LARGURA * ESCALA
 ESPACO_VIRT_ALT = ALTURA * ESCALA
+# Configurações dos sliders
+SLIDER_LARG = 200
+SLIDER_ALT = 20
 
 tela = pg.display.set_mode((LARGURA, ALTURA))
 pg.display.set_caption("Simulação Espaço") # Título da janela
@@ -52,7 +55,7 @@ rot_estrelas = pg_gui.elements.UILabel(
 )
 
 rot_planetas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((10, 110), (250, 30)), # Posição e tamanho do rótulo
+  relative_rect = pg.Rect((10, 70), (250, 30)), # Posição e tamanho do rótulo
   text = "Quantidade de Planetas", # Exibe a quantidade de planetas atualmente selecionada
   manager = gui, 
 )
@@ -64,21 +67,21 @@ rot_slider_estrelas = pg_gui.elements.UILabel(
 )
 
 rot_slider_planetas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((220, 110), (100, 50)), # Posição e tamanho do rótulo
+  relative_rect = pg.Rect((220, 70), (100, 50)), # Posição e tamanho do rótulo
   text = str(QUANT_PLANETAS), # Exibe a quantidade de planetas atualmente selecionada
   manager = gui, 
 )
 
 # Sliders
 slider_estrelas = pg_gui.elements.UIHorizontalSlider(
-  relative_rect = pg.Rect((10, 50), (200, 50)), # Posição e tamanho do rótulo
+  relative_rect = pg.Rect((10, 50), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
   start_value = QUANT_ESTRELAS, # Quantidade inicial padrão de estrelas
   value_range = (0, 1000), # Limites do slider
   manager = gui,
 )
 
 slider_planetas = pg_gui.elements.UIHorizontalSlider(
-  relative_rect = pg.Rect((10, 150), (200, 50)), # Posição e tamanho do rótulo
+  relative_rect = pg.Rect((10, 100), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
   start_value = QUANT_PLANETAS, # Quantidade inicial padrão de planetas
   value_range = (0, 1000), # Limites do slider
   manager = gui,
