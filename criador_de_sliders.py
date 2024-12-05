@@ -191,3 +191,4 @@ def slider_massa_max_planeta(max_massa,gui):
     value_range = (1, 10), # Limites do slider
     manager = gui,
     )
+    return rot_massa_sup_planetas, rot_slider_massa_sup_planetas,slider_massa_sup_planetas

@@ -71,7 +71,7 @@ rot_quant_planetas,rot_slider_quant_planetas,slider_quant_planetas = cds.slider_
 rot_vel_inf_planetas,rot_slider_vel_inf_planetas,slider_vel_inf_planetas = cds.slider_vel_min_planetas(LIM_INF_VEL_PLANETA,gui)
 rot_vel_sup_planetas ,rot_slider_vel_sup_planetas,slider_vel_sup_planetas = cds.slider_vel_max_planetas(LIM_INF_VEL_PLANETA,gui)
 rot_massa_inf_planetas ,rot_slider_massa_inf_planetas,slider_massa_inf_planetas = cds.slider_massa_min_planeta(LIM_INF_MASSA_PLANETA,gui)
-rot_massa_sup_planetas ,rot_slider_massa_sup_planetas,slider_massa_sup_planetas = cds.slider_massa_max_planeta(LIM_SUP_MASSA_PLANETA)
+rot_massa_sup_planetas ,rot_slider_massa_sup_planetas,slider_massa_sup_planetas = cds.slider_massa_max_planeta(LIM_SUP_MASSA_PLANETA,gui)
 
 # Botão de inicar
 botao_iniciar = pg_gui.elements.UIButton(
