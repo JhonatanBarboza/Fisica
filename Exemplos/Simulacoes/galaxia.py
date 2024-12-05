@@ -47,16 +47,10 @@ clock = pg.time.Clock() # Inicializando o clock para controlar o FPS
 
 gui = pg_gui.UIManager((LARGURA, ALTURA)) # Inicializando a GUI
 
-# Configuração dos "rótulos" (onde vão os sliders)
+# Estrelas
 rot_estrelas = pg_gui.elements.UILabel(
   relative_rect = pg.Rect((10, 10), (250, 50)), # Posição e tamanho do rótulo
   text = "Quantidade de Estrelas", # Exibe a quantidade de estrelas atualmente selecionada
-  manager = gui, 
-)
-
-rot_planetas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((10, 70), (250, 30)), # Posição e tamanho do rótulo
-  text = "Quantidade de Planetas", # Exibe a quantidade de planetas atualmente selecionada
   manager = gui, 
 )
 
@@ -66,18 +60,24 @@ rot_slider_estrelas = pg_gui.elements.UILabel(
   manager = gui, 
 )
 
-rot_slider_planetas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((220, 70), (100, 50)), # Posição e tamanho do rótulo
-  text = str(QUANT_PLANETAS), # Exibe a quantidade de planetas atualmente selecionada
-  manager = gui, 
-)
-
-# Sliders
 slider_estrelas = pg_gui.elements.UIHorizontalSlider(
   relative_rect = pg.Rect((10, 50), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
   start_value = QUANT_ESTRELAS, # Quantidade inicial padrão de estrelas
   value_range = (0, 1000), # Limites do slider
   manager = gui,
+)
+
+# Planetas
+rot_planetas = pg_gui.elements.UILabel(
+  relative_rect = pg.Rect((10, 70), (250, 30)), # Posição e tamanho do rótulo
+  text = "Quantidade de Planetas", # Exibe a quantidade de planetas atualmente selecionada
+  manager = gui, 
+)
+
+rot_slider_planetas = pg_gui.elements.UILabel(
+  relative_rect = pg.Rect((220, 70), (100, 50)), # Posição e tamanho do rótulo
+  text = str(QUANT_PLANETAS), # Exibe a quantidade de planetas atualmente selecionada
+  manager = gui, 
 )
 
 slider_planetas = pg_gui.elements.UIHorizontalSlider(
