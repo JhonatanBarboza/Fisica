@@ -495,4 +495,14 @@ Assim, mostra-se que é necessário ampliar  a velocidade em 22% para movê-la d
 
 Simulação feita a partir do código de N corpos, adicionando uma estrela no centro, e um corpo de massa pequena para orbitar com uma velocidade inicial calculada a partir da massa central, constante universal da gravitação e distância da órbita. Dessa forma, o corpo é acelerado com 15% dada sua velocidade atual quando $\cos(\pi)$ para entrar na trajetória elíptica e acelerar 22% da velocidade quando atinge $\cos(0)$, mantendo uma trajetória circular com o dobro do raio anterior. 
 
+## Referências
+
+(1) Bernardes, E. de S. (2024). Dinâmica-v4 (Notas de aula). 7600105 - Física Básica I. Universidade de São Paulo, São Carlos.
+
+(2) Bernardes, E. de S. (2024). Gravitação (Notas de aula). 7600105 - Física Básica I. Universidade de São Paulo, São Carlos.
+
+(3) **Mecânica Clássica UFF.** (s.d.). *Canal no YouTube*. Disponível em: [https://www.youtube.com/@mecanicaclassicauff957](https://www.youtube.com/@mecanicaclassicauff957)
+
+(4) Taylor, J. R. *Mecânica Clássica*. Porto Alegre: Bookman, 2013.
+
 </p>
