@@ -279,7 +279,7 @@ u &= \frac{1}{r} \\
 \frac{d^2r}{dt^2} &= \left(\frac{l}{\mu r^2}\right) \frac{d^2r}{d \phi^2} \\
 r &= \frac{1}{u} \to \frac{dr}{d \phi} \left(\frac{1}{u}\right) &= \- \frac{1}{u^2} \frac{d u}{d \phi} \\
 \frac{dr}{dt} &= \frac{l}{\mu r^2} \- \frac{1}{u^2} \frac{d u}{d \phi} &= \frac{dr}{dt} &= \- \frac{-l}{\mu} \frac{du}{d \phi} \\
-\frac{d^2r}{dt^2} &= \- (\frac{l u^2}{\mu} \frac{l}{\mu} \frac{d^2u}{d \phi^2} &= \- \frac{l^2u^2}{\mu^2} \frac{d^2u}{d \phi^2} \\
+\frac{d^2r}{dt^2} &= \- \left(\frac{l u^2}{\mu}\right) \frac{l}{\mu} \frac{d^2u}{d \phi^2} &= \- \frac{l^2u^2}{\mu^2} \frac{d^2u}{d \phi^2} \\
 \end{align}
 $$
 
@@ -312,7 +312,7 @@ Bom como $u = \frac{1}{r}$, então $r = \frac{1}{A \cos{\phi - \delta}}$. Dessa 
 
 $$
 \begin{align}
-\ddot{v(\phi)} + v(\phi) &= 0 \\
+\ddot{v}(\phi) + v(\phi) &= 0 \\
 \end{align}
 $$
 
@@ -411,5 +411,73 @@ $$
 
 Dessa forma, percebemos que para excenticidade menor que 1, teremos energia negativa, assim orbitas limitadas. Para energia igual a zero(E = 0), teremos $\epsilon = 1$, que descreve a órbita parabólica e energia positiva para $\epsilon > 1$. Assim, dado a excentricidade e o momento angular, sabemos qual é a energia(e vice-versa). Nota-se que o valor mínimo da energia é quando excentricidade é igual a 0, fixados $\mu$ e l, teremos uma circunferência.  
 
+# Mudando entre órbitas circulares
 
+Suponha-se uma espaçonave em uma orbita circular, queremos que ela passe a outra orbita também circular mas com o dobro do raio, com o menor gasto de combustível possível, ou seja, usaremos a interação gravitacional para ajudar. Em um determinado ponto, daremos um impulso ao foguete, usando a interação gravitacional para fazer parte do trabalho, assim, basta descobrirmos o que fazer para que o movimento passe da órbita circular para a órbita elíptica que levará a proxima órbita. Faremos a mudanças acontecerem no periélio e no afélio, uma para entrar na órbita elíptica e outra para sair dela. Para isso, muda-se a velocidade da espaçonave, de inicialmente, está em uma trajetória circular($\epsilon = 0$) de raio $r_1$, assim temos:
+
+$$
+\begin{align}
+v_2 &= \lambda v_1 \\
+r_1 &= \frac{c_1}{1 + \epsilon_1 \cos(\phi)} &= c_1
+\end{align}
+$$
+
+Dessa forma, essa espaçonave entrará em uma órbita elíptica que possui raio que coincide como raio da órbita circular no semieixo menor, podemos afirmar:
+
+$$
+\begin{align}
+r_2 &= \frac{c_2}{1 + \epsilon_2 \cos(\phi)} \\
+\phi &= 0 \\
+r_1 &= c_1 &= \frac{c_2}{1 + e_2}
+\end{align}
+$$
+
+Logo, nesse ponto em que os raios são iguais, muda-se a velocidade instantaneamento de $v_1$ para $v_2$, mudando o momento angular, assim, como a velocidade foi multiplicada por $\lambda$, o momento angular também é multiplicado pelo mesmo fator, porém, podemos saber também como varia o c. Assim, descobrimos o novo c que é quadrado do $\lambda$
+
+$$
+\begin{align}
+l_1 &= \mu r v_1 \to l_2 &= \lambda l_2 \\
+c &= \frac{l^2}{\gamma \mu} \to c_2 &= \lambda^2 c_1 \\
+\end{align}
+$$
+
+Dessa forma, podemos relacionar a excentricidade da órbita elíptica com o $\lambda$:
+
+$$
+\begin{align}
+c_1 &= \frac{\lambda^2 c_1}{1 + e_2} \\
+1 + e_2 &= \lambda^2 \\
+e_2 &= \left(\lambda^2 - 1\right)
+\end{align}
+$$
+
+No instante que o satélite alcança a órbita com o dobro do raio, teremos um $\cos(\phi) = 0$, assim o raio da nova órbita circular($R$) é dado por:
+
+$$
+\begin{align}
+R &= \frac{c_2}{1 - \epsilon_2} \\
+  &= \frac{\lambda^2 r_1}{1 - \left(\lambda^2 - 1\right)} \\
+  &= \frac{\lambda^2 r_1}{2 - \lambda^2}
+\end{align}
+$$
+
+Dessa forma, isolando o $\lambda$ e tomando R como $2r_1$, obtém-se:
+
+$$
+\begin{align}
+\lambda &= \sqrt{\frac{2R}{r_1 + R}} &= \sqrt{\frac{4}{3}} \\
+\lambda &\simeq 1,15
+\end{align}
+$$
+
+A espaçonave deve ampliar sua velocidade em cerca de 15% para se mover para a órbita requerida.A segunda transferência é dada por:
+
+$$
+\begin{align}
+\lambda' &= \sqrt{\frac{R + r_1}{2r_1}} &= \sqrt{\frac{3}{2}} \\
+\lambda' &\simeq 1,22
+\end{align}
+$$
+
+Assim, mostra-se que é necessário ampliar  a velocidade em 22% para movê-la da órbita de transferência para a órbita circular final.
 </p>
