@@ -125,6 +125,7 @@ $$
 Para resolver para o movimento relativo, temos apenas que resolver a segunda lei de Newton para uma única partícula de massa igual à massa reduzida $\mu$ e posição relativa $r$, com energia potencial U(r). Tais conclusões e resoluções sobre objetos inexistentes servem para que quando obtivermos as soluções para R e r, podermos obter $r_1$ e $r_2$, e para alguns casos, isso não importa, pois vendo o caso Terra e Sol, o centro de massa ficara dentro do sol, de forma que o movimento que buscamos, a órbita da Terra, é descrita aproxidamente pelo r, tendo em vista que o sol vai ter um movimento mínimo, podendo ser ignorado. Portanto, adotaremos um referencial com origem no centro de massa do sistema. Como o centro de massa se move com velocidade constante em relação a um referencial inercial (na ausência de forças externas), esse novo referencial também será inercial. Dessa forma, com o referencial no centro de massa, ignorando o movimento do centro de massa, e quando ele coincide com a partícula mais massiva, o problema foi reduzido a um problema de apenas uma partícula, assim usaremos ferramentas de problemas unidimensionais.
 
 ![origem centro de massa](../../Imagens/origem_cm.png)
+
 Fonte: Taylor, J. R. (2013). *Mecânica Clássica*. Porto Alegre: Bookman, p. 298.
 
 Nesse novo referencial, o momento total é zero, assim dado um movimento em $m_1$, $m_2$ terá movimento na mesma direção, porém em sentido contrário com velocidade menor, dado um $m_2$ > $m_1$. Reescrevendo as coordenadas na nova origem(sendo $\vec{R} = \vec{0}$), temos:
@@ -223,6 +224,7 @@ $$
 ### Energia potencial efetiva
 
 ![gráfico energia efetiva](../../Imagens/GRAFUef.png)
+
 Fonte: Taylor, J. R. (2013). *Mecânica Clássica*. Porto Alegre: Bookman, p. 301.
 
 No começo a parcela positiva domina, pois sobe mais depressa, já no final, a parcela negativa que domina, pois se aproxima do zero mais lentamente, dando esse resultado acima. Dessa forma, nosso problema se resume a analisar o percurso de uma partícula de massa \$mu$ que se move sujeita a ação dessa energia potencial. 
@@ -300,6 +302,7 @@ $$
 Desse modo, obtemos a equação de um oscilador, pois temos uma constante, que torna a equação não homogenea, ou seja, possui uma força ou pertubação externa do problema. A equação homogenea, seria apenas  $\frac{d^2u}{d \phi^2} + u = 0$, que é a equação de um oscilador harmonico, no entanto, por conta da força externa, temos um oscilador forçado com uma força constante. Note que essa equação é verdade para qualquer força central, dado uma força nula ($F = 0$), tendo $\ddot{u} + u = 0$ e tem como solução $u(\phi) = A \cos{\phi - \delta}$, porém se força é nula, trajetória deveria ser uma reta:
 
 ![Reta em coordendas polar](../../Imagens/RetaemPOLAR.png)
+
 Fonte: Taylor, J. R. (2013). *Mecânica Clássica*. Porto Alegre: Bookman, p. 307.
 
  Dessa forma, temos que a trajetória de uma linha reta em coordenadas polares dada por:
@@ -339,6 +342,7 @@ Portanto, definimos a equação da órbita, que representa a equação polar de 
 Assim, a nossa órbita depende do valor de $\epsilon$, pois se denominador for 0, r vai para o infinito e teremos uma trajetória aberta, caso contrário, teremos uma orbita fechada. Assim, a perguntar a se fazer é $1 + \epsilon cos{\phi} = 0? \to \cos{\phi} = \- \frac{1}{\epsilon}$, para isso iremos analisar os casos em que $\epsilon$ é menor que 1, igual a 1 e maior que 1. Se for menor que 1, isso nunca pode acontecer, assim, teremos uma trajetória limitada. Se for igual a um ou maior que um, é possivel a condição, então teremos órbitas ilimitadas. Olhando para o caso menor que 1, teremos $r_{mín}$ para o denominador máximo, que é $\frac{1}{1 + \epsilon}$ e $r{máx}$ = $\frac{1}{1 - \epsilon}$. Além disso, cabe destacar que o r é periodico, com período $2\pi$ que é o mesmo do $\phi$, possuem o mesmo período, que indica a órbita fechada. **O r mínimo recebe o nome de periélio da trajetório, e o r máximo se chama afélio.**
 
 ![Trajetórias](../../Imagens/orbitas.png)
+
 Fonte: Taylor, J. R. (2013). *Mecânica Clássica*. Porto Alegre: Bookman, p. 314.
 
 Supondo denominador não nulo, e que epsilon seja menor que 1 e maior que zero:
