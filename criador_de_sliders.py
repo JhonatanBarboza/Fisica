@@ -154,3 +154,40 @@ def slider_vel_max_planetas(max_vel,gui):
     value_range = (-100, 100), # Limites do slider
     manager = gui,
     )
+    return rot_vel_sup_planetas,rot_slider_vel_sup_planetas,slider_vel_sup_planetas
+def slider_massa_min_planeta(min_massa,gui):
+    rot_massa_inf_planetas = pg_gui.elements.UILabel(
+    relative_rect = pg.Rect((LARGURA - 360, 190), (250, 50)), # Posição e tamanho do rótulo
+    text = "Massa Mínima dos Planetas", # Exibe a velocidade mínima das estrelas atualmente selecionada
+    manager = gui, 
+    )
+    rot_slider_massa_inf_planetas = pg_gui.elements.UILabel(
+    relative_rect = pg.Rect((LARGURA - 130, 190), (100, 50)), # Posição e tamanho do rótulo
+    text = str(min_massa), # Exibe a velocidade mínima das estrelas atualmente selecionada
+    manager = gui, 
+    )
+    slider_massa_inf_planetas = pg_gui.elements.UIHorizontalSlider(
+    relative_rect = pg.Rect((LARGURA - 320, 230), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
+    start_value = min_massa, # Velocidade mínima inicial padrão de estrelas
+    value_range = (1, 10), # Limites do slider
+    manager = gui,
+    )
+    return rot_massa_inf_planetas,rot_slider_massa_inf_planetas,slider_massa_inf_planetas
+
+def slider_massa_max_planeta(max_massa,gui):
+    rot_massa_sup_planetas = pg_gui.elements.UILabel(
+    relative_rect = pg.Rect((LARGURA - 360, 250), (250, 50)), # Posição e tamanho do rótulo
+    text = "Massa Máxima dos Planetas", # Exibe a velocidade mínima das estrelas atualmente selecionada
+    manager = gui, 
+    )
+    rot_slider_massa_sup_planetas = pg_gui.elements.UILabel(
+    relative_rect = pg.Rect((LARGURA - 130, 250), (100, 50)), # Posição e tamanho do rótulo
+    text = str(max_massa), # Exibe a velocidade mínima das estrelas atualmente selecionada
+    manager = gui, 
+    )
+    slider_massa_sup_planetas = pg_gui.elements.UIHorizontalSlider(
+    relative_rect = pg.Rect((LARGURA - 320, 290), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
+    start_value = max_massa, # Velocidade mínima inicial padrão de estrelas
+    value_range = (1, 10), # Limites do slider
+    manager = gui,
+    )
