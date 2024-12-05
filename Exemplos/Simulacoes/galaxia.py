@@ -9,18 +9,18 @@ G = 6.67430 # Constante gravitacional com magnitude menor
 # Estrelas
 RAIO_ESTRELA = 60
 COR_ESTRELA = (255, 165, 0) # Laranja
-qtd_estrelas = 4 # Quantidade inicial padrão de estrelas
+QUANT_ESTRELAS = 2 # Quantidade inicial padrão de estrelas
 # Range da velocidade das estrelas
 LIM_INF_VEL_ESTRELA = 0
 LIM_SUP_VEL_ESTRELA = 0
 # Range da massa da estrela
-LIM_INF_MASSA_ESTRELA = 10000000000
-LIM_SUP_MASSA_ESTRELA = 10000000000
+LIM_INF_MASSA_ESTRELA = 1
+LIM_SUP_MASSA_ESTRELA = 1
 
 # Planetas
-RAIO_PLANETA = 100
+RAIO_PLANETA = 30
 COR_PLANETA = (255, 255, 255) # Branco
-qtd_planetas = 100 # Quantidade inicial padrão de planetas
+QUANT_PLANETAS = 10000 # Quantidade inicial padrão de planetas
 # Range da velocidade dos planetas
 LIM_INF_VEL_PLANETA = 0
 LIM_SUP_VEL_PLANETA = 0
@@ -62,27 +62,27 @@ rot_planetas = pg_gui.elements.UILabel(
 
 rot_slider_estrelas = pg_gui.elements.UILabel(
   relative_rect = pg.Rect((220, 10), (100, 50)), # Posição e tamanho do rótulo
-  text = str(qtd_estrelas), # Exibe a quantidade de estrelas atualmente selecionada
+  text = str(QUANT_ESTRELAS), # Exibe a quantidade de estrelas atualmente selecionada
   manager = gui, 
 )
 
 rot_slider_planetas = pg_gui.elements.UILabel(
   relative_rect = pg.Rect((220, 70), (100, 50)), # Posição e tamanho do rótulo
-  text = str(qtd_planetas), # Exibe a quantidade de planetas atualmente selecionada
+  text = str(QUANT_PLANETAS), # Exibe a quantidade de planetas atualmente selecionada
   manager = gui, 
 )
 
 # Sliders
 slider_estrelas = pg_gui.elements.UIHorizontalSlider(
   relative_rect = pg.Rect((10, 50), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
-  start_value = qtd_estrelas, # Quantidade inicial padrão de estrelas
-  value_range = (0, 100), # Limites do slider
+  start_value = QUANT_ESTRELAS, # Quantidade inicial padrão de estrelas
+  value_range = (0, 1000), # Limites do slider
   manager = gui,
 )
 
 slider_planetas = pg_gui.elements.UIHorizontalSlider(
   relative_rect = pg.Rect((10, 100), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
-  start_value = qtd_planetas, # Quantidade inicial padrão de planetas
+  start_value = QUANT_PLANETAS, # Quantidade inicial padrão de planetas
   value_range = (0, 1000), # Limites do slider
   manager = gui,
 )
@@ -157,76 +157,69 @@ def atualizar_informacoes():
 """
   
 def gerar_posicao_aleatoria() -> tuple:
+  """
+  Gera coordenadas (x, y) aleatórias dentro do espaço virtual definido
 
-  x = random.uniform(0, ESPACO_VIRT_LARG)
-  y = random.uniform(0, ESPACO_VIRT_ALT)
+  Parâmetros:
+  
+  Retorno:
+    x, y (tuple): Coordendas (x, y)
+  """
+
+  x = random.uniform(7500, 8500)
+  y = random.uniform(5000, 6000)
 
   return x, y
 
-def gerar_vel_aleatoria() -> tuple:
-
-  vx = random.uniform(-75, 75)
-  vy = random.uniform(-75, 75)
-
-  return vx, vy
-
-def gerar_velocidades_aleatorias(n):
-  velocidades = []
-  for i in range(n):
-    vx = random.uniform(-75, 75)
-    vy = random.uniform(-75, 75)
-    velocidades.append(vx, vy)
-  return velocidades
-
-def gerar_posicoes_velocidades(n):
-    # Gerar posições aleatórias
-    posicoes = [(random.uniform(ESPACO_VIRT_LARG/2-ESPACO_VIRT_LARG/4, ESPACO_VIRT_LARG/2+ESPACO_VIRT_LARG/4), random.uniform(ESPACO_VIRT_ALT/2-ESPACO_VIRT_ALT/4, ESPACO_VIRT_ALT/2+ESPACO_VIRT_ALT/4)) for _ in range(n)]
-    
-    velocidades = []
-    
-    # Para cada par de pontos
-    for i in range(0, n-1, 2):
-        # Calcular vetor distância
-        p1, p2 = posicoes[i], posicoes[i+1]
-        vetor_distancia = (p2[0] - p1[0], p2[1] - p1[1])
-        
-        # Normalizar vetor distância
-        comprimento = math.sqrt(vetor_distancia[0]**2 + vetor_distancia[1]**2)
-        vetor_normalizado = (vetor_distancia[0]/comprimento, vetor_distancia[1]/comprimento)
-        
-        # Gerar vetor perpendicular
-        vetor_perpendicular1 = (-vetor_normalizado[1], vetor_normalizado[0])
-        vetor_perpendicular2 = (vetor_normalizado[1], -vetor_normalizado[0])
-        
-        # Adicionar velocidades perpendiculares com magnitude aleatória
-        magnitude = random.uniform(-120, 120)
-        velocidades.append((vetor_perpendicular1[0] * magnitude, 
-                             vetor_perpendicular1[1] * magnitude))
-        velocidades.append((vetor_perpendicular2[0] * magnitude, 
-                             vetor_perpendicular2[1] * magnitude))
-        if(n%2)==1:
-          velocidades.append(0,0)
-    return posicoes, velocidades
-
 def criar_estrelas(quant_estrelas: int) -> list:
-  
+  """
+  Cria uma lista de objetos da classe Estrela com atributos gerados aleatoriamente
+
+  Parâmetros:
+    quant_estrelas (int): Quantidade de estrelas a serem geradas
+
+  Rertorno:
+    listaEstrelas: Lista de objetos Estrela
+  """
+
   # Lista de objetos Estrela
   listaEstrelas = []
-  listaPos, listaVel = gerar_posicoes_velocidades(quant_estrelas)
-  for i in range(quant_estrelas):
-    x, y = listaPos[i]
-    vx, vy = listaVel[i]
-    listaEstrelas.append(Planeta(
-      x, y, # Coordendas iniciais x e y
-      vx, # Vx
-      vy, # Vy
-      1, # Massa
-      RAIO_ESTRELA, COR_ESTRELA
-    ))
+
+  # Criando duas estrelas que se orbitam
+  x = (ESPACO_VIRT_LARG / 2) + 750
+  y = (ESPACO_VIRT_ALT / 2) - 375
+
+  listaEstrelas.append(Estrela(
+    x, y, # Coordendas iniciais x e y
+    -75, # Vx
+    -75, # Vy
+    7200000, # Massa
+    RAIO_ESTRELA, COR_ESTRELA
+  ))
+
+  x = (ESPACO_VIRT_LARG / 2) - 750
+  y = (ESPACO_VIRT_ALT / 2) + 375
+
+  listaEstrelas.append(Estrela(
+    x, y, # Coordendas iniciais x e y
+    75, # Vx
+    75, # Vy
+    7200000, # Massa
+    RAIO_ESTRELA, COR_ESTRELA
+  ))
 
   return listaEstrelas
 
 def criar_planetas(quant_planetas: int) -> list:
+  """
+  Cria uma lista de objetos da classe Estrela com atributos gerados aleatoriamente
+
+  Parâmetros:
+    quant_planetas (int): Quantidade de planetas a serem gerados
+
+  Rertorno:
+    listaPlanetas: Lista de objetos Planeta
+  """
 
   # Lista de objetos Planeta
   listaPlanetas = []
@@ -234,11 +227,11 @@ def criar_planetas(quant_planetas: int) -> list:
   # Criando um planeta com os parâmetros definidos, e adicionando ela à lista
   for _ in range(quant_planetas):
     x, y = gerar_posicao_aleatoria()
-    vx, vy = gerar_vel_aleatoria()
+
     listaPlanetas.append(Planeta(
       x, y, # Coordendas iniciais x e y
-      vx, # Vx
-      vy, # Vy
+      -75, # Vx
+      150, # Vy
       1, # Massa
       RAIO_PLANETA, COR_PLANETA
     ))
@@ -292,18 +285,18 @@ def atualizar_corpos():
   """
 
   # Estrelas
-  for i in range(qtd_estrelas):
+  for i in range(QUANT_ESTRELAS):
     # Pulando estrelas inativas
     if not estrelas[i].ativo:
       continue
 
     # Calculando interações entre estrelas
-    for j in range(i + 1, qtd_estrelas):
+    for j in range(i + 1, QUANT_ESTRELAS):
       if estrelas[j].ativo:
         interacao_corpos(estrelas[i], estrelas[j])
 
     # Calculando interações entre estrelas e planetas
-    for j in range(qtd_planetas):
+    for j in range(QUANT_PLANETAS):
       if planetas[j].ativo:
         interacao_corpos(estrelas[i], planetas[j])
 
@@ -313,7 +306,7 @@ def atualizar_corpos():
 
 
   # Planetas
-  for i in range(qtd_planetas):
+  for i in range(QUANT_PLANETAS):
     # Pulando planetas inativos
     if not planetas[i].ativo:
       continue
@@ -356,15 +349,12 @@ def desenhar_corpos():
     if planeta.ativo:
       # Desenha o planeta na tela com sua cor original
       desenhar_objeto(planeta.x, planeta.y, planeta.raio, planeta.cor)
-def atualizar_informacoes():
-  qtd_estrelas = int(slider_estrelas.get_current_value())
-  qtd_planetas = int(slider_planetas.get_current_value())
-  return qtd_estrelas, qtd_planetas
+
 ### FUNÇÕES ###
 
 ### SIMULAÇÃO ###
 rodando = True # Flag para controlar o loop principal
-simul_ativa = False # Flag para controlar a simulação
+sim_ativa = False # Flag para controlar a simulação
 
 while rodando:
   # Configuração de FPS
@@ -376,24 +366,22 @@ while rodando:
     if evento.type == pg.QUIT:
       rodando = False
 
-    #MUDA O VALOR DOS SLIDERS SE CLICOU
+    # Atualizando os valores de acordo com os slider
     if evento.type == pg_gui.UI_HORIZONTAL_SLIDER_MOVED:
       if evento.ui_element == slider_estrelas:
         rot_slider_estrelas.set_text(str(int(slider_estrelas.get_current_value())))
       elif evento.ui_element == slider_planetas:
         rot_slider_planetas.set_text(str(int(slider_planetas.get_current_value())))
-    #MUDA O VALOR DOS SLIDERS SE CLICOU
 
-    #SE CLICOU EM INICIAR
+    # Processando o botão de iniciar
     if evento.type == pg.USEREVENT:
       if evento.user_type == pg_gui.UI_BUTTON_PRESSED:
         if evento.ui_element == botao_iniciar:
           # Iniciando simulação
-          qtd_estrelas , qtd_planetas = atualizar_informacoes()
-          estrelas = criar_estrelas(qtd_estrelas)
-          planetas = criar_planetas(qtd_planetas)
-          simul_ativa = True
-    #SE CLICOU EM INICIAR
+          #atualizar_informacoes()
+          estrelas = criar_estrelas(QUANT_ESTRELAS)
+          planetas = criar_planetas(QUANT_PLANETAS)
+          sim_ativa = True
 
     # Processando eventos da GUI
     gui.process_events(evento)
@@ -404,8 +392,7 @@ while rodando:
   # Fundo preto
   tela.fill((0, 0, 0))
 
-  #só vai rodar depois do primeiro iniciar
-  if simul_ativa:
+  if sim_ativa:
     atualizar_corpos()
     desenhar_corpos()
 
