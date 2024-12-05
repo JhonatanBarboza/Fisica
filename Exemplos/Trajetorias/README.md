@@ -111,8 +111,8 @@ $$
 
 ### Aonde está contida a trajetória?
 
-Tendo em vista que a equação não depende de $\vec{R}$, apenas depende de $\dot{\vec{R}}$, portanto, essa coordenada é cíclica( ignorável ), tendo uma lei de conservação associada a essa coordenda sobre o momento total do sistema, logo o momento total do sistema é conservado. Outra conclusão é que podemos imaginar essa equação como compostas por duas partes, uma dependente da coordenada $\dot{\vec{R}}$ e a outra só dependendo de $\vec{r}$ e $\dot{\vec{r}}$, ou seja, mostra-nos que temos dois problemas separáveis, distintos e independentes. Bom, como a R é coordenada ignorável, significa que $M\ddot{\vec{R}} = 0$ e isso está associado ao fato de um sistema isolado, que só depende de forças externas e como não há forças externas, logo, seu momento associado ao centro de massa é constante, por consequência, $M\dot{\vec{R}} = constante$ ( momento total do sistema ), velocidade do centro de massa é uma constante do movimento, ou seja, centro de massa executa um movimento uniforme.
- Analisando, a equação de movimento para coordenada relativa. Toma-se a derivada de L em relação a posição, denotada por $q_i$, e como é um vetor, significa tomar o seu gradiente dessa função escalar, e menos resultado, obtém-se a força.
+Tendo em vista que a equação não depende de $\vec{R}$, apenas depende de $\dot{\vec{R}}$, portanto, essa coordenada é cíclica( ignorável ), tendo uma lei de conservação associada a essa coordenda sobre o momento total do sistema, logo o momento total do sistema é conservado (tal resultado é uma consequência direta da conversavação do momento total). Outra conclusão é que podemos imaginar essa equação como compostas por duas partes, uma dependente da coordenada $\dot{\vec{R}}$ e a outra só dependendo de $\vec{r}$ e $\dot{\vec{r}}$, ou seja, mostra-nos que temos dois problemas separáveis, distintos e independentes. Bom, como a R é coordenada ignorável, significa que $M\ddot{\vec{R}} = 0$ e isso está associado ao fato de um sistema isolado, que só depende de forças externas e como não há forças externas, logo, seu momento associado ao centro de massa é constante, por consequência, $M\dot{\vec{R}} = constante$ ( momento total do sistema ), velocidade do centro de massa é uma constante do movimento, ou seja, centro de massa executa um movimento uniforme.
+ Analisando, a equação de movimento para coordenada relativa. Toma-se a derivada de L em relação a posição, denotada por $q_i$, e como é um vetor, significa tomar o seu gradiente dessa função escalar, e ao negar esse resultado, obtém-se a força(uma interpretação dessa passagem é verificar a lagrangiana que envolve $r$ é matematicamente indistinguível da Lagrangiana para uma única partícula de massa $\mu$ e posição $r$, com energia potencial U(r)).
 
 $$ 
 \begin{align}
@@ -122,7 +122,7 @@ $$
 \end{align}
 $$
 
-Essa equação é uma forma de visualizar a segunda lei de newton, com a força que age sobre uma partícula fictícia e é igualada a massa dessa particula vezes sua aceleração. Tais conclusões e resoluções sobre objetos inexistentes servem para que quando obtivermos as soluções para R e r, podermos obter $r_1$ e $r_2$, e para alguns casos, isso não importa, pois vendo o caso Terra e Sol, o centro de massa ficara dentro do sol, de forma que o movimento que buscamos, a órbita da Terra, é descrita aproxidamente pelo r, tendo em vista que o sol vai ter um movimento mínimo, podendo ser ignorado. Portanto, adotaremos um referencial com origem no centro de massa do sistema. Como o centro de massa se move com velocidade constante em relação a um referencial inercial (na ausência de forças externas), esse novo referencial também será inercial. Dessa forma, com o referencial no centro de massa, ignorando o movimento do centro de massa, e quando ele coincide com a partícula mais massiva, o problema foi reduzido a um problema de apenas uma partícula, assim usaremos ferramentas de problemas unidimensionais.
+Para resolver para o movimento relativo, temos apenas que resolver a segunda lei de Newton para uma única partícula de massa igual à massa reduzida $\mu$ e posição relativa $r$, com energia potencial U(r). Tais conclusões e resoluções sobre objetos inexistentes servem para que quando obtivermos as soluções para R e r, podermos obter $r_1$ e $r_2$, e para alguns casos, isso não importa, pois vendo o caso Terra e Sol, o centro de massa ficara dentro do sol, de forma que o movimento que buscamos, a órbita da Terra, é descrita aproxidamente pelo r, tendo em vista que o sol vai ter um movimento mínimo, podendo ser ignorado. Portanto, adotaremos um referencial com origem no centro de massa do sistema. Como o centro de massa se move com velocidade constante em relação a um referencial inercial (na ausência de forças externas), esse novo referencial também será inercial. Dessa forma, com o referencial no centro de massa, ignorando o movimento do centro de massa, e quando ele coincide com a partícula mais massiva, o problema foi reduzido a um problema de apenas uma partícula, assim usaremos ferramentas de problemas unidimensionais.
 
 ![origem centro de massa](../../Imagens/origem_cm.png)
 
@@ -190,7 +190,7 @@ Sendo que nesse caso, que está assumindo papel de $q_i$ é o $\phi$, e não tem
 $$ 
 \begin{align}
 \frac{\partial L}{\partial r} &= \mu r \dot{\phi}^2 - \frac{\partial U}{\partial r} \\
-\frac{\partial L}{\partial \dot{r}} &= \mu \dot{r} \\
+\frac{\partial L}{\partial \dot{r}} &= \mu \ddot{r} \\
 \dot{\phi} &= \frac{l}{\mu r^2} \\
 \mu r \frac{l^2}{\mu^2 r^4} - \frac{\partial U}{\partial r} &= \mu \ddot{r} \\
 \dot{\frac{l^2}{\mu r^3}} - \frac{\partial U}{\partial r} &= \mu \ddot{r}
