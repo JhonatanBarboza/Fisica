@@ -34,7 +34,7 @@ pg.init() # Inicializando o pygame
 ### CONFIGURAÇÕES DA JANELA/GUI ###
 LARGURA, ALTURA = 1250, 700 # Dimensões da janela
 # Configurações do espaço virtual
-ESCALA = 10
+ESCALA = 10 # "Zoom": quanto menor, mais perto
 ESPACO_VIRT_LARG = LARGURA * ESCALA
 ESPACO_VIRT_ALT = ALTURA * ESCALA
 # Configurações dos sliders
@@ -42,54 +42,186 @@ SLIDER_LARG = 200
 SLIDER_ALT = 20
 
 tela = pg.display.set_mode((LARGURA, ALTURA))
-pg.display.set_caption("Simulação Sistema Solar") # Título da janela
+pg.display.set_caption("Simulação Espaço") # Título da janela
 clock = pg.time.Clock() # Inicializando o clock para controlar o FPS
 
 gui = pg_gui.UIManager((LARGURA, ALTURA)) # Inicializando a GUI
 
-# Configuração dos "rótulos" (onde vão os sliders)
-rot_estrelas = pg_gui.elements.UILabel(
+# Estrelas
+rot_quant_estrelas = pg_gui.elements.UILabel(
   relative_rect = pg.Rect((10, 10), (250, 50)), # Posição e tamanho do rótulo
   text = "Quantidade de Estrelas", # Exibe a quantidade de estrelas atualmente selecionada
   manager = gui, 
 )
-
-rot_planetas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((10, 70), (250, 30)), # Posição e tamanho do rótulo
-  text = "Quantidade de Planetas", # Exibe a quantidade de planetas atualmente selecionada
-  manager = gui, 
-)
-
-rot_slider_estrelas = pg_gui.elements.UILabel(
+rot_slider_quant_estrelas = pg_gui.elements.UILabel(
   relative_rect = pg.Rect((220, 10), (100, 50)), # Posição e tamanho do rótulo
   text = str(QUANT_ESTRELAS), # Exibe a quantidade de estrelas atualmente selecionada
   manager = gui, 
 )
-
-rot_slider_planetas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((220, 70), (100, 50)), # Posição e tamanho do rótulo
-  text = str(QUANT_PLANETAS), # Exibe a quantidade de planetas atualmente selecionada
-  manager = gui, 
-)
-
-# Sliders
-slider_estrelas = pg_gui.elements.UIHorizontalSlider(
-  relative_rect = pg.Rect((10, 50), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
+slider_quant_estrelas = pg_gui.elements.UIHorizontalSlider(
+  relative_rect = pg.Rect((30, 50), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
   start_value = QUANT_ESTRELAS, # Quantidade inicial padrão de estrelas
   value_range = (0, 1000), # Limites do slider
   manager = gui,
 )
 
-slider_planetas = pg_gui.elements.UIHorizontalSlider(
-  relative_rect = pg.Rect((10, 100), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
+rot_vel_inf_estrelas = pg_gui.elements.UILabel(
+  relative_rect = pg.Rect((10, 70), (250, 50)), # Posição e tamanho do rótulo
+  text = "Velocidade Mínima das Estrelas", # Exibe a velocidade mínima das estrelas atualmente selecionada
+  manager = gui, 
+)
+rot_slider_vel_inf_estrelas = pg_gui.elements.UILabel(
+  relative_rect = pg.Rect((220, 70), (100, 50)), # Posição e tamanho do rótulo
+  text = str(LIM_INF_VEL_ESTRELA), # Exibe a velocidade mínima das estrelas atualmente selecionada
+  manager = gui, 
+)
+slider_vel_inf_estrelas = pg_gui.elements.UIHorizontalSlider(
+  relative_rect = pg.Rect((30, 110), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
+  start_value = LIM_INF_VEL_ESTRELA, # Velocidade mínima inicial padrão de estrelas
+  value_range = (-1000, 1000), # Limites do slider
+  manager = gui,
+)
+
+rot_vel_sup_estrelas = pg_gui.elements.UILabel(
+  relative_rect = pg.Rect((10, 130), (250, 50)), # Posição e tamanho do rótulo
+  text = "Velocidade Máxima das Estrelas", # Exibe a velocidade mínima das estrelas atualmente selecionada
+  manager = gui, 
+)
+rot_slider_vel_sup_estrelas = pg_gui.elements.UILabel(
+  relative_rect = pg.Rect((220, 130), (100, 50)), # Posição e tamanho do rótulo
+  text = str(LIM_SUP_VEL_ESTRELA), # Exibe a velocidade mínima das estrelas atualmente selecionada
+  manager = gui, 
+)
+slider_vel_sup_estrelas = pg_gui.elements.UIHorizontalSlider(
+  relative_rect = pg.Rect((30, 170), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
+  start_value = LIM_SUP_VEL_ESTRELA, # Velocidade mínima inicial padrão de estrelas
+  value_range = (-1000, 1000), # Limites do slider
+  manager = gui,
+)
+
+rot_massa_inf_estrelas = pg_gui.elements.UILabel(
+  relative_rect = pg.Rect((10, 190), (250, 50)), # Posição e tamanho do rótulo
+  text = "Massa Mínima das Estrelas", # Exibe a velocidade mínima das estrelas atualmente selecionada
+  manager = gui, 
+)
+rot_slider_massa_inf_estrelas = pg_gui.elements.UILabel(
+  relative_rect = pg.Rect((220, 190), (100, 50)), # Posição e tamanho do rótulo
+  text = str(LIM_INF_MASSA_ESTRELA), # Exibe a velocidade mínima das estrelas atualmente selecionada
+  manager = gui, 
+)
+slider_massa_inf_estrelas = pg_gui.elements.UIHorizontalSlider(
+  relative_rect = pg.Rect((30, 230), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
+  start_value = LIM_INF_MASSA_ESTRELA, # Velocidade mínima inicial padrão de estrelas
+  value_range = (1, 100000000), # Limites do slider
+  manager = gui,
+)
+
+rot_massa_sup_estrelas = pg_gui.elements.UILabel(
+  relative_rect = pg.Rect((10, 250), (250, 50)), # Posição e tamanho do rótulo
+  text = "Massa Máxima das Estrelas", # Exibe a velocidade mínima das estrelas atualmente selecionada
+  manager = gui, 
+)
+rot_slider_massa_sup_estrelas = pg_gui.elements.UILabel(
+  relative_rect = pg.Rect((220, 250), (100, 50)), # Posição e tamanho do rótulo
+  text = str(LIM_SUP_MASSA_ESTRELA), # Exibe a velocidade mínima das estrelas atualmente selecionada
+  manager = gui, 
+)
+slider_massa_sup_estrelas = pg_gui.elements.UIHorizontalSlider(
+  relative_rect = pg.Rect((30, 290), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
+  start_value = LIM_SUP_MASSA_ESTRELA, # Velocidade mínima inicial padrão de estrelas
+  value_range = (1, 100000000), # Limites do slider
+  manager = gui,
+)
+
+# Planetas
+rot_quant_planetas = pg_gui.elements.UILabel(
+  relative_rect = pg.Rect((LARGURA - 360, 10 + 10), (250, 30)), # Posição e tamanho do rótulo
+  text = "Quantidade de Planetas", # Exibe a quantidade de planetas atualmente selecionada
+  manager = gui, 
+)
+rot_slider_quant_planetas = pg_gui.elements.UILabel(
+  relative_rect = pg.Rect((LARGURA - 130, 10), (100, 50)), # Posição e tamanho do rótulo
+  text = str(QUANT_PLANETAS), # Exibe a quantidade de planetas atualmente selecionada
+  manager = gui, 
+)
+slider_quant_planetas = pg_gui.elements.UIHorizontalSlider(
+  relative_rect = pg.Rect((LARGURA - 320, 50), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
   start_value = QUANT_PLANETAS, # Quantidade inicial padrão de planetas
   value_range = (0, 1000), # Limites do slider
   manager = gui,
 )
 
+rot_vel_inf_planetas = pg_gui.elements.UILabel(
+  relative_rect = pg.Rect((LARGURA - 360, 70), (250, 50)), # Posição e tamanho do rótulo
+  text = "Velocidade Mínima dos Planetas", # Exibe a velocidade mínima das planetas atualmente selecionada
+  manager = gui, 
+)
+rot_slider_vel_inf_planetas = pg_gui.elements.UILabel(
+  relative_rect = pg.Rect((LARGURA - 130, 70), (100, 50)), # Posição e tamanho do rótulo
+  text = str(LIM_INF_VEL_PLANETA), # Exibe a velocidade mínima das planetas atualmente selecionada
+  manager = gui, 
+)
+slider_vel_inf_planetas = pg_gui.elements.UIHorizontalSlider(
+  relative_rect = pg.Rect((LARGURA - 320, 110), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
+  start_value = LIM_INF_VEL_PLANETA, # Velocidade mínima inicial padrão de planetas
+  value_range = (-1000, 1000), # Limites do slider
+  manager = gui,
+)
+
+rot_vel_sup_planetas = pg_gui.elements.UILabel(
+  relative_rect = pg.Rect((LARGURA - 360, 130), (250, 50)), # Posição e tamanho do rótulo
+  text = "Velocidade Máxima dos Planetas", # Exibe a velocidade mínima das planetas atualmente selecionada
+  manager = gui, 
+)
+rot_slider_vel_sup_planetas = pg_gui.elements.UILabel(
+  relative_rect = pg.Rect((LARGURA - 130, 130), (100, 50)), # Posição e tamanho do rótulo
+  text = str(LIM_SUP_VEL_PLANETA), # Exibe a velocidade mínima das planetas atualmente selecionada
+  manager = gui, 
+)
+slider_vel_sup_planetas = pg_gui.elements.UIHorizontalSlider(
+  relative_rect = pg.Rect((LARGURA - 320, 170), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
+  start_value = LIM_SUP_VEL_PLANETA, # Velocidade mínima inicial padrão de planetas
+  value_range = (-1000, 1000), # Limites do slider
+  manager = gui,
+)
+
+rot_massa_inf_planetas = pg_gui.elements.UILabel(
+  relative_rect = pg.Rect((LARGURA - 360, 190), (250, 50)), # Posição e tamanho do rótulo
+  text = "Massa Mínima dos Planetas", # Exibe a velocidade mínima das estrelas atualmente selecionada
+  manager = gui, 
+)
+rot_slider_massa_inf_planetas = pg_gui.elements.UILabel(
+  relative_rect = pg.Rect((LARGURA - 130, 190), (100, 50)), # Posição e tamanho do rótulo
+  text = str(LIM_INF_MASSA_PLANETA), # Exibe a velocidade mínima das estrelas atualmente selecionada
+  manager = gui, 
+)
+slider_massa_inf_planetas = pg_gui.elements.UIHorizontalSlider(
+  relative_rect = pg.Rect((LARGURA - 320, 230), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
+  start_value = LIM_INF_MASSA_PLANETA, # Velocidade mínima inicial padrão de estrelas
+  value_range = (1, 100000000), # Limites do slider
+  manager = gui,
+)
+
+rot_massa_sup_planetas = pg_gui.elements.UILabel(
+  relative_rect = pg.Rect((LARGURA - 360, 250), (250, 50)), # Posição e tamanho do rótulo
+  text = "Massa Máxima dos Planetas", # Exibe a velocidade mínima das estrelas atualmente selecionada
+  manager = gui, 
+)
+rot_slider_massa_sup_planetas = pg_gui.elements.UILabel(
+  relative_rect = pg.Rect((LARGURA - 130, 250), (100, 50)), # Posição e tamanho do rótulo
+  text = str(LIM_SUP_MASSA_PLANETA), # Exibe a velocidade mínima das estrelas atualmente selecionada
+  manager = gui, 
+)
+slider_massa_sup_planetas = pg_gui.elements.UIHorizontalSlider(
+  relative_rect = pg.Rect((LARGURA - 320, 290), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
+  start_value = LIM_SUP_MASSA_PLANETA, # Velocidade mínima inicial padrão de estrelas
+  value_range = (1, 100000000), # Limites do slider
+  manager = gui,
+)
+
 # Botão de inicar
 botao_iniciar = pg_gui.elements.UIButton(
-  relative_rect = pg.Rect((10, 220), (100, 50)), # Posição e tamanho do botão
+  relative_rect = pg.Rect((LARGURA/2 - 60, 10), (100, 50)), # Posição e tamanho do botão
   text = "Iniciar", # Texto dentro do botão
   manager = gui,
 )
@@ -147,12 +279,25 @@ class Planeta(CorpoCeleste):
 
 ### FUNÇÕES ###
 def atualizar_informacoes():
-  
-  # Atualiza a quantidade de estrelas e planetas (globalmente) com base no valor inserido no slider
+  """
+  Atualiza a quantidade de estrelas e planetas (globalmente) com base no valor inserido no slider
+  """
 
-  global QUANT_ESTRELAS, QUANT_PLANETAS
-  QUANT_ESTRELAS = int(slider_estrelas.get_current_value())
-  QUANT_PLANETAS = int(slider_planetas.get_current_value())
+  # Planetas
+  global QUANT_PLANETAS, LIM_INF_MASSA_PLANETA, LIM_SUP_MASSA_PLANETA, LIM_INF_VEL_PLANETA, LIM_SUP_VEL_PLANETA
+  QUANT_PLANETAS = int(slider_quant_planetas.get_current_value())
+  LIM_INF_MASSA_PLANETA = int(slider_massa_inf_planetas.get_current_value())
+  LIM_SUP_MASSA_PLANETA = int(slider_massa_sup_planetas.get_current_value())
+  LIM_INF_VEL_PLANETA = int(slider_vel_inf_planetas.get_current_value())
+  LIM_SUP_VEL_PLANETA = int(slider_vel_sup_planetas.get_current_value())
+
+  # Estrelas
+  global QUANT_ESTRELAS, LIM_INF_MASSA_ESTRELA, LIM_SUP_MASSA_ESTRELA, LIM_INF_VEL_ESTRELA, LIM_SUP_VEL_ESTRELA
+  QUANT_ESTRELAS = int(slider_quant_estrelas.get_current_value())
+  LIM_INF_MASSA_ESTRELA = int(slider_massa_inf_estrelas.get_current_value())
+  LIM_SUP_MASSA_ESTRELA = int(slider_massa_sup_estrelas.get_current_value())
+  LIM_INF_VEL_ESTRELA = int(slider_vel_inf_estrelas.get_current_value())
+  LIM_SUP_VEL_ESTRELA = int(slider_vel_sup_estrelas.get_current_value())
   
 def gerar_posicao_aleatoria() -> tuple:
   """
@@ -352,13 +497,32 @@ while rodando:
     # Fechar a janela
     if evento.type == pg.QUIT:
       rodando = False
+    if evento.type == pg.KEYDOWN:
+      if evento.key == pg.K_r and sim_ativa:
+        sim_ativa = False
 
     # Atualizando os valores de acordo com os slider
     if evento.type == pg_gui.UI_HORIZONTAL_SLIDER_MOVED:
-      if evento.ui_element == slider_estrelas:
-        rot_slider_estrelas.set_text(str(int(slider_estrelas.get_current_value())))
-      elif evento.ui_element == slider_planetas:
-        rot_slider_planetas.set_text(str(int(slider_planetas.get_current_value())))
+      if evento.ui_element == slider_quant_planetas:
+        rot_slider_quant_planetas.set_text(str(int(slider_quant_planetas.get_current_value())))
+      elif evento.ui_element == slider_massa_inf_planetas:
+        rot_slider_massa_inf_planetas.set_text(str(int(slider_massa_inf_planetas.get_current_value())))
+      elif evento.ui_element == slider_massa_sup_planetas:
+        rot_slider_massa_sup_planetas.set_text(str(int(slider_massa_sup_planetas.get_current_value())))
+      elif evento.ui_element == slider_vel_inf_planetas:
+        rot_slider_vel_inf_planetas.set_text(str(int(slider_vel_inf_planetas.get_current_value())))
+      elif evento.ui_element == slider_vel_sup_planetas:
+        rot_slider_vel_sup_planetas.set_text(str(int(slider_vel_sup_planetas.get_current_value())))
+      elif evento.ui_element == slider_quant_estrelas:
+        rot_slider_quant_estrelas.set_text(str(int(slider_quant_estrelas.get_current_value())))
+      elif evento.ui_element == slider_massa_inf_estrelas:
+        rot_slider_massa_inf_estrelas.set_text(str(int(slider_massa_inf_estrelas.get_current_value())))
+      elif evento.ui_element == slider_massa_sup_estrelas:
+        rot_slider_massa_sup_estrelas.set_text(str(int(slider_massa_sup_estrelas.get_current_value())))
+      elif evento.ui_element == slider_vel_inf_estrelas:
+        rot_slider_vel_inf_estrelas.set_text(str(int(slider_vel_inf_estrelas.get_current_value())))
+      elif evento.ui_element == slider_vel_sup_estrelas:
+        rot_slider_vel_sup_estrelas.set_text(str(int(slider_vel_sup_estrelas.get_current_value())))
 
     # Processando o botão de iniciar
     if evento.type == pg.USEREVENT:
@@ -382,9 +546,8 @@ while rodando:
   if sim_ativa:
     atualizar_corpos()
     desenhar_corpos()
-
-  # Fazendo a GUI aparecer
-  gui.draw_ui(tela)
+  else:
+    gui.draw_ui(tela)
 
   # Atualizando a tela
   pg.display.flip()
