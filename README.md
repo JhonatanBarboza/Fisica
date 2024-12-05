@@ -139,6 +139,8 @@ Execute o programa:
 python main.py
 ```
 
+Ajuste os parâmetros da simulação como desejar e pressione o botão iniciar. Para parar a simulação e fazer a interface aparecer de novo, pressiona a tecla r.
+
 ## Referências
 (1) Bernardes, E. de S. (2024). Dinâmica-v4 (Notas de aula). 7600105 - Física Básica I. Universidade de São Paulo, São Carlos.
 
