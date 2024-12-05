@@ -37,9 +37,7 @@ sendo $r = \left\| \vec{r_2} - \vec{r_1} \right\|$.
 
 Note que $\vec{r_2} = \vec{r_2} (t)$ e $\vec{r_1} = \vec{r_1} (t)$ indicam os vetores posição das massas $2$ e $1$ (respectivamente) no instante $t$ em relação a uma origem.
 
-<p align=center>
 ![Coordenadas](./Imagens/Coord.png)
-</p>
 
 ### Leis de Newton
 A segunda lei de Newton descreve que a força atuando sobre um corpo $i$ é dada por:
