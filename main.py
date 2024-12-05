@@ -2,18 +2,18 @@ import pygame as pg
 import pygame_gui as pg_gui
 import math
 import random
-
+import criador_de_sliders as cds
 ### PARÂMETROS DA SIMULAÇÃO ###
 G = 6.67430 # Constante gravitacional com magnitude menor
 
 # Estrelas - Valores iniciais padrão
-RAIO_ESTRELA = 50
+RAIO_ESTRELA = 50 
 COR_ESTRELA = (255, 165, 0) # Laranja
-QUANT_ESTRELAS = 1
-# Range da velocidade das estrelas
+QUANT_ESTRELAS = 1 # Quantidade inicial padrão de estrelas
+# Range da velocidade das estrelas padrao
 LIM_INF_VEL_ESTRELA = 0
 LIM_SUP_VEL_ESTRELA = 0
-# Range da massa da estrela
+# Range da massa da estrela padrao
 LIM_INF_MASSA_ESTRELA = 1000000
 LIM_SUP_MASSA_ESTRELA = 1000000
 
@@ -33,140 +33,43 @@ pg.init() # Inicializando o pygame
 
 ### CONFIGURAÇÕES DA JANELA/GUI ###
 LARGURA, ALTURA = 1250, 700 # Dimensões da janela
-# Configurações do espaço virtual
-ESCALA = 10 # "Zoom": quanto menor, mais perto
+# Tamanho do espaço virtual
+
+ESCALA = 20 # "Zoom": quanto menor, mais perto
+'''as posicoes iniciais são limitadas a esse espaço virtual'''
 ESPACO_VIRT_LARG = LARGURA * ESCALA
 ESPACO_VIRT_ALT = ALTURA * ESCALA
-# Configurações dos sliders
+
+# Tamanho dos sliders
 SLIDER_LARG = 200
 SLIDER_ALT = 20
 
-tela = pg.display.set_mode((LARGURA, ALTURA))
+
+tela = pg.display.set_mode((LARGURA, ALTURA))#cria a tela, define a altura e largura
 pg.display.set_caption("Simulação Espaço") # Título da janela
 clock = pg.time.Clock() # Inicializando o clock para controlar o FPS
 
-gui = pg_gui.UIManager((LARGURA, ALTURA)) # Inicializando a GUI
+gui = pg_gui.UIManager((LARGURA, ALTURA)) # cria a interfce "gui" é o nome em ingles
 
-# Estrelas
-rot_quant_estrelas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((10, 10), (250, 50)), # Posição e tamanho do rótulo
-  text = "Quantidade de Estrelas", # Exibe a quantidade de estrelas atualmente selecionada
-  manager = gui, 
-)
-rot_slider_quant_estrelas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((220, 10), (100, 50)), # Posição e tamanho do rótulo
-  text = str(QUANT_ESTRELAS), # Exibe a quantidade de estrelas atualmente selecionada
-  manager = gui, 
-)
-slider_quant_estrelas = pg_gui.elements.UIHorizontalSlider(
-  relative_rect = pg.Rect((30, 50), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
-  start_value = QUANT_ESTRELAS, # Quantidade inicial padrão de estrelas
-  value_range = (0, 500), # Limites do slider
-  manager = gui,
-)
+# SLIDER QUANTIDADE DE ESTRELAS
+rot_quant_estrelas, rot_slider_quant_estrelas, slider_quant_estrelas = cds.slider_estrelas(QUANT_ESTRELAS,gui)
 
-rot_vel_inf_estrelas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((10, 70), (250, 50)), # Posição e tamanho do rótulo
-  text = "Velocidade Mínima das Estrelas", # Exibe a velocidade mínima das estrelas atualmente selecionada
-  manager = gui, 
-)
-rot_slider_vel_inf_estrelas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((220, 70), (100, 50)), # Posição e tamanho do rótulo
-  text = str(LIM_INF_VEL_ESTRELA), # Exibe a velocidade mínima das estrelas atualmente selecionada
-  manager = gui, 
-)
-slider_vel_inf_estrelas = pg_gui.elements.UIHorizontalSlider(
-  relative_rect = pg.Rect((30, 110), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
-  start_value = LIM_INF_VEL_ESTRELA, # Velocidade mínima inicial padrão de estrelas
-  value_range = (-100, 100), # Limites do slider
-  manager = gui,
-)
+# SLIDER VELOCIDADE MIN DE ESTRELAS
+rot_vel_inf_estrelas ,rot_slider_vel_inf_estrelas ,slider_vel_inf_estrelas = cds.slider_velocidade_min_estrelas(LIM_INF_VEL_ESTRELA,gui)
 
-rot_vel_sup_estrelas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((10, 130), (250, 50)), # Posição e tamanho do rótulo
-  text = "Velocidade Máxima das Estrelas", # Exibe a velocidade mínima das estrelas atualmente selecionada
-  manager = gui, 
-)
-rot_slider_vel_sup_estrelas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((220, 130), (100, 50)), # Posição e tamanho do rótulo
-  text = str(LIM_SUP_VEL_ESTRELA), # Exibe a velocidade mínima das estrelas atualmente selecionada
-  manager = gui, 
-)
-slider_vel_sup_estrelas = pg_gui.elements.UIHorizontalSlider(
-  relative_rect = pg.Rect((30, 170), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
-  start_value = LIM_SUP_VEL_ESTRELA, # Velocidade mínima inicial padrão de estrelas
-  value_range = (-100, 100), # Limites do slider
-  manager = gui,
-)
+# SLIDER VELOCIDADE MAX DE ESTRELAS
+rot_vel_sup_estrelas ,rot_slider_vel_sup_estrelas ,slider_vel_sup_estrelas = cds.slider_velocidade_max_estrelas(LIM_SUP_VEL_ESTRELA,gui)
 
-rot_massa_inf_estrelas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((10, 190), (250, 50)), # Posição e tamanho do rótulo
-  text = "Massa Mínima das Estrelas", # Exibe a velocidade mínima das estrelas atualmente selecionada
-  manager = gui, 
-)
-rot_slider_massa_inf_estrelas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((220, 190), (100, 50)), # Posição e tamanho do rótulo
-  text = str(LIM_INF_MASSA_ESTRELA), # Exibe a velocidade mínima das estrelas atualmente selecionada
-  manager = gui, 
-)
-slider_massa_inf_estrelas = pg_gui.elements.UIHorizontalSlider(
-  relative_rect = pg.Rect((30, 230), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
-  start_value = LIM_INF_MASSA_ESTRELA, # Velocidade mínima inicial padrão de estrelas
-  value_range = (1, 1000000), # Limites do slider
-  manager = gui,
-)
+# SLIDER VELOCIDADE MIN DE ESTRELAS
+rot_massa_inf_estrelas ,rot_slider_massa_inf_estrelas ,slider_massa_inf_estrelas = cds.slider_massa_min_estrelas(LIM_INF_MASSA_ESTRELA,gui)
 
-rot_massa_sup_estrelas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((10, 250), (250, 50)), # Posição e tamanho do rótulo
-  text = "Massa Máxima das Estrelas", # Exibe a velocidade mínima das estrelas atualmente selecionada
-  manager = gui, 
-)
-rot_slider_massa_sup_estrelas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((220, 250), (100, 50)), # Posição e tamanho do rótulo
-  text = str(LIM_SUP_MASSA_ESTRELA), # Exibe a velocidade mínima das estrelas atualmente selecionada
-  manager = gui, 
-)
-slider_massa_sup_estrelas = pg_gui.elements.UIHorizontalSlider(
-  relative_rect = pg.Rect((30, 290), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
-  start_value = LIM_SUP_MASSA_ESTRELA, # Velocidade mínima inicial padrão de estrelas
-  value_range = (1, 1000000), # Limites do slider
-  manager = gui,
-)
+# SLIDER VELOCIDADE MAX DE ESTRELAS
+rot_massa_sup_estrelas,rot_slider_massa_sup_estrelas,slider_massa_sup_estrelas = cds.slider_massa_max_estrelas(LIM_SUP_MASSA_ESTRELA,gui)
 
-# Planetas
-rot_quant_planetas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((LARGURA - 360, 10 + 10), (250, 30)), # Posição e tamanho do rótulo
-  text = "Quantidade de Planetas", # Exibe a quantidade de planetas atualmente selecionada
-  manager = gui, 
-)
-rot_slider_quant_planetas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((LARGURA - 130, 10), (100, 50)), # Posição e tamanho do rótulo
-  text = str(QUANT_PLANETAS), # Exibe a quantidade de planetas atualmente selecionada
-  manager = gui, 
-)
-slider_quant_planetas = pg_gui.elements.UIHorizontalSlider(
-  relative_rect = pg.Rect((LARGURA - 320, 50), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
-  start_value = QUANT_PLANETAS, # Quantidade inicial padrão de planetas
-  value_range = (0, 1000), # Limites do slider
-  manager = gui,
-)
+# SLIDER QUANTIDADE DE PLANETAS
+rot_quant_planetas,rot_slider_quant_planetas,slider_quant_planetas = cds.slider_quant_planetas(QUANT_PLANETAS,gui)
 
-rot_vel_inf_planetas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((LARGURA - 360, 70), (250, 50)), # Posição e tamanho do rótulo
-  text = "Velocidade Mínima dos Planetas", # Exibe a velocidade mínima das planetas atualmente selecionada
-  manager = gui, 
-)
-rot_slider_vel_inf_planetas = pg_gui.elements.UILabel(
-  relative_rect = pg.Rect((LARGURA - 130, 70), (100, 50)), # Posição e tamanho do rótulo
-  text = str(LIM_INF_VEL_PLANETA), # Exibe a velocidade mínima das planetas atualmente selecionada
-  manager = gui, 
-)
-slider_vel_inf_planetas = pg_gui.elements.UIHorizontalSlider(
-  relative_rect = pg.Rect((LARGURA - 320, 110), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
-  start_value = LIM_INF_VEL_PLANETA, # Velocidade mínima inicial padrão de planetas
-  value_range = (-100, 100), # Limites do slider
-  manager = gui,
-)
+rot_vel_inf_planetas,rot_slider_vel_inf_planetas,slider_vel_inf_planetas = cds.slider_vel_min_planetas(LIM_INF_VEL_PLANETA,gui)
 
 rot_vel_sup_planetas = pg_gui.elements.UILabel(
   relative_rect = pg.Rect((LARGURA - 360, 130), (250, 50)), # Posição e tamanho do rótulo
@@ -488,7 +391,7 @@ sim_ativa = False # Flag para controlar a simulação
 
 while rodando:
   # Configuração de FPS
-  tempo_delta = clock.tick(60) / 1000.0 # Limitando a 60 o FPS
+  tempo_delta = clock.tick(60) / 1000.0 # a funcao clock.tick(60) serve para limitar a 60 fps e retorna o tempo que passou desde a ultima vez que foi chamada em ms
 
   # Processando eventos do pygame
   for evento in pg.event.get():
