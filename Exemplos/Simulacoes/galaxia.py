@@ -352,6 +352,17 @@ def criar_estrelas(quant_estrelas: int) -> list:
     RAIO_ESTRELA, COR_ESTRELA
   ))
 
+  for _ in range(quant_estrelas - 2):
+    x, y = gerar_posicao_aleatoria()
+
+    listaEstrelas.append(Estrela(
+      x, y, # Coordendas iniciais x e y
+      random.uniform(LIM_INF_VEL_ESTRELA, LIM_SUP_VEL_ESTRELA), # Vx
+      random.uniform(LIM_INF_VEL_ESTRELA, LIM_SUP_VEL_ESTRELA), # Vy
+      random.uniform(LIM_INF_MASSA_ESTRELA, LIM_SUP_MASSA_ESTRELA), # Massa
+      RAIO_ESTRELA, COR_ESTRELA
+    ))
+
   return listaEstrelas
 
 def criar_planetas(quant_planetas: int) -> list:
