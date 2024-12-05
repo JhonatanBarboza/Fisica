@@ -56,17 +56,13 @@ rot_quant_estrelas, rot_slider_quant_estrelas, slider_quant_estrelas = cds.slide
 
 # SLIDER VELOCIDADE MIN DE ESTRELAS
 rot_vel_inf_estrelas ,rot_slider_vel_inf_estrelas ,slider_vel_inf_estrelas = cds.slider_velocidade_min_estrelas(LIM_INF_VEL_ESTRELA,gui)
-
 # SLIDER VELOCIDADE MAX DE ESTRELAS
 rot_vel_sup_estrelas ,rot_slider_vel_sup_estrelas ,slider_vel_sup_estrelas = cds.slider_velocidade_max_estrelas(LIM_SUP_VEL_ESTRELA,gui)
-
 # SLIDER VELOCIDADE MIN DE ESTRELAS
 rot_massa_inf_estrelas ,rot_slider_massa_inf_estrelas ,slider_massa_inf_estrelas = cds.slider_massa_min_estrelas(LIM_INF_MASSA_ESTRELA,gui)
-
 # SLIDER VELOCIDADE MAX DE ESTRELAS
 rot_massa_sup_estrelas,rot_slider_massa_sup_estrelas,slider_massa_sup_estrelas = cds.slider_massa_max_estrelas(LIM_SUP_MASSA_ESTRELA,gui)
-
-# SLIDER QUANTIDADE DE PLANETAS
+# SLIDERS DOS PLANETAS
 rot_quant_planetas,rot_slider_quant_planetas,slider_quant_planetas = cds.slider_quant_planetas(QUANT_PLANETAS,gui)
 rot_vel_inf_planetas,rot_slider_vel_inf_planetas,slider_vel_inf_planetas = cds.slider_vel_min_planetas(LIM_INF_VEL_PLANETA,gui)
 rot_vel_sup_planetas ,rot_slider_vel_sup_planetas,slider_vel_sup_planetas = cds.slider_vel_max_planetas(LIM_INF_VEL_PLANETA,gui)
@@ -85,7 +81,6 @@ botao_iniciar = pg_gui.elements.UIButton(
 class CorpoCeleste:
   """
   Classe base para representar corpos celestes genéricos
-    
   Atributos:
     x (float): Coordenada x no espaço
     y (float): Coordenada y no espaço
@@ -96,7 +91,6 @@ class CorpoCeleste:
     ativo (bool): Estado do corpo (True se ativo, False se desativado)
     cor (tuple): Cor do corpo no formato RGB
     """
-
   def __init__(self, x: float, y: float, vx: float, vy: float, massa: float, raio: float, cor: tuple):
     self.x = x
     self.y = y
@@ -111,13 +105,10 @@ class CorpoCeleste:
 class Estrela(CorpoCeleste):
   """
   Classe que representa uma estrela, herdando de CorpoCeleste.
-    
   Utiliza os mesmos atributos e comportamento de CorpoCeleste.
   """
-
   def __init__(self, x: float, y: float, vx: float, vy: float, massa: float, raio: float, cor: tuple):
     super().__init__(x, y, vx, vy, massa, raio, cor)
-
 
 class Planeta(CorpoCeleste):
   """
@@ -128,15 +119,13 @@ class Planeta(CorpoCeleste):
 
   def __init__(self, x: float, y: float, vx: float, vy: float, massa: float, raio: float, cor: tuple):
     super().__init__(x, y, vx, vy, massa, raio, cor)
-### CLASSE DAS ESTRELAS E DOS PLANETAS ###
 
 
 ### FUNÇÕES ###
 def atualizar_informacoes():
   """
-  Atualiza a quantidade de estrelas e planetas (globalmente) com base no valor inserido no slider
+  Atualiza as variaveis globais que definem a simulação em base do que está nos sliders
   """
-
   # Planetas
   global QUANT_PLANETAS, LIM_INF_MASSA_PLANETA, LIM_SUP_MASSA_PLANETA, LIM_INF_VEL_PLANETA, LIM_SUP_VEL_PLANETA
   QUANT_PLANETAS = int(slider_quant_planetas.get_current_value())
@@ -144,7 +133,6 @@ def atualizar_informacoes():
   LIM_SUP_MASSA_PLANETA = int(slider_massa_sup_planetas.get_current_value())
   LIM_INF_VEL_PLANETA = int(slider_vel_inf_planetas.get_current_value())
   LIM_SUP_VEL_PLANETA = int(slider_vel_sup_planetas.get_current_value())
-
   # Estrelas
   global QUANT_ESTRELAS, LIM_INF_MASSA_ESTRELA, LIM_SUP_MASSA_ESTRELA, LIM_INF_VEL_ESTRELA, LIM_SUP_VEL_ESTRELA
   QUANT_ESTRELAS = int(slider_quant_estrelas.get_current_value())
@@ -156,27 +144,21 @@ def atualizar_informacoes():
 def gerar_posicao_aleatoria() -> tuple:
   """
   Gera coordenadas (x, y) aleatórias dentro do espaço virtual definido
-
-  Parâmetros:
-  
-  Retorno:
-    x, y (tuple): Coordendas (x, y)
   """
-
   x = random.uniform(0, ESPACO_VIRT_LARG)
   y = random.uniform(0, ESPACO_VIRT_ALT)
-
+  return x, y
+def gerar_tupla_aleatoria(lim_inf,lim_sup) -> tuple:
+  """
+  Gera valores (x, y) aleatórias dentro dos limites nos parametros
+  """
+  x = random.uniform(lim_inf, lim_sup)
+  y = random.uniform(lim_inf, lim_sup)
   return x, y
 
 def criar_estrelas(quant_estrelas: int) -> list:
   """
   Cria uma lista de objetos da classe Estrela com atributos gerados aleatoriamente
-
-  Parâmetros:
-    quant_estrelas (int): Quantidade de estrelas a serem geradas
-
-  Rertorno:
-    listaEstrelas: Lista de objetos Estrela
   """
 
   # Lista de objetos Estrela
@@ -185,11 +167,11 @@ def criar_estrelas(quant_estrelas: int) -> list:
   # Criando uma estrela com os parâmetros definidos, e adicionando ela à lista
   for _ in range(quant_estrelas):
     x, y = gerar_posicao_aleatoria()
+    vx, vy = gerar_tupla_aleatoria(LIM_INF_VEL_ESTRELA,LIM_SUP_VEL_ESTRELA)
 
     listaEstrelas.append(Estrela(
       x, y, # Coordendas iniciais x e y
-      random.uniform(LIM_INF_VEL_ESTRELA, LIM_SUP_VEL_ESTRELA), # Vx
-      random.uniform(LIM_INF_VEL_ESTRELA, LIM_SUP_VEL_ESTRELA), # Vy
+      vx, vy, #velocidades iniciais vx e vy
       random.uniform(LIM_INF_MASSA_ESTRELA, LIM_SUP_MASSA_ESTRELA), # Massa
       RAIO_ESTRELA, COR_ESTRELA
     ))
@@ -199,25 +181,17 @@ def criar_estrelas(quant_estrelas: int) -> list:
 def criar_planetas(quant_planetas: int) -> list:
   """
   Cria uma lista de objetos da classe Estrela com atributos gerados aleatoriamente
-
-  Parâmetros:
-    quant_planetas (int): Quantidade de planetas a serem gerados
-
-  Rertorno:
-    listaPlanetas: Lista de objetos Planeta
   """
-
   # Lista de objetos Planeta
   listaPlanetas = []
 
   # Criando um planeta com os parâmetros definidos, e adicionando ela à lista
   for _ in range(quant_planetas):
     x, y = gerar_posicao_aleatoria()
-
+    vx, vy = gerar_tupla_aleatoria(LIM_INF_VEL_PLANETA, LIM_SUP_VEL_PLANETA)
     listaPlanetas.append(Planeta(
       x, y, # Coordendas iniciais x e y
-      random.uniform(LIM_INF_VEL_PLANETA, LIM_SUP_VEL_PLANETA), # Vx
-      random.uniform(LIM_INF_VEL_PLANETA, LIM_SUP_VEL_PLANETA), # Vy
+      vx, vy, #velocidades iniciais vx e vy
       random.uniform(LIM_INF_MASSA_PLANETA, LIM_SUP_MASSA_PLANETA), # Massa
       RAIO_PLANETA, COR_PLANETA
     ))
