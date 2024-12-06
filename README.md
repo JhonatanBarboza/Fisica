@@ -19,7 +19,7 @@ Esse é o problema de $3$ (e, consequentemente) de $N$ corpos. Não conseguimos 
 
 A solução é aproximar e resolver as equações **numericamente**, calculando iterativamente as forças, acelerações, velocidades e posições de cada corpo conforme eles interagem entre si em pequenos intervalos de tempo. Há múltiplos métodos de simular esse sistema, e o utilizado pos nós foi o mais simples, o **método de Euler**.
 
-![Problema dos 3 Corpos](./Imagens/3corpos.gif)
+![3corpos](https://github.com/user-attachments/assets/0f2c852f-6932-4fa0-becf-8e9d1afa622b)
 
 ## Conceitos de Física e Modelo Matemático
 Colocaremos como origem do nosso sistema de coordendas ortonormal um ponto que não é nenhuma das massas. Temos assim um referencial inercial. Seja também o nosso sistema de coordenadas ortonormal dado pelos versores ($\hat{i}, \hat{j}$) ao longo dos eixos ($x, y$), respectivamente.
