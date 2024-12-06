@@ -421,6 +421,14 @@ $$
 
 Dessa forma, percebemos que para excenticidade menor que 1, teremos energia negativa, assim orbitas limitadas. Para energia igual a zero(E = 0), teremos $\epsilon = 1$, que descreve a órbita parabólica e energia positiva para $\epsilon > 1$. Assim, dado a excentricidade e o momento angular, sabemos qual é a energia(e vice-versa). Nota-se que o valor mínimo da energia é quando excentricidade é igual a 0, fixados $\mu$ e l, teremos uma circunferência.  
 
+| Excentricidade | Energia | Órbita |
+|----------------|---------|--------|
+| $\epsilon = 0$ | E < 0 | Círculo |
+| $0 < \epsilon < 1$ | E < 0 | Elipse |
+| $\epsilon = 1$ | E = 0 | Parábola |
+| $\epsilon > 1$ | E > 0 | Hipérbole |
+
+
 # Mudando entre órbitas circulares
 
 Suponha-se uma espaçonave em uma orbita circular, queremos que ela passe a outra orbita também circular mas com o dobro do raio, com o menor gasto de combustível possível, ou seja, usaremos a interação gravitacional para ajudar. Em um determinado ponto, daremos um impulso ao foguete, usando a interação gravitacional para fazer parte do trabalho, assim, basta descobrirmos o que fazer para que o movimento passe da órbita circular para a órbita elíptica que levará a proxima órbita. Faremos a mudanças acontecerem no periélio e no afélio, uma para entrar na órbita elíptica e outra para sair dela. Para isso, muda-se a velocidade da espaçonave, de inicialmente, está em uma trajetória circular($\epsilon = 0$) de raio $r_1$, assim temos:
