@@ -7,8 +7,8 @@ import criador_de_sliders as cds
 G = 6.67430 # Constante gravitacional com magnitude menor
 
 # Estrelas - Valores iniciais padrão
-RAIO_ESTRELA = 50 
-COR_ESTRELA = (255, 165, 0) # Laranja
+RAIO_ESTRELA = 70
+COR_ESTRELA = (225, 200, 0) # Laranja
 QUANT_ESTRELAS = 1 # Quantidade inicial padrão de estrelas
 # Range da velocidade das estrelas padrao
 LIM_INF_VEL_ESTRELA = 0
@@ -78,53 +78,14 @@ botao_iniciar = pg_gui.elements.UIButton(
 ### CONFIGURAÇÕES DA JANELA/GUI ###
 
 ### CLASSE DAS ESTRELAS E DOS PLANETAS ###
-class CorpoCeleste:
-  """
-  Classe base para representar corpos celestes genéricos
-  Atributos:
-    x (float): Coordenada x no espaço
-    y (float): Coordenada y no espaço
-    vx (float): Velocidade no eixo x
-    vy (float): Velocidade no eixo y
-    massa (float): Massa do corpo celeste
-    raio (float): Raio do corpo celeste
-    ativo (bool): Estado do corpo (True se ativo, False se desativado)
-    cor (tuple): Cor do corpo no formato RGB
-    """
-  def __init__(self, x: float, y: float, vx: float, vy: float, massa: float, raio: float, cor: tuple):
-    self.x = x
-    self.y = y
-    self.vx = vx
-    self.vy = vy
-    self.massa = massa
-    self.raio = raio
-    self.ativo = True
-    self.cor = cor
-
-
-class Estrela(CorpoCeleste):
-  """
-  Classe que representa uma estrela, herdando de CorpoCeleste.
-  Utiliza os mesmos atributos e comportamento de CorpoCeleste.
-  """
-  def __init__(self, x: float, y: float, vx: float, vy: float, massa: float, raio: float, cor: tuple):
-    super().__init__(x, y, vx, vy, massa, raio, cor)
-
-class Planeta(CorpoCeleste):
-  """
-  Classe que representa um planeta, herdando de CorpoCeleste.
-    
-  Utiliza os mesmos atributos e comportamento de CorpoCeleste.
-  """
-
-  def __init__(self, x: float, y: float, vx: float, vy: float, massa: float, raio: float, cor: tuple):
-    super().__init__(x, y, vx, vy, massa, raio, cor)
+from classes import CorpoCeleste, Estrela, Planeta
+### CLASSE DAS ESTRELAS E DOS PLANETAS ###
 
 
 ### FUNÇÕES ###
 def atualizar_informacoes():
   """
-  Atualiza as variaveis globais que definem a simulação em base do que está nos sliders
+  Atualiza as variaveis globais que definem o começo da simulação em base do que está nos sliders
   """
   # Planetas
   global QUANT_PLANETAS, LIM_INF_MASSA_PLANETA, LIM_SUP_MASSA_PLANETA, LIM_INF_VEL_PLANETA, LIM_SUP_VEL_PLANETA
@@ -206,7 +167,6 @@ def interacao_corpos(corpoA, corpoB : CorpoCeleste):
   corpoA (CorpoCeleste): Primeiro corpo envolvido
   corpoB (CorpoCeleste): Segundo corpo envolvido
 
-  Retorno:
 
   """
 
@@ -237,11 +197,6 @@ def interacao_corpos(corpoA, corpoB : CorpoCeleste):
 def atualizar_corpos():
   """
   Atualiza as posições de todas as estrelas e planetas ativos no momento
-
-  Parâmetros:
-
-  Retorno: 
-
   """
 
   # Estrelas
@@ -281,6 +236,10 @@ def atualizar_corpos():
     planetas[i].y += planetas[i].vy
 
 def desenhar_objeto(x_virtual: float, y_virtual: float, raio: float, cor):
+  """
+  Desenha um circulo na tela
+
+  """
   # Converte as coordenadas do espaço virtual para o espaço da tela (com escala)
   x_tela = x_virtual / ESCALA
   y_tela = y_virtual / ESCALA
@@ -292,10 +251,6 @@ def desenhar_objeto(x_virtual: float, y_virtual: float, raio: float, cor):
 def desenhar_corpos():
   """
   Desenha todos os corpos ativos na tela.
-    
-  Parâmetros:
-
-  Retorno:
 
   """
   for estrela in estrelas:
@@ -310,7 +265,7 @@ def desenhar_corpos():
 
 ### FUNÇÕES ###
 
-### SIMULAÇÃO ###
+### LOOP PINCIPAL ###
 rodando = True # Flag para controlar o loop principal
 sim_ativa = False # Flag para controlar a simulação
 
@@ -327,7 +282,7 @@ while rodando:
       if evento.key == pg.K_r and sim_ativa:
         sim_ativa = False
 
-    # Atualizando os valores de acordo com os slider
+    # Se foi modificado um slider ele atualiza o texto do slider respectivo
     if evento.type == pg_gui.UI_HORIZONTAL_SLIDER_MOVED:
       if evento.ui_element == slider_quant_planetas:
         rot_slider_quant_planetas.set_text(str(int(slider_quant_planetas.get_current_value())))
@@ -368,7 +323,8 @@ while rodando:
 
   # Fundo preto
   tela.fill((0, 0, 0))
-
+  
+  #ou a simulacao começou ou nao
   if sim_ativa:
     atualizar_corpos()
     desenhar_corpos()

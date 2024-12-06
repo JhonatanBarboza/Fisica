@@ -6,6 +6,9 @@ SLIDER_LARG = 200
 SLIDER_ALT = 20
 LARGURA = 1250
 def slider_estrelas(quant_estrelas,gui):
+    """
+    Retorna os objetos do slider do numero de estrelas
+    """
     rot_quant_estrelas = pg_gui.elements.UILabel(
     relative_rect = pg.Rect((10, 10), (250, 50)), # Posição e tamanho do texto
     text = "Quantidade de Estrelas", # Texto a ser exibido
@@ -25,6 +28,9 @@ def slider_estrelas(quant_estrelas,gui):
     return rot_quant_estrelas, rot_slider_quant_estrelas, slider_quant_estrelas
 
 def slider_velocidade_min_estrelas(min_vel,gui):
+    """
+    Retorna os objetos do slider da velocidade minima das estrelas
+    """
     rot_vel_inf_estrelas = pg_gui.elements.UILabel(
     relative_rect = pg.Rect((10, 70), (250, 50)),
     text = "Velocidade Mínima das Estrelas", 
@@ -44,6 +50,9 @@ def slider_velocidade_min_estrelas(min_vel,gui):
     return rot_vel_inf_estrelas, rot_slider_vel_inf_estrelas, slider_vel_inf_estrelas
 
 def slider_velocidade_max_estrelas(max_vel,gui):
+    """
+    Retorna os objetos do slider da velocidade maxima das estrelas
+    """
     rot_vel_sup_estrelas = pg_gui.elements.UILabel(
     relative_rect = pg.Rect((10, 130), (250, 50)),
     text = "Velocidade Máxima das Estrelas", 
@@ -63,6 +72,9 @@ def slider_velocidade_max_estrelas(max_vel,gui):
     return rot_vel_sup_estrelas, rot_slider_vel_sup_estrelas, slider_vel_sup_estrelas
 
 def slider_massa_min_estrelas(min_mass,gui):
+    """
+    Retorna os objetos do slider da massa minima das estrelas
+    """
     rot_massa_inf_estrelas = pg_gui.elements.UILabel(
     relative_rect = pg.Rect((10, 190), (250, 50)), 
     text = "Massa Mínima das Estrelas", 
@@ -82,6 +94,9 @@ def slider_massa_min_estrelas(min_mass,gui):
     return rot_massa_inf_estrelas, rot_slider_massa_inf_estrelas, slider_massa_inf_estrelas
 
 def slider_massa_max_estrelas(max_mass,gui):
+    """
+    Retorna os objetos do slider da massa maxima das estrelas
+    """
     rot_massa_sup_estrelas = pg_gui.elements.UILabel(
     relative_rect = pg.Rect((10, 250), (250, 50)), 
     text = "Massa Máxima das Estrelas", 
@@ -100,6 +115,9 @@ def slider_massa_max_estrelas(max_mass,gui):
     )
     return rot_massa_sup_estrelas, rot_slider_massa_sup_estrelas,slider_massa_sup_estrelas
 def slider_quant_planetas(quant_planetas,gui):
+    """
+    Retorna os objetos do slider da quantidade de planetas
+    """
     rot_quant_planetas = pg_gui.elements.UILabel(
     relative_rect = pg.Rect((LARGURA - 360, 30), (250, 30)),
     text = "Quantidade de Planetas", 
@@ -119,6 +137,9 @@ def slider_quant_planetas(quant_planetas,gui):
     return rot_quant_planetas, rot_slider_quant_planetas, slider_quant_planetas
 
 def slider_vel_min_planetas(min_vel, gui):
+    """
+    Retorna os objetos do slider da velocidade minima dos planetas
+    """
     rot_vel_inf_planetas = pg_gui.elements.UILabel(
     relative_rect = pg.Rect((LARGURA - 360, 70), (250, 50)), # Posição e tamanho do rótulo
     text = "Velocidade Mínima dos Planetas", # Exibe a velocidade mínima das planetas atualmente selecionada
@@ -138,6 +159,9 @@ def slider_vel_min_planetas(min_vel, gui):
     return rot_vel_inf_planetas, rot_slider_vel_inf_planetas, slider_vel_inf_planetas
 
 def slider_vel_max_planetas(max_vel,gui):
+    """
+    Retorna os objetos do slider da velocidade maxima dos planetas
+    """
     rot_vel_sup_planetas = pg_gui.elements.UILabel(
     relative_rect = pg.Rect((LARGURA - 360, 130), (250, 50)), # Posição e tamanho do rótulo
     text = "Velocidade Máxima dos Planetas", # Exibe a velocidade mínima das planetas atualmente selecionada
@@ -156,6 +180,9 @@ def slider_vel_max_planetas(max_vel,gui):
     )
     return rot_vel_sup_planetas,rot_slider_vel_sup_planetas,slider_vel_sup_planetas
 def slider_massa_min_planeta(min_massa,gui):
+    """
+    Retorna os objetos do slider da massa minima dos planetas
+    """
     rot_massa_inf_planetas = pg_gui.elements.UILabel(
     relative_rect = pg.Rect((LARGURA - 360, 190), (250, 50)), # Posição e tamanho do rótulo
     text = "Massa Mínima dos Planetas", # Exibe a velocidade mínima das estrelas atualmente selecionada
@@ -175,6 +202,9 @@ def slider_massa_min_planeta(min_massa,gui):
     return rot_massa_inf_planetas,rot_slider_massa_inf_planetas,slider_massa_inf_planetas
 
 def slider_massa_max_planeta(max_massa,gui):
+    """
+    Retorna os objetos do slider da massa maxima dos planetas
+    """
     rot_massa_sup_planetas = pg_gui.elements.UILabel(
     relative_rect = pg.Rect((LARGURA - 360, 250), (250, 50)), # Posição e tamanho do rótulo
     text = "Massa Máxima dos Planetas", # Exibe a velocidade mínima das estrelas atualmente selecionada

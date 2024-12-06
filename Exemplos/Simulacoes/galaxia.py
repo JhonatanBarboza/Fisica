@@ -228,60 +228,20 @@ botao_iniciar = pg_gui.elements.UIButton(
 ### CONFIGURAÇÕES DA JANELA/GUI ###
 
 ### CLASSE DAS ESTRELAS E DOS PLANETAS ###
-class CorpoCeleste:
-  """
-  Classe base para representar corpos celestes genéricos
-    
-  Atributos:
-    x (float): Coordenada x no espaço
-    y (float): Coordenada y no espaço
-    vx (float): Velocidade no eixo x
-    vy (float): Velocidade no eixo y
-    massa (float): Massa do corpo celeste
-    raio (float): Raio do corpo celeste
-    ativo (bool): Estado do corpo (True se ativo, False se desativado)
-    cor (tuple): Cor do corpo no formato RGB
-    """
-
-  def __init__(self, x: float, y: float, vx: float, vy: float, massa: float, raio: float, cor: tuple):
-    self.x = x
-    self.y = y
-    self.vx = vx
-    self.vy = vy
-    self.massa = massa
-    self.raio = raio
-    self.ativo = True
-    self.cor = cor
-
-
-class Estrela(CorpoCeleste):
-  """
-  Classe que representa uma estrela, herdando de CorpoCeleste.
-    
-  Utiliza os mesmos atributos e comportamento de CorpoCeleste.
-  """
-
-  def __init__(self, x: float, y: float, vx: float, vy: float, massa: float, raio: float, cor: tuple):
-    super().__init__(x, y, vx, vy, massa, raio, cor)
-
-
-class Planeta(CorpoCeleste):
-  """
-  Classe que representa um planeta, herdando de CorpoCeleste.
-    
-  Utiliza os mesmos atributos e comportamento de CorpoCeleste.
-  """
-
-  def __init__(self, x: float, y: float, vx: float, vy: float, massa: float, raio: float, cor: tuple):
-    super().__init__(x, y, vx, vy, massa, raio, cor)
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parent.parent.parent)) #tudo isso pra importar de cima dessa pasta
+from classes import CorpoCeleste, Estrela, Planeta
 ### CLASSE DAS ESTRELAS E DOS PLANETAS ###
 
 
 ### FUNÇÕES ###
 
 def atualizar_informacoes():
+  '''
+  Atualiza as variáveis globais com base no que ta escrito nos sliders
+  '''
   
-  #Atualiza a quantidade de estrelas e planetas (globalmente) com base no valor inserido no slider
 
   # Planetas
   global QUANT_PLANETAS, LIM_INF_MASSA_PLANETA, LIM_SUP_MASSA_PLANETA, LIM_INF_VEL_PLANETA, LIM_SUP_VEL_PLANETA
