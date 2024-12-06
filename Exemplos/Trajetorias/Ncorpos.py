@@ -58,7 +58,7 @@ clock = pygame.time.Clock()
 G = 6.67430                                 # Constante gravitacional
 RAIO_PROPORCIONALIDADE = 10                 # Constante de ajuste para o raio
 ESCALA = 100                                # Fator de escala
-COLISAO = 0                                 # 1 ativado, 0 desativado
+COLISAO = 1                                 # 1 ativado, 0 desativado
 ESPACO_VIRTUAL_LARGURA = LARGURA * ESCALA
 ESPACO_VIRTUAL_ALTURA = ALTURA * ESCALA
 
