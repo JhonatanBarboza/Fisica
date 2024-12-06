@@ -1,3 +1,47 @@
+"""
+Simulação Gravitacional com Corpos Celestes
+
+Descrição:
+Este programa simula interações gravitacionais entre corpos celestes utilizando o princípio da gravitação universal de Newton. 
+Os corpos celestes (estrelas) interagem em um espaço virtual onde forças gravitacionais afetam suas velocidades e posições. 
+O programa inclui funcionalidades como detecção de colisões, fusão de corpos em caso de colisão, e representação visual 
+usando Pygame e Pygame GUI para controle da simulação.
+
+Funcionalidades principais:
+- Simulação de forças gravitacionais entre corpos.
+- Representação gráfica dos corpos e suas trajetórias.
+- Detecção e fusão de corpos celestes em caso de colisão.
+- Interface para configurar a simulação, incluindo posicionamento inicial e propriedades dos corpos.
+- Botão para reiniciar a simulação com parâmetros atualizados.
+
+Estrutura:
+1. Classe `CorpoCeleste`: Representa corpos celestes com atributos como posição, velocidade, massa e histórico de trajetórias.
+2. Funções auxiliares:
+   - `calcular_gravidade_estrela`: Calcula as forças gravitacionais entre dois corpos.
+   - `verificar_colisoes`: Detecta e processa colisões entre corpos.
+   - `atualizar_estrelas`: Atualiza posições e trajetórias dos corpos.
+   - `desenhar_objeto` e `desenhar_trajetoria`: Gerenciam a visualização gráfica.
+3. Interface gráfica:
+   - Configuração inicial com campos para definir as propriedades das estrelas.
+   - Botão para reiniciar a simulação.
+
+Dependências:
+- Pygame
+- Pygame GUI
+
+Instruções de uso:
+- Execute o programa para iniciar a tela de configuração, onde é possível definir as propriedades iniciais dos corpos celestes.
+- Inicie a simulação para visualizar as interações gravitacionais.
+- Use o botão "Reiniciar Simulação" para ajustar parâmetros e reiniciar a simulação.
+
+Constantes principais:
+- `G`: Constante gravitacional.
+- `ESCALA`: Fator de escala para converter coordenadas do espaço virtual para a tela.
+- `COLISAO`: Ativa ou desativa a detecção de colisões.
+
+"""
+
+
 import pygame
 import pygame_gui as pg_gui
 import math
@@ -214,7 +258,8 @@ def criar_botao_reiniciar(gerenciador):
     )
     return botao_reiniciar
 
-def tela_configuracao(valores_anteriores=None):
+# [Mantenha o código anterior até a função main()]
+def tela_configuracao(valores_primeira_simulacao=None, valores_ultima_simulacao=None):
     # Configurações do Pygame GUI
     gerenciador = pg_gui.UIManager((LARGURA, ALTURA), 'theme.json')
     
@@ -229,22 +274,28 @@ def tela_configuracao(valores_anteriores=None):
         manager=gerenciador
     )
     
-    # Se houver valores anteriores, preencher com o número de estrelas
-    num_estrelas_inicial = len(valores_anteriores) if valores_anteriores else 0
+    # Dropdown para escolher configuração inicial
+    opcoes_configuracao = ['Nova Configuração', 'Primeira Simulação', 'Última Simulação']
+    dropdown_configuracao = pg_gui.elements.UIDropDownMenu(
+        options_list=opcoes_configuracao,
+        starting_option='Nova Configuração',
+        relative_rect=pygame.Rect((pos_x_inicial + 350, 50), (200, 30)),
+        manager=gerenciador
+    )
+    
+    # Determinar número inicial de estrelas e valores iniciais
+    num_estrelas_inicial = 0
+    valores_selecionados = None
     
     entrada_num_estrelas = pg_gui.elements.UITextEntryLine(
         relative_rect=pygame.Rect((pos_x_inicial + 250, 50), (100, 30)),
         manager=gerenciador
     )
     
-    # Preencher entrada do número de estrelas se houver valores anteriores
-    if valores_anteriores:
-        entrada_num_estrelas.set_text(str(num_estrelas_inicial))
-    
-    # Botão de início
-    botao_iniciar = pg_gui.elements.UIButton(
-        relative_rect=pygame.Rect((LARGURA // 2 - 100, ALTURA - 100), (200, 50)),
-        text='Iniciar Simulação',
+    # Texto para mensagens de erro
+    label_erro = pg_gui.elements.UILabel(
+        relative_rect=pygame.Rect((50, ALTURA - 150), (LARGURA - 100, 50)),
+        text='',
         manager=gerenciador
     )
     
@@ -256,7 +307,6 @@ def tela_configuracao(valores_anteriores=None):
     entradas_vx = []
     entradas_vy = []
     
-    # Se já houver valores anteriores, criar entradas preenchidas
     def criar_entradas_estrelas(num_estrelas, valores=None):
         # Limpar entradas antigas, se existirem
         for label in labels_estrelas:
@@ -339,13 +389,9 @@ def tela_configuracao(valores_anteriores=None):
             entradas_vy.append(entrada_vy)
 
     def main_configuracao_loop():
-        num_estrelas = num_estrelas_inicial
+        nonlocal num_estrelas_inicial, valores_selecionados
         configuracao_concluida = False
         estrelas = []
-
-        # Se já houver valores anteriores, criar entradas imediatamente
-        if valores_anteriores:
-            criar_entradas_estrelas(num_estrelas, valores_anteriores)
 
         while not configuracao_concluida:
             tempo_delta = clock.tick(60)/1000.0
@@ -354,34 +400,71 @@ def tela_configuracao(valores_anteriores=None):
                 if evento.type == pygame.QUIT:
                     return None
                 
+                if evento.type == pg_gui.UI_DROP_DOWN_MENU_CHANGED:
+                    if evento.ui_element == dropdown_configuracao:
+                        # Resetar campos baseado na seleção
+                        if evento.text == 'Nova Configuração':
+                            valores_selecionados = None
+                            entrada_num_estrelas.set_text('')
+                            criar_entradas_estrelas(0)
+                        elif evento.text == 'Primeira Simulação' and valores_primeira_simulacao:
+                            valores_selecionados = valores_primeira_simulacao
+                            num_estrelas_inicial = len(valores_primeira_simulacao)
+                            entrada_num_estrelas.set_text(str(num_estrelas_inicial))
+                            criar_entradas_estrelas(num_estrelas_inicial, valores_primeira_simulacao)
+                        elif evento.text == 'Última Simulação' and valores_ultima_simulacao:
+                            valores_selecionados = valores_ultima_simulacao
+                            num_estrelas_inicial = len(valores_ultima_simulacao)
+                            entrada_num_estrelas.set_text(str(num_estrelas_inicial))
+                            criar_entradas_estrelas(num_estrelas_inicial, valores_ultima_simulacao)
+                
                 if evento.type == pg_gui.UI_TEXT_ENTRY_FINISHED:
                     if evento.ui_element == entrada_num_estrelas:
                         try:
                             num_estrelas = int(evento.text)
-                            criar_entradas_estrelas(num_estrelas, valores_anteriores)
+                            criar_entradas_estrelas(num_estrelas, valores_selecionados)
+                            num_estrelas_inicial = num_estrelas
                         
                         except ValueError:
-                            print("Entrada inválida para número de estrelas!")
+                            label_erro.set_text("Entrada inválida para número de estrelas!")
                 
                 if evento.type == pg_gui.UI_BUTTON_PRESSED:
                     if evento.ui_element == botao_iniciar:
                         # Validar e coletar entradas
                         try:
+                            # Verificar se número de estrelas foi definido
+                            if num_estrelas_inicial == 0:
+                                label_erro.set_text("Defina o número de estrelas primeiro!")
+                                continue
+                            
                             estrelas = []
-                            for i in range(num_estrelas):
-                                x = (float(entradas_x[i].get_text()) + (ESPACO_VIRTUAL_LARGURA / 2))
-                                y = (-float(entradas_y[i].get_text()) + (ESPACO_VIRTUAL_ALTURA / 2))
-                                massa = (float(entradas_massa[i].get_text()))
-                                vx = float(entradas_vx[i].get_text())
-                                vy = -float(entradas_vy[i].get_text())
+                            for i in range(num_estrelas_inicial):
+                                # Verificar se todos os campos estão preenchidos
+                                x_texto = entradas_x[i].get_text().strip()
+                                y_texto = entradas_y[i].get_text().strip()
+                                massa_texto = entradas_massa[i].get_text().strip()
+                                vx_texto = entradas_vx[i].get_text().strip()
+                                vy_texto = entradas_vy[i].get_text().strip()
+                                
+                                if not (x_texto and y_texto and massa_texto and vx_texto and vy_texto):
+                                    label_erro.set_text(f"Preencha todos os campos para a Estrela {i+1}!")
+                                    break
+                                
+                                x = (float(x_texto) + (ESPACO_VIRTUAL_LARGURA / 2))
+                                y = (-float(y_texto) + (ESPACO_VIRTUAL_ALTURA / 2))
+                                massa = (float(massa_texto))
+                                vx = float(vx_texto)
+                                vy = -float(vy_texto)
                                 
                                 raio = calcular_raio(massa)
                                 estrela = CorpoCeleste(x, y, vx, vy, massa, raio)
                                 estrelas.append(estrela)
-                            
-                            configuracao_concluida = True
-                        except ValueError:
-                            print("Por favor, preencha todos os campos corretamente!")
+                            else:  # Se o loop completar sem break
+                                configuracao_concluida = True
+                                label_erro.set_text("")
+                        
+                        except ValueError as e:
+                            label_erro.set_text(f"Erro de conversão: {str(e)}")
                 
                 gerenciador.process_events(evento)
             
@@ -393,22 +476,44 @@ def tela_configuracao(valores_anteriores=None):
         
         return estrelas
 
+    # Botão de início
+    botao_iniciar = pg_gui.elements.UIButton(
+        relative_rect=pygame.Rect((LARGURA // 2 - 100, ALTURA - 100), (200, 50)),
+        text='Iniciar Simulação',
+        manager=gerenciador
+    )
+
     return main_configuracao_loop()
 
 def main():
-    # Variável para armazenar os valores da última simulação
+    # Variáveis para armazenar os valores da primeira e última simulação
+    valores_primeira_simulacao = None
     valores_ultima_simulacao = None
     
     # Flag para controlar o loop principal
     continuar_simulacao = True
     
     while continuar_simulacao:
-        # Tela de configuração inicial, passando valores da última simulação
-        estrelas = tela_configuracao(valores_ultima_simulacao)
+        # Capturar os valores passados pelo usuário antes da simulação
+        estrelas = tela_configuracao(valores_primeira_simulacao, valores_ultima_simulacao)
         
         if not estrelas:
             pygame.quit()
             return
+        
+        # Armazenar a primeira configuração imediatamente após a entrada do usuário
+        if valores_primeira_simulacao is None:
+            # Criar uma cópia dos valores originais passados pelo usuário
+            valores_primeira_simulacao = [
+                CorpoCeleste(
+                    estrela.x, 
+                    estrela.y, 
+                    estrela.vx, 
+                    estrela.vy, 
+                    estrela.massa, 
+                    estrela.raio
+                ) for estrela in estrelas
+            ]
         
         # Gerenciador para eventos durante a simulação
         gerenciador = pg_gui.UIManager((LARGURA, ALTURA))
@@ -430,8 +535,17 @@ def main():
                 # Verificar clique no botão de reinício
                 if evento.type == pg_gui.UI_BUTTON_PRESSED:
                     if evento.ui_element == botao_reiniciar:
-                        # Armazenar valores da simulação atual
-                        valores_ultima_simulacao = estrelas
+                        # Armazenar valores da simulação atual para próxima iteração
+                        valores_ultima_simulacao = [
+                            CorpoCeleste(
+                                estrela.x, 
+                                estrela.y, 
+                                estrela.vx, 
+                                estrela.vy, 
+                                estrela.massa, 
+                                estrela.raio
+                            ) for estrela in estrelas
+                        ]
                         rodando = False  # Sair do loop de simulação atual
             
             # Atualizar gerenciador de GUI
