@@ -1,0 +1,30 @@
+{
+    "defaults": {
+        "colours": {
+            "normal_bg": "#45494e",
+            "hovered_bg": "#35393e",
+            "disabled_bg": "#25292e",
+            "selected_bg": "#3c4048",
+            "active_bg": "#3c4048",
+            "normal_text": "#c5cbd8",
+            "hovered_text": "#FFFFFF",
+            "selected_text": "#FFFFFF",
+            "disabled_text": "#6d6d6d",
+            "link_text": "#a8d6ff",
+            "link_hover": "#ffffff",
+            "link_selected": "#a8d6ff",
+            "text_shadow": "#777777",
+            "normal_border": "#666666", 
+            "hovered_border": "#888888", 
+            "disabled_border": "#444444", 
+            "selected_border": "#555555", 
+            "active_border": "#555555"   
+        },
+        "font": {
+            "name": "fira_code",
+            "size": "14",
+            "bold": "0",
+            "italic": "0"
+        }
+    }
+}
