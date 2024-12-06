@@ -2,7 +2,6 @@ import pygame as pg
 import pygame_gui as pg_gui
 import math
 import random
-import criador_de_sliders as cds
 ### PARÂMETROS DA SIMULAÇÃO ###
 G = 6.67430 # Constante gravitacional com magnitude menor
 
@@ -51,9 +50,10 @@ clock = pg.time.Clock() # Inicializando o clock para controlar o FPS
 
 gui = pg_gui.UIManager((LARGURA, ALTURA)) # cria a interfce "gui" é o nome em ingles
 
+
+import criador_de_sliders as cds
 # SLIDER QUANTIDADE DE ESTRELAS
 rot_quant_estrelas, rot_slider_quant_estrelas, slider_quant_estrelas = cds.slider_estrelas(QUANT_ESTRELAS,gui)
-
 # SLIDER VELOCIDADE MIN DE ESTRELAS
 rot_vel_inf_estrelas ,rot_slider_vel_inf_estrelas ,slider_vel_inf_estrelas = cds.slider_velocidade_min_estrelas(LIM_INF_VEL_ESTRELA,gui)
 # SLIDER VELOCIDADE MAX DE ESTRELAS
@@ -323,7 +323,7 @@ while rodando:
 
   # Fundo preto
   tela.fill((0, 0, 0))
-  
+
   #ou a simulacao começou ou nao
   if sim_ativa:
     atualizar_corpos()

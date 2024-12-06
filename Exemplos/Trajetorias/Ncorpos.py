@@ -17,7 +17,7 @@ COLISAO = 1   #1 ativado, 0 desativado
 ESPACO_VIRTUAL_LARGURA = LARGURA * ESCALA
 ESPACO_VIRTUAL_ALTURA = ALTURA * ESCALA
 
-# Funções auxiliares
+# calcula o raio de um corpo em base a massa dele
 def calcular_raio(massa):
     return (massa ** (1/3)) * RAIO_PROPORCIONALIDADE
 
