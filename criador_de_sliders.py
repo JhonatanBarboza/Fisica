@@ -44,7 +44,7 @@ def slider_velocidade_min_estrelas(min_vel,gui):
     slider_vel_inf_estrelas = pg_gui.elements.UIHorizontalSlider(
     relative_rect = pg.Rect((30, 110), (SLIDER_LARG, SLIDER_ALT)), 
     start_value = min_vel, 
-    value_range = (-100, 100), 
+    value_range = (-1000, 1000), 
     manager = gui,
     )
     return rot_vel_inf_estrelas, rot_slider_vel_inf_estrelas, slider_vel_inf_estrelas
@@ -66,7 +66,7 @@ def slider_velocidade_max_estrelas(max_vel,gui):
     slider_vel_sup_estrelas = pg_gui.elements.UIHorizontalSlider(
     relative_rect = pg.Rect((30, 170), (SLIDER_LARG, SLIDER_ALT)),
     start_value = max_vel,
-    value_range = (-100, 100),
+    value_range = (-1000, 1000),
     manager = gui,
     )
     return rot_vel_sup_estrelas, rot_slider_vel_sup_estrelas, slider_vel_sup_estrelas
@@ -131,7 +131,7 @@ def slider_quant_planetas(quant_planetas,gui):
     slider_quant_planetas = pg_gui.elements.UIHorizontalSlider(
     relative_rect = pg.Rect((LARGURA - 320, 60), (SLIDER_LARG, SLIDER_ALT)), 
     start_value = quant_planetas, 
-    value_range = (0, 1000),
+    value_range = (0, 15000),
     manager = gui,
     )
     return rot_quant_planetas, rot_slider_quant_planetas, slider_quant_planetas
@@ -153,7 +153,7 @@ def slider_vel_min_planetas(min_vel, gui):
     slider_vel_inf_planetas = pg_gui.elements.UIHorizontalSlider(
     relative_rect = pg.Rect((LARGURA - 320, 110), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
     start_value = min_vel, # Velocidade mínima inicial padrão de planetas
-    value_range = (-100, 100), # Limites do slider
+    value_range = (-1000, 1000), # Limites do slider
     manager = gui,
     )
     return rot_vel_inf_planetas, rot_slider_vel_inf_planetas, slider_vel_inf_planetas
@@ -175,7 +175,7 @@ def slider_vel_max_planetas(max_vel,gui):
     slider_vel_sup_planetas = pg_gui.elements.UIHorizontalSlider(
     relative_rect = pg.Rect((LARGURA - 320, 170), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
     start_value = max_vel, # Velocidade mínima inicial padrão de planetas
-    value_range = (-100, 100), # Limites do slider
+    value_range = (-1000, 1000), # Limites do slider
     manager = gui,
     )
     return rot_vel_sup_planetas,rot_slider_vel_sup_planetas,slider_vel_sup_planetas
@@ -196,7 +196,7 @@ def slider_massa_min_planeta(min_massa,gui):
     slider_massa_inf_planetas = pg_gui.elements.UIHorizontalSlider(
     relative_rect = pg.Rect((LARGURA - 320, 230), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
     start_value = min_massa, # Velocidade mínima inicial padrão de estrelas
-    value_range = (1, 10), # Limites do slider
+    value_range = (1, 1000), # Limites do slider
     manager = gui,
     )
     return rot_massa_inf_planetas,rot_slider_massa_inf_planetas,slider_massa_inf_planetas
@@ -218,7 +218,7 @@ def slider_massa_max_planeta(max_massa,gui):
     slider_massa_sup_planetas = pg_gui.elements.UIHorizontalSlider(
     relative_rect = pg.Rect((LARGURA - 320, 290), (SLIDER_LARG, SLIDER_ALT)), # Posição e tamanho do rótulo
     start_value = max_massa, # Velocidade mínima inicial padrão de estrelas
-    value_range = (1, 10), # Limites do slider
+    value_range = (1, 1000), # Limites do slider
     manager = gui,
     )
     return rot_massa_sup_planetas, rot_slider_massa_sup_planetas,slider_massa_sup_planetas

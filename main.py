@@ -34,7 +34,7 @@ pg.init() # Inicializando o pygame
 LARGURA, ALTURA = 1250, 700 # Dimensões da janela
 # Tamanho do espaço virtual
 
-ESCALA = 20 # "Zoom": quanto menor, mais perto
+ESCALA = 10 # "Zoom": quanto menor, mais perto
 '''as posicoes iniciais são limitadas a esse espaço virtual'''
 ESPACO_VIRT_LARG = LARGURA * ESCALA
 ESPACO_VIRT_ALT = ALTURA * ESCALA
