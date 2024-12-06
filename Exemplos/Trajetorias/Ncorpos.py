@@ -1,4 +1,5 @@
 import pygame
+import pygame_gui as pg_gui
 import math
 import random
 
@@ -6,22 +7,21 @@ import random
 pygame.init()
 LARGURA, ALTURA = 950, 950
 tela = pygame.display.set_mode((LARGURA, ALTURA))
+pygame.display.set_caption("Simulação Gravitacional")
 clock = pygame.time.Clock()
 
 # Constantes
 G = 6.67430  # Constante gravitacional
-NUM_ESTRELAS = 2
-RAIO_PROPORCIONALIDADE = 2  # Constante de ajuste para o raio
-ESCALA = 200  # Fator de escala
-COLISAO = 1   #1 ativado, 0 desativado
+RAIO_PROPORCIONALIDADE = 10  # Constante de ajuste para o raio
+ESCALA = 100  # Fator de escala
+COLISAO = 1   # 1 ativado, 0 desativado
 ESPACO_VIRTUAL_LARGURA = LARGURA * ESCALA
 ESPACO_VIRTUAL_ALTURA = ALTURA * ESCALA
 
-# calcula o raio de um corpo em base a massa dele
+# Funções auxiliares
 def calcular_raio(massa):
     return (massa ** (1/3)) * RAIO_PROPORCIONALIDADE
 
-# Classes para corpos celestes
 class CorpoCeleste:
     def __init__(self, x, y, vx, vy, massa, raio):
         self.x = x
@@ -38,79 +38,6 @@ class CorpoCeleste:
             self.trajetoria.pop(0)
         self.trajetoria.append((self.x, self.y))
 
-class Estrela(CorpoCeleste):
-    pass
-
-def criar_estrelas(num_estrelas):
-    estrelas = []
-    if NUM_ESTRELAS > 0:
-        # Central star
-        x = ESPACO_VIRTUAL_LARGURA / 2
-        y = ESPACO_VIRTUAL_ALTURA / 2
-        massa = 2000000000
-        raio = calcular_raio(massa)
-        estrelas.append(Estrela(x, y, 0, 0, massa, raio))
-
-    if NUM_ESTRELAS > 1:
-        # Calculate orbital parameters for circular orbit
-        distancia_orbital = 30000  # Distance from central star
-        massa_central = estrelas[0].massa
-        
-        # Calculate orbital velocity for a circular orbit
-        # v = sqrt(G * M / r)
-        velocidade_orbital = math.sqrt(G * massa_central / distancia_orbital)
-        
-        # Position the second star in a circular orbit
-        angulo = math.pi / 4  # 45-degree angle, you can adjust this
-        x = x + distancia_orbital * math.cos(angulo)
-        y = y + distancia_orbital * math.sin(angulo)
-        
-        # Tangential velocity for circular orbit
-        vx = -velocidade_orbital * math.sin(angulo)
-        vy = velocidade_orbital * math.cos(angulo)
-        
-        massa = 100000
-        raio = calcular_raio(massa) * 10
-        estrelas.append(Estrela(x, y, vx, vy, massa, raio))
-
-    if NUM_ESTRELAS > 2:
-        # Similar approach for the third star
-        distancia_orbital = 50000  # Different distance for third star
-        velocidade_orbital = math.sqrt(G * massa_central / distancia_orbital)
-        
-        angulo = -math.pi / 4  # Opposite angle
-        x = x + distancia_orbital * math.cos(angulo)
-        y = y + distancia_orbital * math.sin(angulo)
-        
-        vx = -velocidade_orbital * math.sin(angulo)
-        vy = velocidade_orbital * math.cos(angulo)
-        
-        massa = 100000
-        raio = calcular_raio(massa) * 20
-        estrelas.append(Estrela(x, y, vx, vy, massa, raio))
-
-    if NUM_ESTRELAS > 3:
-        for _ in range(num_estrelas-3):
-            # Random positioning but closer to the center
-            distancia_orbital = random.uniform(20000, 80000)
-            angulo = random.uniform(0, 2 * math.pi)
-            
-            x = ESPACO_VIRTUAL_LARGURA / 2 + distancia_orbital * math.cos(angulo)
-            y = ESPACO_VIRTUAL_ALTURA / 2 + distancia_orbital * math.sin(angulo)
-            
-            # Calculate orbital velocity
-            velocidade_orbital = math.sqrt(G * massa_central / distancia_orbital)
-            
-            # Tangential velocity for circular orbit
-            vx = -velocidade_orbital * math.sin(angulo)
-            vy = velocidade_orbital * math.cos(angulo)
-            
-            massa = random.randint(10000, 50000)
-            raio = calcular_raio(massa)
-            estrelas.append(Estrela(x, y, vx, vy, massa, raio))
-
-    return estrelas
-
 def verificar_colisoes(estrelas):
     for i in range(len(estrelas)):
         if not estrelas[i].ativo:
@@ -126,21 +53,9 @@ def verificar_colisoes(estrelas):
                 # Massa total
                 massa_total = estrelas[i].massa + estrelas[j].massa
 
-                # Centro de massa
-                cx = (estrelas[i].x * estrelas[i].massa + estrelas[j].x * estrelas[j].massa) / massa_total
-                cy = (estrelas[i].y * estrelas[i].massa + estrelas[j].y * estrelas[j].massa) / massa_total
-
-                # Momento angular total antes da fusão
-                Lx = (estrelas[i].y - cy) * estrelas[i].massa * estrelas[i].vx + (estrelas[j].y - cy) * estrelas[j].massa * estrelas[j].vx
-                Ly = -(estrelas[i].x - cx) * estrelas[i].massa * estrelas[i].vy - (estrelas[j].x - cx) * estrelas[j].massa * estrelas[j].vy
-
                 # Velocidade resultante
                 vx_resultante = (estrelas[i].vx * estrelas[i].massa + estrelas[j].vx * estrelas[j].massa) / massa_total
                 vy_resultante = (estrelas[i].vy * estrelas[i].massa + estrelas[j].vy * estrelas[j].massa) / massa_total
-
-                # Ajuste para conservar o momento angular
-                vx_resultante += Lx / (massa_total * distancia**2)
-                vy_resultante += Ly / (massa_total * distancia**2)
 
                 # Atualizar estrela resultante
                 if estrelas[i].massa >= estrelas[j].massa:
@@ -156,8 +71,6 @@ def verificar_colisoes(estrelas):
                     estrelas[j].raio = (estrelas[j].raio**3 + estrelas[i].raio**3)**(1/3)
                     estrelas[i].ativo = False
 
-
-# Função para calcular gravidade
 def calcular_gravidade_estrela(a, b):
     dx = b.x - a.x
     dy = b.y - a.y
@@ -174,7 +87,6 @@ def calcular_gravidade_estrela(a, b):
         b.vx += ax_b
         b.vy += ay_b
 
-# Função para atualizar posições
 def atualizar_estrelas(estrelas):
     for i in range(len(estrelas)):
         if not estrelas[i].ativo:
@@ -186,68 +98,23 @@ def atualizar_estrelas(estrelas):
         estrelas[i].y += estrelas[i].vy
         estrelas[i].atualizar_trajetoria()
 
-# Função para desenhar objetos
 def desenhar_objeto(x_virtual, y_virtual, raio, cor):
     x_tela = x_virtual / ESCALA
     y_tela = y_virtual / ESCALA
     raio_tela = raio / ESCALA
     pygame.draw.circle(tela, cor, (int(x_tela), int(y_tela)), int(raio_tela))
 
-# Função para desenhar trajetórias
 def desenhar_trajetoria(estrela, cor):
     if estrela.ativo and estrela.trajetoria:
         pontos_tela = [(int(pos[0] / ESCALA), int(pos[1] / ESCALA)) for pos in estrela.trajetoria]
         if len(pontos_tela) > 1:
             pygame.draw.lines(tela, cor, False, pontos_tela, 1)
 
-# Função para desenhar estrelas e trajetórias separadamente
-def desenhar_estrelas(estrelas):
-    # Primeiro, desenhe todas as trajetórias
-    for idx, estrela in enumerate(estrelas):
-        if idx == 0:  # Primeiro planeta (amarelo)
-            cor_trajetoria = (255, 255, 0)
-        elif idx == 1:  # Segundo planeta (azul)
-            cor_trajetoria = (100, 100, 255)
-        else:
-            cor_trajetoria = (255, 255, 255)  # Cor padrão para outros objetos
-
-        desenhar_trajetoria(estrela, cor_trajetoria)
-
-    # Depois, desenhe todas as estrelas
-    for idx, estrela in enumerate(estrelas):
-        if idx == 0:  # Primeiro planeta (amarelo)
-            cor_estrela = (255, 255, 0)
-        elif idx == 1:  # Segundo planeta (azul)
-            cor_estrela = (100, 100, 255)
-        else:
-            cor_estrela = (255, 255, 255)  # Cor padrão para outros objetos
-
-        if estrela.ativo:
-            desenhar_objeto(estrela.x, estrela.y, estrela.raio, cor_estrela)
-
-
-# Função para desenhar objetos
-def desenhar_objetoN(x_virtual, y_virtual, raio, cor):
-    x_tela = x_virtual / ESCALA
-    y_tela = y_virtual / ESCALA
-    raio_tela = raio / ESCALA
-    pygame.draw.circle(tela, cor, (int(x_tela), int(y_tela)), int(raio_tela))
-
-# Função para desenhar trajetórias
-def desenhar_trajetoriaN(estrela, cor):
-    if estrela.ativo and estrela.trajetoria:
-        pontos_tela = [(int(pos[0] / ESCALA), int(pos[1] / ESCALA)) for pos in estrela.trajetoria]
-        if len(pontos_tela) > 1:
-            pygame.draw.lines(tela, cor, False, pontos_tela, 1)
-
-# Gerar cores únicas para as estrelas
 def gerar_cores_unicas(num_estrelas):
     random.seed(20)  # Para consistência nas cores geradas
     return [(random.randint(50, 255), random.randint(50, 255), random.randint(50, 255)) for _ in range(num_estrelas)]
 
-# Função para desenhar estrelas e trajetórias
 def desenhar_estrelasN(estrelas):
-    # Gera cores diferentes para cada estrela
     cores = gerar_cores_unicas(len(estrelas))
     
     # Primeiro, desenhe todas as trajetórias
@@ -259,34 +126,213 @@ def desenhar_estrelasN(estrelas):
         if estrela.ativo:
             desenhar_objeto(estrela.x, estrela.y, estrela.raio, cores[idx])
 
-
-# Inicializar estrelas
-estrelas = criar_estrelas(NUM_ESTRELAS)
-
-# Loop principal
-rodando = True
-while rodando:
-    for evento in pygame.event.get():
-        if evento.type == pygame.QUIT:
-            rodando = False
-        elif evento.type == pygame.KEYDOWN:
-                if evento.key == pygame.K_SPACE:
-                    estrelas[1].vx *= 1.15
-                    estrelas[1].vy *= 1.15
-     
+def tela_configuracao():
+    # Configurações do Pygame GUI
+    gerenciador = pg_gui.UIManager((LARGURA, ALTURA), 'theme.json')
+    
+    # Posicionamento dos elementos
+    pos_x_inicial = LARGURA // 4
+    espacamento_y = 50
+    
+    # Elementos de entrada para o número de estrelas
+    label_num_estrelas = pg_gui.elements.UILabel(
+        relative_rect=pygame.Rect((pos_x_inicial, 50), (300, 30)),
+        text='Número de Estrelas:',
+        manager=gerenciador
+    )
+    
+    entrada_num_estrelas = pg_gui.elements.UITextEntryLine(
+        relative_rect=pygame.Rect((pos_x_inicial + 250, 50), (100, 30)),
+        manager=gerenciador
+    )
+    
+    # Botão de início
+    botao_iniciar = pg_gui.elements.UIButton(
+        relative_rect=pygame.Rect((LARGURA // 2 - 100, ALTURA - 100), (200, 50)),
+        text='Iniciar Simulação',
+        manager=gerenciador
+    )
+    
+    # Listas para armazenar entradas dinâmicas
+    labels_estrelas = []
+    entradas_x = []
+    entradas_y = []
+    entradas_massa = []
+    entradas_vx = []
+    entradas_vy = []
+    
+    num_estrelas = 0
+    configuracao_concluida = False
+    estrelas = []
+    
+    while not configuracao_concluida:
+        tempo_delta = clock.tick(60)/1000.0
         
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                return None
+            
+            if evento.type == pg_gui.UI_TEXT_ENTRY_FINISHED:
+                if evento.ui_element == entrada_num_estrelas:
+                    try:
+                        num_estrelas = int(evento.text)
+                        
+                        # Limpar entradas antigas, se existirem
+                        for label in labels_estrelas:
+                            label.kill()
+                        for entrada in entradas_x + entradas_y + entradas_massa + entradas_vx + entradas_vy:
+                            entrada.kill()
+                        
+                        labels_estrelas.clear()
+                        entradas_x.clear()
+                        entradas_y.clear()
+                        entradas_massa.clear()
+                        entradas_vx.clear()
+                        entradas_vy.clear()
+                        
+                        # Criar novas entradas para cada estrela
+                        for i in range(num_estrelas):
+                            # Labels
+                            label_estrela = pg_gui.elements.UILabel(
+                                relative_rect=pygame.Rect((50, 150 + i * espacamento_y), (300, 30)),
+                                text=f'Estrela {i+1}:',
+                                manager=gerenciador
+                            )
+                            labels_estrelas.append(label_estrela)
+                            
+                            # Entradas para cada estrela
+                            entrada_x = pg_gui.elements.UITextEntryLine(
+                                relative_rect=pygame.Rect((pos_x_inicial, 150 + i * espacamento_y), (100, 30)),
+                                placeholder_text='x',
+                                manager=gerenciador
+                            )
+                            entrada_y = pg_gui.elements.UITextEntryLine(
+                                relative_rect=pygame.Rect((pos_x_inicial + 120, 150 + i * espacamento_y), (100, 30)),
+                                placeholder_text='y',
+                                manager=gerenciador
+                            )
+                            entrada_massa = pg_gui.elements.UITextEntryLine(
+                                relative_rect=pygame.Rect((pos_x_inicial + 240, 150 + i * espacamento_y), (100, 30)),
+                                placeholder_text='Massa',
+                                manager=gerenciador
+                            )
+                            entrada_vx = pg_gui.elements.UITextEntryLine(
+                                relative_rect=pygame.Rect((pos_x_inicial + 360, 150 + i * espacamento_y), (100, 30)),
+                                placeholder_text='Vel X',
+                                manager=gerenciador
+                            )
+                            entrada_vy = pg_gui.elements.UITextEntryLine(
+                                relative_rect=pygame.Rect((pos_x_inicial + 480, 150 + i * espacamento_y), (100, 30)),
+                                placeholder_text='Vel Y',
+                                manager=gerenciador
+                            )
+                            
+                            entradas_x.append(entrada_x)
+                            entradas_y.append(entrada_y)
+                            entradas_massa.append(entrada_massa)
+                            entradas_vx.append(entrada_vx)
+                            entradas_vy.append(entrada_vy)
+                    
+                    except ValueError:
+                        print("Entrada inválida para número de estrelas!")
+            
+            if evento.type == pg_gui.UI_BUTTON_PRESSED:
+                if evento.ui_element == botao_iniciar:
+                    # Validar e coletar entradas
+                    try:
+                        estrelas = []
+                        for i in range(num_estrelas):
+                            x = (float(entradas_x[i].get_text()) + (ESPACO_VIRTUAL_LARGURA / 2))
+                            y = (-float(entradas_y[i].get_text()) + (ESPACO_VIRTUAL_ALTURA / 2))
+                            massa = (float(entradas_massa[i].get_text()))
+                            vx = float(entradas_vx[i].get_text())
+                            vy = -float(entradas_vy[i].get_text())
+                            
+                            raio = calcular_raio(massa)
+                            estrela = CorpoCeleste(x, y, vx, vy, massa, raio)
+                            estrelas.append(estrela)
+                        
+                        configuracao_concluida = True
+                    except ValueError:
+                        print("Por favor, preencha todos os campos corretamente!")
+            
+            gerenciador.process_events(evento)
+        
+        gerenciador.update(tempo_delta)
+        
+        tela.fill((0, 0, 0))
+        gerenciador.draw_ui(tela)
+        pygame.display.update()
+    
+    return estrelas
 
-    tela.fill((0, 0, 0))
-    if COLISAO == 1:
-        verificar_colisoes(estrelas)
-    atualizar_estrelas(estrelas)
-    if NUM_ESTRELAS <= 3:
-        desenhar_estrelas(estrelas)
-    else:
-        desenhar_estrelasN(estrelas)
+def criar_botao_reiniciar(gerenciador):
+    """Cria um botão de reinício na tela de simulação"""
+    botao_reiniciar = pg_gui.elements.UIButton(
+        relative_rect=pygame.Rect((LARGURA - 250, 10), (200, 50)),
+        text='Reiniciar Simulação',
+        manager=gerenciador
+    )
+    return botao_reiniciar
 
+def main():
+    # Flag para controlar o loop principal
+    continuar_simulacao = True
+    
+    while continuar_simulacao:
+        # Tela de configuração inicial
+        estrelas = tela_configuracao()
+        
+        if not estrelas:
+            pygame.quit()
+            return
+        
+        # Gerenciador para eventos durante a simulação
+        gerenciador = pg_gui.UIManager((LARGURA, ALTURA))
+        botao_reiniciar = criar_botao_reiniciar(gerenciador)
+        
+        # Loop principal
+        rodando = True
+        while rodando:
+            tempo_delta = clock.tick(60)/1000.0
+            
+            for evento in pygame.event.get():
+                if evento.type == pygame.QUIT:
+                    rodando = False
+                    continuar_simulacao = False
+                
+                # Processar eventos do Pygame GUI
+                gerenciador.process_events(evento)
+                
+                # Verificar clique no botão de reinício
+                if evento.type == pg_gui.UI_BUTTON_PRESSED:
+                    if evento.ui_element == botao_reiniciar:
+                        rodando = False  # Sair do loop de simulação atual
+            
+            # Atualizar gerenciador de GUI
+            gerenciador.update(tempo_delta)
+            
+            tela.fill((0, 0, 0))
+            
+            if COLISAO == 1:
+                verificar_colisoes(estrelas)
+            atualizar_estrelas(estrelas)
+            
+            if len(estrelas) <= 3:
+                cores = [(255, 255, 0), (100, 100, 255), (255, 255, 255)]
+                for idx, estrela in enumerate(estrelas):
+                    desenhar_trajetoria(estrela, cores[idx % len(cores)])
+                    if estrela.ativo:
+                        desenhar_objeto(estrela.x, estrela.y, estrela.raio, cores[idx % len(cores)])
+            else:
+                desenhar_estrelasN(estrelas)
+            
+            # Desenhar botão de reinício
+            gerenciador.draw_ui(tela)
+            
+            pygame.display.flip()
 
-    pygame.display.flip()
-    clock.tick(30)
+    pygame.quit()
 
-pygame.quit()
+if __name__ == "__main__":
+    main()
