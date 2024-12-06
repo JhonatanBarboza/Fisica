@@ -210,7 +210,7 @@ U_{total} &= U + U_{cf} &= U(r) + \frac{l^2}{2\mu r^2}
 \end{align}
 $$
 
-Dessa forma, possuímos um problema de dois corpos sujeitos a uma força central, travestido ao problema de uma partícula em uma dimensão, com massa reduzida(ficticia), e essa dimensão única é uma quantidade escalar que é a distância entre as duas partículas que compunham o problema original, e dessa forma, pode-se utiklizar ferramentas de método unidimensionais.
+Dessa forma, possuímos um problema de dois corpos sujeitos a uma força central, travestido ao problema de uma partícula em uma dimensão, com massa reduzida(ficticia), e essa dimensão única é uma quantidade escalar que é a distância entre as duas partículas que compunham o problema original, e dessa forma, pode-se utilizar ferramentas de método unidimensionais.
 
 Exemplo do gráfico da energia para sistema gravitacional:
 
@@ -263,7 +263,7 @@ Assim, obtemos a velocidade areolar, e conforme a segunda lei de Kepler, áreas 
 
  $$ 
 \begin{align}
-\frac{dA}{dt} &= \frac{1}{2} r(t)^2 \frac{l}{\mu r^2}
+\frac{dA}{dt} &= \frac{1}{2} r(t)^2 \frac{l}{\mu r^2} \\
 \frac{dA}{dt} &= \frac{l}{2 \mu}
 \end{align}
 $$
