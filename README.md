@@ -139,7 +139,8 @@ Execute o programa:
 python main.py
 ```
 
-Ajuste os parâmetros da simulação como desejar e pressione o botão iniciar. Para parar a simulação e fazer a interface aparecer de novo, pressiona a tecla r.
+Ajuste os parâmetros da simulação como desejar e pressione o botão iniciar. Para parar a simulação e fazer a interface aparecer de novo, pressiona a tecla ```r```. **Observação**: na simulação ```main.py```, recomendamos utilizar um número baixo de estrelas (uma) e um número alto de planetas (por volta de 500) para manter a performance da simulação. Na simulação ```sistema.py``` e ```galaxia.py```, o número de planetas pode ser variado com certa liberdade, mas cabe notar que adicionar estrelas adicionais ao sistema pode o tornar muito caótico.
+
 
 ## Referências
 (1) Bernardes, E. de S. (2024). Dinâmica-v4 (Notas de aula). 7600105 - Física Básica I. Universidade de São Paulo, São Carlos.
